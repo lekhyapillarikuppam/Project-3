@@ -28,3 +28,6 @@ Thumbs.db
 debug_marker_*.png
 results/feasibility/probe_*.csv
 results/feasibility/debug/
+results/phase2/markers_parts/
+results/phase2/photos_parts/
+results/phase2/*.log

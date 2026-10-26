@@ -67,6 +67,25 @@ def guess_columns(grid: pd.DataFrame) -> tuple[int, int]:
     return marker_col, desc_col
 
 
+def read_exhibit_rows(path, sheet: str | int | None = None) -> pd.DataFrame:
+    """Like `read_exhibit_file`, but also returns rows that have a description and a BLANK marker cell
+    (marker_no is NaN), so they can be counted and reported (SPEC R-P-1).
+
+    A marker cell holding other text, such as the "IPC" title row, is a header and is skipped.
+    """
+    grid = _read_grid(Path(path), sheet)
+    marker_col, desc_col = guess_columns(grid)
+    rows = []
+    for _, row in grid.iterrows():
+        cell, desc = str(row.iloc[marker_col]).strip(), str(row.iloc[desc_col]).strip()
+        n = _as_int(cell)
+        if n is not None and desc:
+            rows.append({"marker_no": n, "description": desc})
+        elif not cell and desc:
+            rows.append({"marker_no": float("nan"), "description": desc})
+    return pd.DataFrame(rows, columns=["marker_no", "description"])
+
+
 def read_exhibit_file(path, marker_col: int | None = None, desc_col: int | None = None,
                       sheet: str | int | None = None) -> pd.DataFrame:
     """Columns: marker_no (int), description (str). Rows without a number are skipped (R-A1-3)."""

@@ -1,0 +1,69 @@
+scene_id,marker_no,description,category,source,confirmed
+th_0001,35,Braun big scotch tape,other,llm,0
+th_0002,12,15 red pick,other,llm,0
+th_0002,13,4 white links,other,llm,0
+th_0002,15,5 Pump nozzles,other,llm,0
+th_0002,16,4 white cans with blue caps,bottle_glass,llm,0
+th_0002,17,"Blue pen ""bic""",other,llm,0
+th_0002,18,2 white links,other,llm,0
+th_0002,19,Squared key,other,llm,0
+th_0002,35,Plastic bag containing white pills,other,llm,0
+th_0002,60,"Black pen ""bic""",other,llm,0
+th_0003,16,Black empty waller,other,llm,0
+th_0003,18,Metal clip,other,llm,0
+th_0003,20,White powder in a clear bag,other,llm,0
+th_0003,21,Syringe with white and red liquid,other,llm,0
+th_0003,32,Black glasses,other,llm,0
+th_0004,11,White plastic glove,other,llm,0
+th_0004,12,Black briefcase with code,other,llm,0
+th_0004,16,White plastic glove,other,llm,0
+th_0004,18,Glasses,other,llm,0
+th_0004,20,Bundle of bills with paper clip,other,llm,0
+th_0004,21,Black wallet,other,llm,0
+th_0004,32,White plastic glove,other,llm,0
+th_0005,11,Crowbar,other,llm,0
+th_0005,21,Cooking book,paper_document,llm,0
+th_0006,1,Open safe,other,llm,0
+th_0006,14,White powder tranee,other,llm,0
+th_0006,19,White powder tranee,other,llm,0
+th_0006,22,Crowbar,other,llm,0
+th_0006,35,Open book,paper_document,llm,0
+th_0006,69,Handkerchief,other,llm,0
+th_0006,90,Mattress protector,other,llm,0
+th_0007,20,Polystyrene box,other,llm,0
+th_0009,14,Bundle of bills,other,llm,0
+th_0009,19,Black wallet,other,llm,0
+th_0009,69,Crystal bag with white powder inside,other,llm,0
+th_0009,90,Orange string,other,llm,0
+th_0010,12,Black bucket,other,llm,0
+th_0010,20,Blue bache,other,llm,0
+th_0011,12,Upside down chair,other,llm,0
+th_0011,32,Table,other,llm,0
+th_0012,14,Wallet,other,llm,0
+th_0013,17,Orange string,other,llm,0
+th_0013,21,Blue bag,other,llm,0
+th_0014,11,Footprint,other,llm,0
+th_0014,14,Black glove,other,llm,0
+th_0014,15,White sunglasses,other,llm,0
+th_0014,16,Footprint,other,llm,0
+th_0014,32,Black glove,other,llm,0
+th_0015,12,Hammer,other,llm,0
+th_0015,13,Wrench,other,llm,0
+th_0015,15,Broken vase,bottle_glass,llm,0
+th_0015,35,Chair,other,llm,0
+th_0016,11,White string,other,llm,0
+th_0016,17,Blue bache,other,llm,0
+th_0016,60,Yellow trace,other,llm,0
+th_0017,1,Chest,other,llm,0
+th_0017,18,Dustbin,other,llm,0
+th_0017,19,Hammer,other,llm,0
+th_0017,23,Meat grinder,other,llm,0
+th_0018,20,Footprint,other,llm,0
+th_0018,22,Footprint,other,llm,0
+th_0018,90,Stove,other,llm,0
+th_0019,18,Stepladder unfolded,other,llm,0
+th_0019,35,Screwdriver with red transparent handhelded,other,llm,0
+th_0020,12,Black  bar,other,llm,0
+th_0020,13,"Box of purple gloves ""VWR""",other,llm,0
+th_0020,16,Dustbin,other,llm,0
+th_0020,23,White transparent part of plastic,other,llm,0
