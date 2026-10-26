@@ -20,17 +20,18 @@ class MarkerParams:
     """All tunable thresholds. Log any change made after looking at real photos (R-A2-7)."""
 
     work_side: int = 1600          # longest side of the working copy, pixels
-    h_lo: int = 18                 # yellow hue range, OpenCV scale 0-179
-    h_hi: int = 38
-    s_min: int = 110
-    v_min: int = 110
+    h_lo: int = 16                 # yellow hue range, OpenCV scale 0-179 (D-013)
+    h_hi: int = 40
+    s_min: int = 150
+    v_min: int = 55                # low, because some photos are underexposed
     close_kernel: int = 5          # morphological close to join broken yellow regions
-    min_area_frac: float = 1e-4    # blob area as a fraction of the image
+    min_area_frac: float = 3e-5    # blob area as a fraction of the image
     max_area_frac: float = 0.15
-    min_solidity: float = 0.70     # blob area / convex hull area
+    min_solidity: float = 0.60     # blob area / convex hull area
     min_aspect: float = 0.4        # bounding box width / height
     max_aspect: float = 2.5
-    ink_v_max: int = 90            # "dark" means brightness below this
+    ink_rel: float = 0.5           # "dark" = below this times the marker body's median V (R-A2-8) ...
+    ink_v_cap: int = 90            # ... and below this, so bright photos behave as before
     min_ink_frac: float = 0.02     # dark pixels inside the blob / blob area
     max_ink_frac: float = 0.45
     merge_iou: float = 0.30
@@ -59,6 +60,22 @@ def yellow_mask(hsv: np.ndarray, p: MarkerParams) -> np.ndarray:
     return cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
 
 
+def ink_threshold(body_median_v: float, p: MarkerParams) -> float:
+    return min(p.ink_rel * body_median_v, p.ink_v_cap)
+
+
+def ink_pixels(v: np.ndarray, region: np.ndarray, body: np.ndarray, p: MarkerParams) -> np.ndarray:
+    """Dark pixels of `region`, judged against the brightness of the marker's own yellow body.
+
+    A fixed threshold fails on underexposed photos, where the yellow itself is dim (R-A2-8).
+    v = brightness channel, region = blob outline filled, body = yellow-mask pixels (both bool).
+    """
+    body_v = v[body & region]
+    if body_v.size == 0:
+        return np.zeros(v.shape, bool)
+    return (v < ink_threshold(float(np.median(body_v)), p)) & region
+
+
 def find_markers(img_bgr: np.ndarray, params: MarkerParams = MarkerParams()) -> list[Box]:
     """Boxes in ORIGINAL pixel coordinates, best first (R-A2-1 to R-A2-6)."""
     p = params
@@ -69,7 +86,6 @@ def find_markers(img_bgr: np.ndarray, params: MarkerParams = MarkerParams()) -> 
 
     hsv = cv2.cvtColor(small, cv2.COLOR_BGR2HSV)
     mask = yellow_mask(hsv, p)
-    dark = hsv[:, :, 2] < p.ink_v_max
     img_area = small.shape[0] * small.shape[1]
 
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -91,8 +107,10 @@ def find_markers(img_bgr: np.ndarray, params: MarkerParams = MarkerParams()) -> 
         # Ink test: dark pixels INSIDE the blob outline (holes such as digits count).
         filled = np.zeros((h, w), np.uint8)
         cv2.drawContours(filled, [c - np.array([[x, y]])], -1, 255, thickness=cv2.FILLED)
-        blob_px = max(int((filled > 0).sum()), 1)
-        ink_frac = float((dark[y:y + h, x:x + w] & (filled > 0)).sum()) / blob_px
+        region = filled > 0
+        blob_px = max(int(region.sum()), 1)
+        ink = ink_pixels(hsv[y:y + h, x:x + w, 2], region, mask[y:y + h, x:x + w] > 0, p)
+        ink_frac = float(ink.sum()) / blob_px
         if not (p.min_ink_frac <= ink_frac <= p.max_ink_frac):
             continue
 

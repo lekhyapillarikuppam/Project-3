@@ -20,10 +20,20 @@ def cluttered_background(h, w, seed=0):
     return np.clip(img + noise, 0, 255).astype(np.uint8)
 
 
-def draw_marker(img, x, y, w, h, text):
+def hsv_bgr(h, s, v):
+    """One BGR colour from OpenCV-scale HSV, to build photos with a known brightness."""
+    return tuple(int(c) for c in cv2.cvtColor(np.uint8([[[h, s, v]]]), cv2.COLOR_HSV2BGR)[0, 0])
+
+
+def dark_background(h, w, seed=0, factor=0.25):
+    """The cluttered background, darkened to mimic an underexposed photo."""
+    return (cluttered_background(h, w, seed) * factor).astype(np.uint8)
+
+
+def draw_marker(img, x, y, w, h, text, body_bgr=YELLOW_BGR, ink_bgr=(0, 0, 0)):
     """A tent-like yellow trapezoid with a black number that fits inside. Returns the true box."""
     pts = np.array([[x + w * 0.15, y], [x + w * 0.85, y], [x + w, y + h], [x, y + h]], np.int32)
-    cv2.fillPoly(img, [pts], YELLOW_BGR)
+    cv2.fillPoly(img, [pts], body_bgr)
     font = cv2.FONT_HERSHEY_SIMPLEX
     scale = h / 55
     thick = max(2, h // 18)
@@ -33,5 +43,5 @@ def draw_marker(img, x, y, w, h, text):
         thick = max(2, int(thick * 0.62 * w / tw))
         (tw, th), _ = cv2.getTextSize(text, font, scale, thick)
     org = (x + (w - tw) // 2, y + int(h * 0.55) + th // 2)
-    cv2.putText(img, text, org, font, scale, (0, 0, 0), thick, cv2.LINE_AA)
+    cv2.putText(img, text, org, font, scale, ink_bgr, thick, cv2.LINE_AA)
     return Box(x, y, w, h, 1.0)

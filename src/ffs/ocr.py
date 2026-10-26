@@ -11,7 +11,7 @@ from __future__ import annotations
 import cv2
 import numpy as np
 
-from .markers import Box, MarkerParams, crop_box, yellow_mask
+from .markers import Box, MarkerParams, crop_box, ink_pixels, ink_threshold, yellow_mask
 
 # Digit pairs that OCR often mixes up (R-A3-4, rule 3).
 CONFUSABLE = {frozenset(p) for p in [("0", "8"), ("1", "7"), ("3", "8"),
@@ -73,21 +73,24 @@ def preprocess_crop(crop_bgr: np.ndarray, params: MarkerParams = MarkerParams(),
     or cross the marker's edge are kept.
     """
     hsv = cv2.cvtColor(crop_bgr, cv2.COLOR_BGR2HSV)
-    dark = hsv[:, :, 2] < params.ink_v_max
+    v = hsv[:, :, 2]
 
-    contours, _ = cv2.findContours(yellow_mask(hsv, params), cv2.RETR_EXTERNAL,
-                                   cv2.CHAIN_APPROX_SIMPLE)
-    region = np.zeros(dark.shape, np.uint8)
+    mask = yellow_mask(hsv, params)
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     if contours:
+        region = np.zeros(v.shape, np.uint8)
         cv2.drawContours(region, [max(contours, key=cv2.contourArea)], -1, 255, cv2.FILLED)
+        ink = ink_pixels(v, region > 0, mask > 0, params)   # same rule as the finder (R-A2-8)
         if wide:
-            k = max(3, int(0.12 * min(dark.shape)) | 1)
-            region = cv2.dilate(region, np.ones((k, k), np.uint8))
-        ink = dark & (region > 0)
-    else:
-        ink = dark                                          # no yellow found: use all dark pixels
+            k = max(3, int(0.12 * min(v.shape)) | 1)
+            grown = cv2.dilate(region, np.ones((k, k), np.uint8)) > 0
+            # judge darkness against the body, but accept ink anywhere in the grown region
+            body_v = v[(mask > 0) & (region > 0)]
+            ink = (v < ink_threshold(float(np.median(body_v)), params)) & grown
+    else:                                                   # no yellow found: judge against the whole crop
+        ink = v < ink_threshold(float(np.median(v)), params)
 
-    out = np.full(dark.shape, 255, np.uint8)
+    out = np.full(v.shape, 255, np.uint8)
     out[ink] = 0
     ys, xs = np.where(ink)
     if len(ys) > 0:                                         # D-012: crop to the ink box + margin

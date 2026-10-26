@@ -210,20 +210,27 @@ Input: a BGR image. Output: boxes `x, y, w, h` in **original** pixels, each with
 
 - R-A2-1. Work on a downscaled copy (longest side at most `work_side`, default
   1600 px); map boxes back to original coordinates.
-- R-A2-2. Yellow mask in HSV (OpenCV scale): H 18-38, S at least 110, V at least 110,
-  then a small morphological close.
-- R-A2-3. A candidate blob is kept only if: area is between 0.0001 and 0.15 of
-  the image; solidity (area / convex hull area) at least 0.70; bounding box
+- R-A2-2. Yellow mask in HSV (OpenCV scale): H 16-40, S at least 150, V at least 55,
+  then a small morphological close. (Values from D-013; they were H 18-38, S 110, V 110.)
+- R-A2-3. A candidate blob is kept only if: area is between 0.00003 and 0.15 of
+  the image; solidity (area / convex hull area) at least 0.60; bounding box
   width/height between 0.4 and 2.5. A triangle is **not** required, because a
   tent-shaped placard can look like a triangle, trapezoid or rectangle
   depending on the view (decision D-007).
-- R-A2-4. Ink test: dark pixels (V below 90) inside the blob's bounding box must
+- R-A2-4. Ink test: dark pixels (defined in R-A2-8) inside the blob outline must
   be between 2% and 45% of the blob area. This is the printed number; a plain
   yellow object without it is rejected.
 - R-A2-5. Boxes overlapping with IoU above 0.30 are merged, keeping the higher score.
 - R-A2-6. `score = solidity * (0.5 + 0.5 * min(1, ink_fraction / 0.08))`.
 - R-A2-7. All thresholds live in `MarkerParams` (`src/ffs/markers.py`). Any change
   made after looking at real photos is logged in section 9.
+- R-A2-8. "Dark" is relative to the marker's own brightness: a pixel inside the blob is ink if
+  its V is below 0.5 times the median V of the blob's yellow body (the yellow-mask pixels of the
+  blob), **and** below 90. The fixed rule "V below 90" alone failed on underexposed photos where the
+  body itself is near V 100; the relative part fixes that (D-013). The cap of 90 keeps the old
+  behaviour on well-exposed photos, where half the body V (about 127) would also count mid-grey
+  background as ink and break the OCR preprocessing. The ink fraction limits of R-A2-4 are
+  unchanged. The same rule is used to pick the digit pixels for OCR (R-A3-2).
 
 Acceptance tests (synthetic images, `tests/test_markers.py`):
 
@@ -231,11 +238,15 @@ Acceptance tests (synthetic images, `tests/test_markers.py`):
 - AT-A2-2. A plain yellow rectangle with no digits gives no box.
 - AT-A2-3. An image with no yellow gives no box.
 - AT-A2-4. For a large image the returned box is in original coordinates, not working-scale coordinates.
+- AT-A2-5. Dark photo: a marker whose body has V about 100 (H 19, S 250) and digits with V about 20, on a
+  dark background, gives one box with IoU at least 0.5.
+- AT-A2-6. A marker whose outline is not compact (a yellow tail attached, as for a tilted or partly covered
+  marker; solidity about 0.65) gives one box.
 
 ### 4.4 Reading the number (A3)
 
 - R-A3-1. Crop = box grown by 10% on each side, clipped to the image.
-- R-A3-2. Preprocessing: keep the dark ink pixels inside the yellow region,
+- R-A3-2. Preprocessing: keep the dark ink pixels (dark as in R-A2-8) inside the yellow region,
   render them as black digits on white, scale so the height is at least 96 px,
   add a white border. Two variants are made: **tight** (the yellow region as found) and
   **wide** (the region grown by 12% of the crop size, so digits touching the marker's edge
@@ -363,6 +374,7 @@ tried without any download.
 | D-012 | 2026-10-26 | Crop the preprocessed image to the ink box before upscaling | Real EasyOCR failed on a small digit centred in a large white canvas (test_real_ocr_reads_a_synthetic_digit) |
 | D-011 | 2026-10-26 | Run OCR on a tight and a wide ink mask and keep the better result | Demo: the second digit sat outside the yellow region and was discarded |
 | D-009 | 2026-10-26 | Take a file's scene only from a scene folder or a file-name token, never the archive folder; ignore macOS junk files | First real listing assigned all 40 exhibit lists to th_0001 and counted `._` files as photos |
+| D-013 | 2026-10-26 | Finder tuning round 1: H 16-40, S min 150, V min 55, min solidity 0.60, min area fraction 3e-5; ink is relative to the marker body, capped at V 90 (R-A2-8) | Gate failed (H 0.56, A 0.35). th_0006 photos are underexposed: marker body V about 98 (below v_min 110 and the old fixed ink threshold 90), S about 250, H 18-20. Higher S min keeps wood and walls out |
 
 ## 10. Change log
 
@@ -372,3 +384,4 @@ tried without any download.
 | 2026-10-26 | 4, 8, 9 | Phase 1: marker finder, OCR and exhibit reading requirements; feasibility gate procedure and metrics; D-007, D-008 |
 | 2026-10-26 | 4.1, 9 | Layout confirmed from the real zip; fixed scene detection and junk files (R-A0-4, R-A0-5, D-009) |
 | 2026-10-26 | 4.1, 4.4, 8.1, 9 | Demo run on the laptop: one-digit snapping banned, two OCR mask variants (R-A3-5, R-A3-6, D-010, D-011); ink-box crop (D-012); part 1 facts (no marker-free scene, two-digit numbers) |
+| 2026-10-26 | 4.3, 9 | Gate failed (H 0.56, A 0.35); tuning round 1: relative ink rule R-A2-8, new thresholds in R-A2-2 and R-A2-3, AT-A2-5, AT-A2-6, D-013 |
