@@ -1,324 +1,324 @@
 scene_id,photo_id,category,present,confidence,note,labeller,labelled_at
-th_0002,IMG_20240227_085541,ammunition,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T20:52:34Z
-th_0002,IMG_20240227_085541,blade,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T20:52:34Z
-th_0002,IMG_20240227_085541,bottle_glass,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T20:52:34Z
-th_0002,IMG_20240227_085541,paper_document,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T20:52:34Z
-th_0002,IMG_20240227_085541,red_brown_stain,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T20:52:34Z
-th_0002,IMG_20240227_085548,ammunition,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:52:36Z
-th_0002,IMG_20240227_085548,blade,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:52:36Z
-th_0002,IMG_20240227_085548,bottle_glass,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:52:36Z
-th_0002,IMG_20240227_085548,paper_document,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:52:36Z
-th_0002,IMG_20240227_085548,red_brown_stain,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:52:36Z
-th_0002,IMG_20240227_085557,ammunition,0,high,red plastic pegs on table; no stain,claude-sonnet-5-5,2026-10-26T20:52:37Z
-th_0002,IMG_20240227_085557,blade,0,high,red plastic pegs on table; no stain,claude-sonnet-5-5,2026-10-26T20:52:37Z
-th_0002,IMG_20240227_085557,bottle_glass,0,high,red plastic pegs on table; no stain,claude-sonnet-5-5,2026-10-26T20:52:37Z
-th_0002,IMG_20240227_085557,paper_document,0,high,red plastic pegs on table; no stain,claude-sonnet-5-5,2026-10-26T20:52:37Z
-th_0002,IMG_20240227_085557,red_brown_stain,0,high,red plastic pegs on table; no stain,claude-sonnet-5-5,2026-10-26T20:52:37Z
-th_0002,IMG_20240227_085606,ammunition,0,med,pump; cables; pill bag; printed leaflet,claude-sonnet-5-5,2026-10-26T20:52:39Z
-th_0002,IMG_20240227_085606,blade,0,med,pump; cables; pill bag; printed leaflet,claude-sonnet-5-5,2026-10-26T20:52:39Z
-th_0002,IMG_20240227_085606,bottle_glass,0,med,pump; cables; pill bag; printed leaflet,claude-sonnet-5-5,2026-10-26T20:52:39Z
-th_0002,IMG_20240227_085606,paper_document,1,med,pump; cables; pill bag; printed leaflet,claude-sonnet-5-5,2026-10-26T20:52:39Z
-th_0002,IMG_20240227_085606,red_brown_stain,0,med,pump; cables; pill bag; printed leaflet,claude-sonnet-5-5,2026-10-26T20:52:39Z
-th_0002,IMG_20240227_085614,ammunition,0,low,pill bag; glove box; pens; jug; cardboard box not a document,claude-sonnet-5-5,2026-10-26T20:52:40Z
-th_0002,IMG_20240227_085614,blade,0,low,pill bag; glove box; pens; jug; cardboard box not a document,claude-sonnet-5-5,2026-10-26T20:52:40Z
-th_0002,IMG_20240227_085614,bottle_glass,0,low,pill bag; glove box; pens; jug; cardboard box not a document,claude-sonnet-5-5,2026-10-26T20:52:40Z
-th_0002,IMG_20240227_085614,paper_document,0,low,pill bag; glove box; pens; jug; cardboard box not a document,claude-sonnet-5-5,2026-10-26T20:52:40Z
-th_0002,IMG_20240227_085614,red_brown_stain,0,low,pill bag; glove box; pens; jug; cardboard box not a document,claude-sonnet-5-5,2026-10-26T20:52:40Z
-th_0002,IMG_20240227_085623,ammunition,0,low,plastic fertiliser bottles; leaflet at corner,claude-sonnet-5-5,2026-10-26T20:52:42Z
-th_0002,IMG_20240227_085623,blade,0,low,plastic fertiliser bottles; leaflet at corner,claude-sonnet-5-5,2026-10-26T20:52:42Z
-th_0002,IMG_20240227_085623,bottle_glass,1,low,plastic fertiliser bottles; leaflet at corner,claude-sonnet-5-5,2026-10-26T20:52:42Z
-th_0002,IMG_20240227_085623,paper_document,1,low,plastic fertiliser bottles; leaflet at corner,claude-sonnet-5-5,2026-10-26T20:52:42Z
-th_0002,IMG_20240227_085623,red_brown_stain,0,low,plastic fertiliser bottles; leaflet at corner,claude-sonnet-5-5,2026-10-26T20:52:42Z
-th_0002,IMG_20240227_085630,ammunition,0,low,paper towel roll and key; roll not a document,claude-sonnet-5-5,2026-10-26T20:52:43Z
-th_0002,IMG_20240227_085630,blade,0,low,paper towel roll and key; roll not a document,claude-sonnet-5-5,2026-10-26T20:52:43Z
-th_0002,IMG_20240227_085630,bottle_glass,0,low,paper towel roll and key; roll not a document,claude-sonnet-5-5,2026-10-26T20:52:43Z
-th_0002,IMG_20240227_085630,paper_document,0,low,paper towel roll and key; roll not a document,claude-sonnet-5-5,2026-10-26T20:52:43Z
-th_0002,IMG_20240227_085630,red_brown_stain,0,low,paper towel roll and key; roll not a document,claude-sonnet-5-5,2026-10-26T20:52:43Z
-th_0002,IMG_20240227_085639,ammunition,0,low,plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T20:52:44Z
-th_0002,IMG_20240227_085639,blade,0,low,plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T20:52:44Z
-th_0002,IMG_20240227_085639,bottle_glass,0,low,plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T20:52:44Z
-th_0002,IMG_20240227_085639,paper_document,0,low,plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T20:52:44Z
-th_0002,IMG_20240227_085639,red_brown_stain,0,low,plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T20:52:44Z
-th_0002,IMG_20240227_085647,ammunition,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:47Z
-th_0002,IMG_20240227_085647,blade,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:47Z
-th_0002,IMG_20240227_085647,bottle_glass,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:47Z
-th_0002,IMG_20240227_085647,paper_document,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:47Z
-th_0002,IMG_20240227_085647,red_brown_stain,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:47Z
-th_0002,IMG_20240227_085653,ammunition,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:49Z
-th_0002,IMG_20240227_085653,blade,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:49Z
-th_0002,IMG_20240227_085653,bottle_glass,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:49Z
-th_0002,IMG_20240227_085653,paper_document,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:49Z
-th_0002,IMG_20240227_085653,red_brown_stain,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T20:53:49Z
-th_0002,IMG_20240227_085701,ammunition,0,high,cable ties; handwritten note on paper,claude-sonnet-5-5,2026-10-26T20:53:51Z
-th_0002,IMG_20240227_085701,blade,0,high,cable ties; handwritten note on paper,claude-sonnet-5-5,2026-10-26T20:53:51Z
-th_0002,IMG_20240227_085701,bottle_glass,0,high,cable ties; handwritten note on paper,claude-sonnet-5-5,2026-10-26T20:53:51Z
-th_0002,IMG_20240227_085701,paper_document,1,high,cable ties; handwritten note on paper,claude-sonnet-5-5,2026-10-26T20:53:51Z
-th_0002,IMG_20240227_085701,red_brown_stain,0,high,cable ties; handwritten note on paper,claude-sonnet-5-5,2026-10-26T20:53:51Z
-th_0002,IMG_20240227_085710,ammunition,0,high,handwritten note on step,claude-sonnet-5-5,2026-10-26T20:53:52Z
-th_0002,IMG_20240227_085710,blade,0,high,handwritten note on step,claude-sonnet-5-5,2026-10-26T20:53:52Z
-th_0002,IMG_20240227_085710,bottle_glass,0,high,handwritten note on step,claude-sonnet-5-5,2026-10-26T20:53:52Z
-th_0002,IMG_20240227_085710,paper_document,1,high,handwritten note on step,claude-sonnet-5-5,2026-10-26T20:53:52Z
-th_0002,IMG_20240227_085710,red_brown_stain,0,high,handwritten note on step,claude-sonnet-5-5,2026-10-26T20:53:52Z
-th_0002,IMG_20240227_085719,ammunition,0,high,stack of paper sheets; paper clip chain,claude-sonnet-5-5,2026-10-26T20:53:53Z
-th_0002,IMG_20240227_085719,blade,0,high,stack of paper sheets; paper clip chain,claude-sonnet-5-5,2026-10-26T20:53:53Z
-th_0002,IMG_20240227_085719,bottle_glass,0,high,stack of paper sheets; paper clip chain,claude-sonnet-5-5,2026-10-26T20:53:53Z
-th_0002,IMG_20240227_085719,paper_document,1,high,stack of paper sheets; paper clip chain,claude-sonnet-5-5,2026-10-26T20:53:53Z
-th_0002,IMG_20240227_085719,red_brown_stain,0,high,stack of paper sheets; paper clip chain,claude-sonnet-5-5,2026-10-26T20:53:53Z
-th_0002,IMG_20240227_085728,ammunition,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:55Z
-th_0002,IMG_20240227_085728,blade,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:55Z
-th_0002,IMG_20240227_085728,bottle_glass,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:55Z
-th_0002,IMG_20240227_085728,paper_document,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:55Z
-th_0002,IMG_20240227_085728,red_brown_stain,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:55Z
-th_0002,IMG_20240227_085734,ammunition,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:56Z
-th_0002,IMG_20240227_085734,blade,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:56Z
-th_0002,IMG_20240227_085734,bottle_glass,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:56Z
-th_0002,IMG_20240227_085734,paper_document,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:56Z
-th_0002,IMG_20240227_085734,red_brown_stain,0,low,mannequin; tanks; bin bags; small white item on floor unclear,claude-sonnet-5-5,2026-10-26T20:53:56Z
-th_0002,IMG_20240227_085743,ammunition,0,high,mannequin head; tanks; cables,claude-sonnet-5-5,2026-10-26T20:53:57Z
-th_0002,IMG_20240227_085743,blade,0,high,mannequin head; tanks; cables,claude-sonnet-5-5,2026-10-26T20:53:57Z
-th_0002,IMG_20240227_085743,bottle_glass,0,high,mannequin head; tanks; cables,claude-sonnet-5-5,2026-10-26T20:53:57Z
-th_0002,IMG_20240227_085743,paper_document,0,high,mannequin head; tanks; cables,claude-sonnet-5-5,2026-10-26T20:53:57Z
-th_0002,IMG_20240227_085743,red_brown_stain,0,high,mannequin head; tanks; cables,claude-sonnet-5-5,2026-10-26T20:53:57Z
-th_0002,IMG_20240227_085754,ammunition,0,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:33Z
-th_0002,IMG_20240227_085754,blade,0,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:33Z
-th_0002,IMG_20240227_085754,bottle_glass,1,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:33Z
-th_0002,IMG_20240227_085754,paper_document,0,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:33Z
-th_0002,IMG_20240227_085754,red_brown_stain,0,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:33Z
-th_0002,IMG_20240227_085802,ammunition,0,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:34Z
-th_0002,IMG_20240227_085802,blade,0,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:34Z
-th_0002,IMG_20240227_085802,bottle_glass,1,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:34Z
-th_0002,IMG_20240227_085802,paper_document,0,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:34Z
-th_0002,IMG_20240227_085802,red_brown_stain,0,high,glass flask bottle on tank,claude-sonnet-5-5,2026-10-26T20:54:34Z
-th_0002,IMG_20240227_085822,ammunition,0,high,wide room; paper sheets on floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:35Z
-th_0002,IMG_20240227_085822,blade,0,high,wide room; paper sheets on floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:35Z
-th_0002,IMG_20240227_085822,bottle_glass,0,high,wide room; paper sheets on floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:35Z
-th_0002,IMG_20240227_085822,paper_document,1,high,wide room; paper sheets on floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:35Z
-th_0002,IMG_20240227_085822,red_brown_stain,0,high,wide room; paper sheets on floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:35Z
-th_0002,IMG_20240227_085835,ammunition,0,low,table: plastic fertiliser bottles; leaflet; paper roll,claude-sonnet-5-5,2026-10-26T20:54:37Z
-th_0002,IMG_20240227_085835,blade,0,low,table: plastic fertiliser bottles; leaflet; paper roll,claude-sonnet-5-5,2026-10-26T20:54:37Z
-th_0002,IMG_20240227_085835,bottle_glass,1,low,table: plastic fertiliser bottles; leaflet; paper roll,claude-sonnet-5-5,2026-10-26T20:54:37Z
-th_0002,IMG_20240227_085835,paper_document,1,low,table: plastic fertiliser bottles; leaflet; paper roll,claude-sonnet-5-5,2026-10-26T20:54:37Z
-th_0002,IMG_20240227_085835,red_brown_stain,0,low,table: plastic fertiliser bottles; leaflet; paper roll,claude-sonnet-5-5,2026-10-26T20:54:37Z
-th_0002,IMG_20240227_085853,ammunition,0,high,note on floor; pens; cable ties,claude-sonnet-5-5,2026-10-26T20:54:38Z
-th_0002,IMG_20240227_085853,blade,0,high,note on floor; pens; cable ties,claude-sonnet-5-5,2026-10-26T20:54:38Z
-th_0002,IMG_20240227_085853,bottle_glass,0,high,note on floor; pens; cable ties,claude-sonnet-5-5,2026-10-26T20:54:38Z
-th_0002,IMG_20240227_085853,paper_document,1,high,note on floor; pens; cable ties,claude-sonnet-5-5,2026-10-26T20:54:38Z
-th_0002,IMG_20240227_085853,red_brown_stain,0,high,note on floor; pens; cable ties,claude-sonnet-5-5,2026-10-26T20:54:38Z
-th_0002,IMG_20240227_085900,ammunition,0,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:40Z
-th_0002,IMG_20240227_085900,blade,0,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:40Z
-th_0002,IMG_20240227_085900,bottle_glass,0,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:40Z
-th_0002,IMG_20240227_085900,paper_document,1,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:40Z
-th_0002,IMG_20240227_085900,red_brown_stain,0,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:40Z
-th_0002,IMG_20240227_085937,ammunition,0,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:41Z
-th_0002,IMG_20240227_085937,blade,0,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:41Z
-th_0002,IMG_20240227_085937,bottle_glass,0,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:41Z
-th_0002,IMG_20240227_085937,paper_document,1,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:41Z
-th_0002,IMG_20240227_085937,red_brown_stain,0,high,wide room; paper sheets; plastic jerrycans,claude-sonnet-5-5,2026-10-26T20:54:41Z
-th_0003,IMG_20240227_090714,ammunition,0,med,floor; phone and small printed card near marker 11,claude-sonnet-5-5,2026-10-26T20:54:43Z
-th_0003,IMG_20240227_090714,blade,0,med,floor; phone and small printed card near marker 11,claude-sonnet-5-5,2026-10-26T20:54:43Z
-th_0003,IMG_20240227_090714,bottle_glass,0,med,floor; phone and small printed card near marker 11,claude-sonnet-5-5,2026-10-26T20:54:43Z
-th_0003,IMG_20240227_090714,paper_document,1,med,floor; phone and small printed card near marker 11,claude-sonnet-5-5,2026-10-26T20:54:43Z
-th_0003,IMG_20240227_090714,red_brown_stain,0,med,floor; phone and small printed card near marker 11,claude-sonnet-5-5,2026-10-26T20:54:43Z
-th_0003,IMG_20240227_090732,ammunition,0,low,bare room; duct; briefcase; glasses; small white item at marker 20 unclear,claude-sonnet-5-5,2026-10-26T20:55:22Z
-th_0003,IMG_20240227_090732,blade,0,low,bare room; duct; briefcase; glasses; small white item at marker 20 unclear,claude-sonnet-5-5,2026-10-26T20:55:22Z
-th_0003,IMG_20240227_090732,bottle_glass,0,low,bare room; duct; briefcase; glasses; small white item at marker 20 unclear,claude-sonnet-5-5,2026-10-26T20:55:22Z
-th_0003,IMG_20240227_090732,paper_document,0,low,bare room; duct; briefcase; glasses; small white item at marker 20 unclear,claude-sonnet-5-5,2026-10-26T20:55:22Z
-th_0003,IMG_20240227_090732,red_brown_stain,0,low,bare room; duct; briefcase; glasses; small white item at marker 20 unclear,claude-sonnet-5-5,2026-10-26T20:55:22Z
-th_0003,IMG_20240227_090743,ammunition,0,med,wide room with tripod; white sheet on floor; red floor mark unclear,claude-sonnet-5-5,2026-10-26T20:55:23Z
-th_0003,IMG_20240227_090743,blade,0,med,wide room with tripod; white sheet on floor; red floor mark unclear,claude-sonnet-5-5,2026-10-26T20:55:23Z
-th_0003,IMG_20240227_090743,bottle_glass,0,med,wide room with tripod; white sheet on floor; red floor mark unclear,claude-sonnet-5-5,2026-10-26T20:55:23Z
-th_0003,IMG_20240227_090743,paper_document,1,med,wide room with tripod; white sheet on floor; red floor mark unclear,claude-sonnet-5-5,2026-10-26T20:55:23Z
-th_0003,IMG_20240227_090743,red_brown_stain,0,med,wide room with tripod; white sheet on floor; red floor mark unclear,claude-sonnet-5-5,2026-10-26T20:55:23Z
-th_0003,IMG_20240227_090754,ammunition,0,med,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T20:55:25Z
-th_0003,IMG_20240227_090754,blade,0,med,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T20:55:25Z
-th_0003,IMG_20240227_090754,bottle_glass,0,med,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T20:55:25Z
-th_0003,IMG_20240227_090754,paper_document,0,med,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T20:55:25Z
-th_0003,IMG_20240227_090754,red_brown_stain,0,med,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T20:55:25Z
-th_0003,IMG_20240227_090800,ammunition,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:55:26Z
-th_0003,IMG_20240227_090800,blade,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:55:26Z
-th_0003,IMG_20240227_090800,bottle_glass,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:55:26Z
-th_0003,IMG_20240227_090800,paper_document,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:55:26Z
-th_0003,IMG_20240227_090800,red_brown_stain,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:55:26Z
-th_0003,IMG_20240227_090807,ammunition,0,high,metal air duct and marker,claude-sonnet-5-5,2026-10-26T20:55:28Z
-th_0003,IMG_20240227_090807,blade,0,high,metal air duct and marker,claude-sonnet-5-5,2026-10-26T20:55:28Z
-th_0003,IMG_20240227_090807,bottle_glass,0,high,metal air duct and marker,claude-sonnet-5-5,2026-10-26T20:55:28Z
-th_0003,IMG_20240227_090807,paper_document,0,high,metal air duct and marker,claude-sonnet-5-5,2026-10-26T20:55:28Z
-th_0003,IMG_20240227_090807,red_brown_stain,0,high,metal air duct and marker,claude-sonnet-5-5,2026-10-26T20:55:28Z
-th_0003,IMG_20240227_090814,ammunition,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:29Z
-th_0003,IMG_20240227_090814,blade,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:29Z
-th_0003,IMG_20240227_090814,bottle_glass,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:29Z
-th_0003,IMG_20240227_090814,paper_document,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:29Z
-th_0003,IMG_20240227_090814,red_brown_stain,1,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:29Z
-th_0003,IMG_20240227_090818,ammunition,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:31Z
-th_0003,IMG_20240227_090818,blade,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:31Z
-th_0003,IMG_20240227_090818,bottle_glass,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:31Z
-th_0003,IMG_20240227_090818,paper_document,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:31Z
-th_0003,IMG_20240227_090818,red_brown_stain,1,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:31Z
-th_0003,IMG_20240227_090824,ammunition,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:32Z
-th_0003,IMG_20240227_090824,blade,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:32Z
-th_0003,IMG_20240227_090824,bottle_glass,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:32Z
-th_0003,IMG_20240227_090824,paper_document,0,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:32Z
-th_0003,IMG_20240227_090824,red_brown_stain,1,low,syringe with reddish residue; tweezers; orange-brown rust mark on floor,claude-sonnet-5-5,2026-10-26T20:55:32Z
-th_0003,IMG_20240227_090830,ammunition,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T20:56:12Z
-th_0003,IMG_20240227_090830,blade,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T20:56:12Z
-th_0003,IMG_20240227_090830,bottle_glass,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T20:56:12Z
-th_0003,IMG_20240227_090830,paper_document,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T20:56:12Z
-th_0003,IMG_20240227_090830,red_brown_stain,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T20:56:12Z
-th_0003,IMG_20240227_090840,ammunition,0,high,phone on floor; printed ID card at top,claude-sonnet-5-5,2026-10-26T20:56:13Z
-th_0003,IMG_20240227_090840,blade,0,high,phone on floor; printed ID card at top,claude-sonnet-5-5,2026-10-26T20:56:13Z
-th_0003,IMG_20240227_090840,bottle_glass,0,high,phone on floor; printed ID card at top,claude-sonnet-5-5,2026-10-26T20:56:13Z
-th_0003,IMG_20240227_090840,paper_document,1,high,phone on floor; printed ID card at top,claude-sonnet-5-5,2026-10-26T20:56:13Z
-th_0003,IMG_20240227_090840,red_brown_stain,0,high,phone on floor; printed ID card at top,claude-sonnet-5-5,2026-10-26T20:56:13Z
-th_0003,IMG_20240227_090844,ammunition,0,high,printed ID card beside marker,claude-sonnet-5-5,2026-10-26T20:56:15Z
-th_0003,IMG_20240227_090844,blade,0,high,printed ID card beside marker,claude-sonnet-5-5,2026-10-26T20:56:15Z
-th_0003,IMG_20240227_090844,bottle_glass,0,high,printed ID card beside marker,claude-sonnet-5-5,2026-10-26T20:56:15Z
-th_0003,IMG_20240227_090844,paper_document,1,high,printed ID card beside marker,claude-sonnet-5-5,2026-10-26T20:56:15Z
-th_0003,IMG_20240227_090844,red_brown_stain,0,high,printed ID card beside marker,claude-sonnet-5-5,2026-10-26T20:56:15Z
-th_0004,IMG_20240227_091516,ammunition,0,low,gloves; briefcase; blue tube; card on duct; rust-brown floor marks,claude-sonnet-5-5,2026-10-26T20:56:16Z
-th_0004,IMG_20240227_091516,blade,0,low,gloves; briefcase; blue tube; card on duct; rust-brown floor marks,claude-sonnet-5-5,2026-10-26T20:56:16Z
-th_0004,IMG_20240227_091516,bottle_glass,0,low,gloves; briefcase; blue tube; card on duct; rust-brown floor marks,claude-sonnet-5-5,2026-10-26T20:56:16Z
-th_0004,IMG_20240227_091516,paper_document,1,low,gloves; briefcase; blue tube; card on duct; rust-brown floor marks,claude-sonnet-5-5,2026-10-26T20:56:16Z
-th_0004,IMG_20240227_091516,red_brown_stain,1,low,gloves; briefcase; blue tube; card on duct; rust-brown floor marks,claude-sonnet-5-5,2026-10-26T20:56:16Z
-th_0004,IMG_20240227_091532,ammunition,0,low,gloves; blue tube; banknote-like card on duct; faint brown floor patch,claude-sonnet-5-5,2026-10-26T20:56:18Z
-th_0004,IMG_20240227_091532,blade,0,low,gloves; blue tube; banknote-like card on duct; faint brown floor patch,claude-sonnet-5-5,2026-10-26T20:56:18Z
-th_0004,IMG_20240227_091532,bottle_glass,0,low,gloves; blue tube; banknote-like card on duct; faint brown floor patch,claude-sonnet-5-5,2026-10-26T20:56:18Z
-th_0004,IMG_20240227_091532,paper_document,1,low,gloves; blue tube; banknote-like card on duct; faint brown floor patch,claude-sonnet-5-5,2026-10-26T20:56:18Z
-th_0004,IMG_20240227_091532,red_brown_stain,1,low,gloves; blue tube; banknote-like card on duct; faint brown floor patch,claude-sonnet-5-5,2026-10-26T20:56:18Z
-th_0004,IMG_20240227_091543,ammunition,0,low,gloves; briefcase; blue tube; orange-brown floor stain,claude-sonnet-5-5,2026-10-26T20:56:19Z
-th_0004,IMG_20240227_091543,blade,0,low,gloves; briefcase; blue tube; orange-brown floor stain,claude-sonnet-5-5,2026-10-26T20:56:19Z
-th_0004,IMG_20240227_091543,bottle_glass,0,low,gloves; briefcase; blue tube; orange-brown floor stain,claude-sonnet-5-5,2026-10-26T20:56:19Z
-th_0004,IMG_20240227_091543,paper_document,0,low,gloves; briefcase; blue tube; orange-brown floor stain,claude-sonnet-5-5,2026-10-26T20:56:19Z
-th_0004,IMG_20240227_091543,red_brown_stain,1,low,gloves; briefcase; blue tube; orange-brown floor stain,claude-sonnet-5-5,2026-10-26T20:56:19Z
-th_0004,IMG_20240227_091556,ammunition,0,med,wide room; white sheet on floor; large brown streak on floor,claude-sonnet-5-5,2026-10-26T20:56:21Z
-th_0004,IMG_20240227_091556,blade,0,med,wide room; white sheet on floor; large brown streak on floor,claude-sonnet-5-5,2026-10-26T20:56:21Z
-th_0004,IMG_20240227_091556,bottle_glass,0,med,wide room; white sheet on floor; large brown streak on floor,claude-sonnet-5-5,2026-10-26T20:56:21Z
-th_0004,IMG_20240227_091556,paper_document,1,med,wide room; white sheet on floor; large brown streak on floor,claude-sonnet-5-5,2026-10-26T20:56:21Z
-th_0004,IMG_20240227_091556,red_brown_stain,1,med,wide room; white sheet on floor; large brown streak on floor,claude-sonnet-5-5,2026-10-26T20:56:21Z
-th_0004,IMG_20240227_091609,ammunition,0,low,glasses; wallet; briefcase; small orange-brown floor mark,claude-sonnet-5-5,2026-10-26T20:56:22Z
-th_0004,IMG_20240227_091609,blade,0,low,glasses; wallet; briefcase; small orange-brown floor mark,claude-sonnet-5-5,2026-10-26T20:56:22Z
-th_0004,IMG_20240227_091609,bottle_glass,0,low,glasses; wallet; briefcase; small orange-brown floor mark,claude-sonnet-5-5,2026-10-26T20:56:22Z
-th_0004,IMG_20240227_091609,paper_document,0,low,glasses; wallet; briefcase; small orange-brown floor mark,claude-sonnet-5-5,2026-10-26T20:56:22Z
-th_0004,IMG_20240227_091609,red_brown_stain,1,low,glasses; wallet; briefcase; small orange-brown floor mark,claude-sonnet-5-5,2026-10-26T20:56:22Z
-th_0004,IMG_20240227_091620,ammunition,0,low,gloves; briefcase; blue tube; dark spots on floor near pipes,claude-sonnet-5-5,2026-10-26T20:56:58Z
-th_0004,IMG_20240227_091620,blade,0,low,gloves; briefcase; blue tube; dark spots on floor near pipes,claude-sonnet-5-5,2026-10-26T20:56:58Z
-th_0004,IMG_20240227_091620,bottle_glass,0,low,gloves; briefcase; blue tube; dark spots on floor near pipes,claude-sonnet-5-5,2026-10-26T20:56:58Z
-th_0004,IMG_20240227_091620,paper_document,0,low,gloves; briefcase; blue tube; dark spots on floor near pipes,claude-sonnet-5-5,2026-10-26T20:56:58Z
-th_0004,IMG_20240227_091620,red_brown_stain,1,low,gloves; briefcase; blue tube; dark spots on floor near pipes,claude-sonnet-5-5,2026-10-26T20:56:58Z
-th_0004,IMG_20240227_091631,ammunition,0,med,latex glove; blue tube; floor with tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:00Z
-th_0004,IMG_20240227_091631,blade,0,med,latex glove; blue tube; floor with tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:00Z
-th_0004,IMG_20240227_091631,bottle_glass,0,med,latex glove; blue tube; floor with tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:00Z
-th_0004,IMG_20240227_091631,paper_document,0,med,latex glove; blue tube; floor with tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:00Z
-th_0004,IMG_20240227_091631,red_brown_stain,0,med,latex glove; blue tube; floor with tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:00Z
-th_0004,IMG_20240227_091637,ammunition,0,med,latex glove on floor; tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:01Z
-th_0004,IMG_20240227_091637,blade,0,med,latex glove on floor; tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:01Z
-th_0004,IMG_20240227_091637,bottle_glass,0,med,latex glove on floor; tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:01Z
-th_0004,IMG_20240227_091637,paper_document,0,med,latex glove on floor; tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:01Z
-th_0004,IMG_20240227_091637,red_brown_stain,0,med,latex glove on floor; tiny orange specks,claude-sonnet-5-5,2026-10-26T20:57:01Z
-th_0004,IMG_20240227_091642,ammunition,0,high,mannequin head close-up on floor,claude-sonnet-5-5,2026-10-26T20:57:03Z
-th_0004,IMG_20240227_091642,blade,0,high,mannequin head close-up on floor,claude-sonnet-5-5,2026-10-26T20:57:03Z
-th_0004,IMG_20240227_091642,bottle_glass,0,high,mannequin head close-up on floor,claude-sonnet-5-5,2026-10-26T20:57:03Z
-th_0004,IMG_20240227_091642,paper_document,0,high,mannequin head close-up on floor,claude-sonnet-5-5,2026-10-26T20:57:03Z
-th_0004,IMG_20240227_091642,red_brown_stain,0,high,mannequin head close-up on floor,claude-sonnet-5-5,2026-10-26T20:57:03Z
-th_0004,IMG_20240227_091650,ammunition,0,low,gloves; briefcase; blue tube; faint orange-brown floor mark top left,claude-sonnet-5-5,2026-10-26T20:57:04Z
-th_0004,IMG_20240227_091650,blade,0,low,gloves; briefcase; blue tube; faint orange-brown floor mark top left,claude-sonnet-5-5,2026-10-26T20:57:04Z
-th_0004,IMG_20240227_091650,bottle_glass,0,low,gloves; briefcase; blue tube; faint orange-brown floor mark top left,claude-sonnet-5-5,2026-10-26T20:57:04Z
-th_0004,IMG_20240227_091650,paper_document,0,low,gloves; briefcase; blue tube; faint orange-brown floor mark top left,claude-sonnet-5-5,2026-10-26T20:57:04Z
-th_0004,IMG_20240227_091650,red_brown_stain,1,low,gloves; briefcase; blue tube; faint orange-brown floor mark top left,claude-sonnet-5-5,2026-10-26T20:57:04Z
-th_0004,IMG_20240227_091700,ammunition,0,med,latex gloves on floor with marker,claude-sonnet-5-5,2026-10-26T20:57:06Z
-th_0004,IMG_20240227_091700,blade,0,med,latex gloves on floor with marker,claude-sonnet-5-5,2026-10-26T20:57:06Z
-th_0004,IMG_20240227_091700,bottle_glass,0,med,latex gloves on floor with marker,claude-sonnet-5-5,2026-10-26T20:57:06Z
-th_0004,IMG_20240227_091700,paper_document,0,med,latex gloves on floor with marker,claude-sonnet-5-5,2026-10-26T20:57:06Z
-th_0004,IMG_20240227_091700,red_brown_stain,0,med,latex gloves on floor with marker,claude-sonnet-5-5,2026-10-26T20:57:06Z
-th_0004,IMG_20240227_091708,ammunition,0,high,briefcase and gloves on floor,claude-sonnet-5-5,2026-10-26T20:57:07Z
-th_0004,IMG_20240227_091708,blade,0,high,briefcase and gloves on floor,claude-sonnet-5-5,2026-10-26T20:57:07Z
-th_0004,IMG_20240227_091708,bottle_glass,0,high,briefcase and gloves on floor,claude-sonnet-5-5,2026-10-26T20:57:07Z
-th_0004,IMG_20240227_091708,paper_document,0,high,briefcase and gloves on floor,claude-sonnet-5-5,2026-10-26T20:57:07Z
-th_0004,IMG_20240227_091708,red_brown_stain,0,high,briefcase and gloves on floor,claude-sonnet-5-5,2026-10-26T20:57:07Z
-th_0004,IMG_20240227_091713,ammunition,0,low,banknote bundle on duct; currency not clearly a document,claude-sonnet-5-5,2026-10-26T20:57:09Z
-th_0004,IMG_20240227_091713,blade,0,low,banknote bundle on duct; currency not clearly a document,claude-sonnet-5-5,2026-10-26T20:57:09Z
-th_0004,IMG_20240227_091713,bottle_glass,0,low,banknote bundle on duct; currency not clearly a document,claude-sonnet-5-5,2026-10-26T20:57:09Z
-th_0004,IMG_20240227_091713,paper_document,1,low,banknote bundle on duct; currency not clearly a document,claude-sonnet-5-5,2026-10-26T20:57:09Z
-th_0004,IMG_20240227_091713,red_brown_stain,0,low,banknote bundle on duct; currency not clearly a document,claude-sonnet-5-5,2026-10-26T20:57:09Z
-th_0004,IMG_20240227_091725,ammunition,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:58:11Z
-th_0004,IMG_20240227_091725,blade,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:58:11Z
-th_0004,IMG_20240227_091725,bottle_glass,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:58:11Z
-th_0004,IMG_20240227_091725,paper_document,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:58:11Z
-th_0004,IMG_20240227_091725,red_brown_stain,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T20:58:11Z
-th_0004,IMG_20240227_091731,ammunition,0,high,black wallet on step,claude-sonnet-5-5,2026-10-26T20:58:13Z
-th_0004,IMG_20240227_091731,blade,0,high,black wallet on step,claude-sonnet-5-5,2026-10-26T20:58:13Z
-th_0004,IMG_20240227_091731,bottle_glass,0,high,black wallet on step,claude-sonnet-5-5,2026-10-26T20:58:13Z
-th_0004,IMG_20240227_091731,paper_document,0,high,black wallet on step,claude-sonnet-5-5,2026-10-26T20:58:13Z
-th_0004,IMG_20240227_091731,red_brown_stain,0,high,black wallet on step,claude-sonnet-5-5,2026-10-26T20:58:13Z
-th_0005,IMG_20240227_093447,ammunition,0,low,dark room: crowbar; shoes; shelf with binder; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:14Z
-th_0005,IMG_20240227_093447,blade,0,low,dark room: crowbar; shoes; shelf with binder; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:14Z
-th_0005,IMG_20240227_093447,bottle_glass,1,low,dark room: crowbar; shoes; shelf with binder; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:14Z
-th_0005,IMG_20240227_093447,paper_document,1,low,dark room: crowbar; shoes; shelf with binder; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:14Z
-th_0005,IMG_20240227_093447,red_brown_stain,0,low,dark room: crowbar; shoes; shelf with binder; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:14Z
-th_0005,IMG_20240227_093503,ammunition,0,low,dark room: legs; overturned chair; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:15Z
-th_0005,IMG_20240227_093503,blade,0,low,dark room: legs; overturned chair; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:15Z
-th_0005,IMG_20240227_093503,bottle_glass,1,low,dark room: legs; overturned chair; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:15Z
-th_0005,IMG_20240227_093503,paper_document,0,low,dark room: legs; overturned chair; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:15Z
-th_0005,IMG_20240227_093503,red_brown_stain,0,low,dark room: legs; overturned chair; small bottle on floor,claude-sonnet-5-5,2026-10-26T20:58:15Z
-th_0005,IMG_20240227_093514,ammunition,1,low,dark room: small cartridge-like items near markers 12; 17; binder on shelf,claude-sonnet-5-5,2026-10-26T20:58:17Z
-th_0005,IMG_20240227_093514,blade,0,low,dark room: small cartridge-like items near markers 12; 17; binder on shelf,claude-sonnet-5-5,2026-10-26T20:58:17Z
-th_0005,IMG_20240227_093514,bottle_glass,0,low,dark room: small cartridge-like items near markers 12; 17; binder on shelf,claude-sonnet-5-5,2026-10-26T20:58:17Z
-th_0005,IMG_20240227_093514,paper_document,1,low,dark room: small cartridge-like items near markers 12; 17; binder on shelf,claude-sonnet-5-5,2026-10-26T20:58:17Z
-th_0005,IMG_20240227_093514,red_brown_stain,0,low,dark room: small cartridge-like items near markers 12; 17; binder on shelf,claude-sonnet-5-5,2026-10-26T20:58:17Z
-th_0005,IMG_20240227_093526,ammunition,0,low,dark room: legs; overturned chair; shelf; items unclear,claude-sonnet-5-5,2026-10-26T20:58:19Z
-th_0005,IMG_20240227_093526,blade,0,low,dark room: legs; overturned chair; shelf; items unclear,claude-sonnet-5-5,2026-10-26T20:58:19Z
-th_0005,IMG_20240227_093526,bottle_glass,0,low,dark room: legs; overturned chair; shelf; items unclear,claude-sonnet-5-5,2026-10-26T20:58:19Z
-th_0005,IMG_20240227_093526,paper_document,0,low,dark room: legs; overturned chair; shelf; items unclear,claude-sonnet-5-5,2026-10-26T20:58:19Z
-th_0005,IMG_20240227_093526,red_brown_stain,0,low,dark room: legs; overturned chair; shelf; items unclear,claude-sonnet-5-5,2026-10-26T20:58:19Z
-th_0005,IMG_20240227_093536,ammunition,0,low,dark room: legs; table; glass jar or vase on counter,claude-sonnet-5-5,2026-10-26T20:58:20Z
-th_0005,IMG_20240227_093536,blade,0,low,dark room: legs; table; glass jar or vase on counter,claude-sonnet-5-5,2026-10-26T20:58:20Z
-th_0005,IMG_20240227_093536,bottle_glass,1,low,dark room: legs; table; glass jar or vase on counter,claude-sonnet-5-5,2026-10-26T20:58:20Z
-th_0005,IMG_20240227_093536,paper_document,0,low,dark room: legs; table; glass jar or vase on counter,claude-sonnet-5-5,2026-10-26T20:58:20Z
-th_0005,IMG_20240227_093536,red_brown_stain,0,low,dark room: legs; table; glass jar or vase on counter,claude-sonnet-5-5,2026-10-26T20:58:20Z
-th_0005,IMG_20240227_093549,ammunition,0,med,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T20:58:22Z
-th_0005,IMG_20240227_093549,blade,0,med,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T20:58:22Z
-th_0005,IMG_20240227_093549,bottle_glass,0,med,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T20:58:22Z
-th_0005,IMG_20240227_093549,paper_document,0,med,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T20:58:22Z
-th_0005,IMG_20240227_093549,red_brown_stain,0,med,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T20:58:22Z
-th_0005,IMG_20240227_093555,ammunition,1,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T20:58:59Z
-th_0005,IMG_20240227_093555,blade,0,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T20:58:59Z
-th_0005,IMG_20240227_093555,bottle_glass,0,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T20:58:59Z
-th_0005,IMG_20240227_093555,paper_document,0,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T20:58:59Z
-th_0005,IMG_20240227_093555,red_brown_stain,0,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T20:58:59Z
-th_0005,IMG_20240227_093601,ammunition,0,med,pair of sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T20:59:01Z
-th_0005,IMG_20240227_093601,blade,0,med,pair of sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T20:59:01Z
-th_0005,IMG_20240227_093601,bottle_glass,0,med,pair of sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T20:59:01Z
-th_0005,IMG_20240227_093601,paper_document,0,med,pair of sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T20:59:01Z
-th_0005,IMG_20240227_093601,red_brown_stain,0,med,pair of sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T20:59:01Z
-th_0005,IMG_20240227_093605,ammunition,1,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:02Z
-th_0005,IMG_20240227_093605,blade,0,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:02Z
-th_0005,IMG_20240227_093605,bottle_glass,0,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:02Z
-th_0005,IMG_20240227_093605,paper_document,0,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:02Z
-th_0005,IMG_20240227_093605,red_brown_stain,0,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:02Z
-th_0005,IMG_20240227_093613,ammunition,1,med,dark photo; shotgun barrel; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T20:59:04Z
-th_0005,IMG_20240227_093613,blade,0,med,dark photo; shotgun barrel; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T20:59:04Z
-th_0005,IMG_20240227_093613,bottle_glass,0,med,dark photo; shotgun barrel; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T20:59:04Z
-th_0005,IMG_20240227_093613,paper_document,0,med,dark photo; shotgun barrel; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T20:59:04Z
-th_0005,IMG_20240227_093613,red_brown_stain,0,med,dark photo; shotgun barrel; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T20:59:04Z
-th_0005,IMG_20240227_093621,ammunition,1,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:06Z
-th_0005,IMG_20240227_093621,blade,0,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:06Z
-th_0005,IMG_20240227_093621,bottle_glass,0,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:06Z
-th_0005,IMG_20240227_093621,paper_document,0,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:06Z
-th_0005,IMG_20240227_093621,red_brown_stain,0,high,green shotgun shell on floor,claude-sonnet-5-5,2026-10-26T20:59:06Z
-th_0005,IMG_20240227_093629,ammunition,0,low,very dark photo; clothing and rug; objects not visible,claude-sonnet-5-5,2026-10-26T20:59:07Z
-th_0005,IMG_20240227_093629,blade,0,low,very dark photo; clothing and rug; objects not visible,claude-sonnet-5-5,2026-10-26T20:59:07Z
-th_0005,IMG_20240227_093629,bottle_glass,0,low,very dark photo; clothing and rug; objects not visible,claude-sonnet-5-5,2026-10-26T20:59:07Z
-th_0005,IMG_20240227_093629,paper_document,0,low,very dark photo; clothing and rug; objects not visible,claude-sonnet-5-5,2026-10-26T20:59:07Z
-th_0005,IMG_20240227_093629,red_brown_stain,0,low,very dark photo; clothing and rug; objects not visible,claude-sonnet-5-5,2026-10-26T20:59:07Z
-th_0005,IMG_20240227_093639,ammunition,0,low,very dark photo; rotated; clothing and rug; objects unclear,claude-sonnet-5-5,2026-10-26T20:59:09Z
-th_0005,IMG_20240227_093639,blade,0,low,very dark photo; rotated; clothing and rug; objects unclear,claude-sonnet-5-5,2026-10-26T20:59:09Z
-th_0005,IMG_20240227_093639,bottle_glass,0,low,very dark photo; rotated; clothing and rug; objects unclear,claude-sonnet-5-5,2026-10-26T20:59:09Z
-th_0005,IMG_20240227_093639,paper_document,0,low,very dark photo; rotated; clothing and rug; objects unclear,claude-sonnet-5-5,2026-10-26T20:59:09Z
-th_0005,IMG_20240227_093639,red_brown_stain,0,low,very dark photo; rotated; clothing and rug; objects unclear,claude-sonnet-5-5,2026-10-26T20:59:09Z
-th_0005,IMG_20240227_093648,ammunition,1,high,brass cartridge case on table,claude-sonnet-5-5,2026-10-26T20:59:10Z
-th_0005,IMG_20240227_093648,blade,0,high,brass cartridge case on table,claude-sonnet-5-5,2026-10-26T20:59:10Z
-th_0005,IMG_20240227_093648,bottle_glass,0,high,brass cartridge case on table,claude-sonnet-5-5,2026-10-26T20:59:10Z
-th_0005,IMG_20240227_093648,paper_document,0,high,brass cartridge case on table,claude-sonnet-5-5,2026-10-26T20:59:10Z
-th_0005,IMG_20240227_093648,red_brown_stain,0,high,brass cartridge case on table,claude-sonnet-5-5,2026-10-26T20:59:10Z
+th_0002,IMG_20240227_085541,ammunition,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T21:08:59Z
+th_0002,IMG_20240227_085541,blade,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T21:08:59Z
+th_0002,IMG_20240227_085541,bottle_glass,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T21:08:59Z
+th_0002,IMG_20240227_085541,paper_document,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T21:08:59Z
+th_0002,IMG_20240227_085541,red_brown_stain,0,high,cable ties and clear plastic crate on floor,claude-sonnet-5-5,2026-10-26T21:08:59Z
+th_0002,IMG_20240227_085548,ammunition,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:00Z
+th_0002,IMG_20240227_085548,blade,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:00Z
+th_0002,IMG_20240227_085548,bottle_glass,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:00Z
+th_0002,IMG_20240227_085548,paper_document,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:00Z
+th_0002,IMG_20240227_085548,red_brown_stain,0,high,ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:00Z
+th_0002,IMG_20240227_085557,ammunition,0,high,red plastic pegs on white shelf,claude-sonnet-5-5,2026-10-26T21:09:02Z
+th_0002,IMG_20240227_085557,blade,0,high,red plastic pegs on white shelf,claude-sonnet-5-5,2026-10-26T21:09:02Z
+th_0002,IMG_20240227_085557,bottle_glass,0,high,red plastic pegs on white shelf,claude-sonnet-5-5,2026-10-26T21:09:02Z
+th_0002,IMG_20240227_085557,paper_document,0,high,red plastic pegs on white shelf,claude-sonnet-5-5,2026-10-26T21:09:02Z
+th_0002,IMG_20240227_085557,red_brown_stain,0,high,red plastic pegs on white shelf,claude-sonnet-5-5,2026-10-26T21:09:02Z
+th_0002,IMG_20240227_085606,ammunition,0,med,pump; cable; pill bag; printed instruction booklet,claude-sonnet-5-5,2026-10-26T21:09:03Z
+th_0002,IMG_20240227_085606,blade,0,med,pump; cable; pill bag; printed instruction booklet,claude-sonnet-5-5,2026-10-26T21:09:03Z
+th_0002,IMG_20240227_085606,bottle_glass,0,med,pump; cable; pill bag; printed instruction booklet,claude-sonnet-5-5,2026-10-26T21:09:03Z
+th_0002,IMG_20240227_085606,paper_document,1,med,pump; cable; pill bag; printed instruction booklet,claude-sonnet-5-5,2026-10-26T21:09:03Z
+th_0002,IMG_20240227_085606,red_brown_stain,0,med,pump; cable; pill bag; printed instruction booklet,claude-sonnet-5-5,2026-10-26T21:09:03Z
+th_0002,IMG_20240227_085614,ammunition,0,low,fertilizer jug; pill bag; glove box; pens; plastic container only partly visible,claude-sonnet-5-5,2026-10-26T21:09:05Z
+th_0002,IMG_20240227_085614,blade,0,low,fertilizer jug; pill bag; glove box; pens; plastic container only partly visible,claude-sonnet-5-5,2026-10-26T21:09:05Z
+th_0002,IMG_20240227_085614,bottle_glass,1,low,fertilizer jug; pill bag; glove box; pens; plastic container only partly visible,claude-sonnet-5-5,2026-10-26T21:09:05Z
+th_0002,IMG_20240227_085614,paper_document,0,low,fertilizer jug; pill bag; glove box; pens; plastic container only partly visible,claude-sonnet-5-5,2026-10-26T21:09:05Z
+th_0002,IMG_20240227_085614,red_brown_stain,0,low,fertilizer jug; pill bag; glove box; pens; plastic container only partly visible,claude-sonnet-5-5,2026-10-26T21:09:05Z
+th_0002,IMG_20240227_085623,ammunition,0,med,plastic fertilizer bottles; printed booklet at lower right,claude-sonnet-5-5,2026-10-26T21:09:06Z
+th_0002,IMG_20240227_085623,blade,0,med,plastic fertilizer bottles; printed booklet at lower right,claude-sonnet-5-5,2026-10-26T21:09:06Z
+th_0002,IMG_20240227_085623,bottle_glass,1,med,plastic fertilizer bottles; printed booklet at lower right,claude-sonnet-5-5,2026-10-26T21:09:06Z
+th_0002,IMG_20240227_085623,paper_document,1,med,plastic fertilizer bottles; printed booklet at lower right,claude-sonnet-5-5,2026-10-26T21:09:06Z
+th_0002,IMG_20240227_085623,red_brown_stain,0,med,plastic fertilizer bottles; printed booklet at lower right,claude-sonnet-5-5,2026-10-26T21:09:06Z
+th_0002,IMG_20240227_085630,ammunition,0,high,paper towel roll and key on table,claude-sonnet-5-5,2026-10-26T21:09:08Z
+th_0002,IMG_20240227_085630,blade,0,high,paper towel roll and key on table,claude-sonnet-5-5,2026-10-26T21:09:08Z
+th_0002,IMG_20240227_085630,bottle_glass,0,high,paper towel roll and key on table,claude-sonnet-5-5,2026-10-26T21:09:08Z
+th_0002,IMG_20240227_085630,paper_document,0,high,paper towel roll and key on table,claude-sonnet-5-5,2026-10-26T21:09:08Z
+th_0002,IMG_20240227_085630,red_brown_stain,0,high,paper towel roll and key on table,claude-sonnet-5-5,2026-10-26T21:09:08Z
+th_0002,IMG_20240227_085639,ammunition,0,low,large white plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T21:09:09Z
+th_0002,IMG_20240227_085639,blade,0,low,large white plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T21:09:09Z
+th_0002,IMG_20240227_085639,bottle_glass,0,low,large white plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T21:09:09Z
+th_0002,IMG_20240227_085639,paper_document,0,low,large white plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T21:09:09Z
+th_0002,IMG_20240227_085639,red_brown_stain,0,low,large white plastic jerrycans; not clearly bottles,claude-sonnet-5-5,2026-10-26T21:09:09Z
+th_0002,IMG_20240227_085647,ammunition,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:41Z
+th_0002,IMG_20240227_085647,blade,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:41Z
+th_0002,IMG_20240227_085647,bottle_glass,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:41Z
+th_0002,IMG_20240227_085647,paper_document,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:41Z
+th_0002,IMG_20240227_085647,red_brown_stain,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:41Z
+th_0002,IMG_20240227_085653,ammunition,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:43Z
+th_0002,IMG_20240227_085653,blade,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:43Z
+th_0002,IMG_20240227_085653,bottle_glass,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:43Z
+th_0002,IMG_20240227_085653,paper_document,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:43Z
+th_0002,IMG_20240227_085653,red_brown_stain,0,high,blue ballpoint pen on floor,claude-sonnet-5-5,2026-10-26T21:09:43Z
+th_0002,IMG_20240227_085701,ammunition,0,high,cable ties; handwritten note on paper at top right,claude-sonnet-5-5,2026-10-26T21:09:44Z
+th_0002,IMG_20240227_085701,blade,0,high,cable ties; handwritten note on paper at top right,claude-sonnet-5-5,2026-10-26T21:09:44Z
+th_0002,IMG_20240227_085701,bottle_glass,0,high,cable ties; handwritten note on paper at top right,claude-sonnet-5-5,2026-10-26T21:09:44Z
+th_0002,IMG_20240227_085701,paper_document,1,high,cable ties; handwritten note on paper at top right,claude-sonnet-5-5,2026-10-26T21:09:44Z
+th_0002,IMG_20240227_085701,red_brown_stain,0,high,cable ties; handwritten note on paper at top right,claude-sonnet-5-5,2026-10-26T21:09:44Z
+th_0002,IMG_20240227_085710,ammunition,0,high,handwritten note on paper beside marker 20,claude-sonnet-5-5,2026-10-26T21:09:46Z
+th_0002,IMG_20240227_085710,blade,0,high,handwritten note on paper beside marker 20,claude-sonnet-5-5,2026-10-26T21:09:46Z
+th_0002,IMG_20240227_085710,bottle_glass,0,high,handwritten note on paper beside marker 20,claude-sonnet-5-5,2026-10-26T21:09:46Z
+th_0002,IMG_20240227_085710,paper_document,1,high,handwritten note on paper beside marker 20,claude-sonnet-5-5,2026-10-26T21:09:46Z
+th_0002,IMG_20240227_085710,red_brown_stain,0,high,handwritten note on paper beside marker 20,claude-sonnet-5-5,2026-10-26T21:09:46Z
+th_0002,IMG_20240227_085719,ammunition,0,high,stack of white paper sheets and paper clip chain,claude-sonnet-5-5,2026-10-26T21:09:47Z
+th_0002,IMG_20240227_085719,blade,0,high,stack of white paper sheets and paper clip chain,claude-sonnet-5-5,2026-10-26T21:09:47Z
+th_0002,IMG_20240227_085719,bottle_glass,0,high,stack of white paper sheets and paper clip chain,claude-sonnet-5-5,2026-10-26T21:09:47Z
+th_0002,IMG_20240227_085719,paper_document,1,high,stack of white paper sheets and paper clip chain,claude-sonnet-5-5,2026-10-26T21:09:47Z
+th_0002,IMG_20240227_085719,red_brown_stain,0,high,stack of white paper sheets and paper clip chain,claude-sonnet-5-5,2026-10-26T21:09:47Z
+th_0002,IMG_20240227_085728,ammunition,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:49Z
+th_0002,IMG_20240227_085728,blade,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:49Z
+th_0002,IMG_20240227_085728,bottle_glass,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:49Z
+th_0002,IMG_20240227_085728,paper_document,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:49Z
+th_0002,IMG_20240227_085728,red_brown_stain,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:49Z
+th_0002,IMG_20240227_085734,ammunition,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:50Z
+th_0002,IMG_20240227_085734,blade,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:50Z
+th_0002,IMG_20240227_085734,bottle_glass,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:50Z
+th_0002,IMG_20240227_085734,paper_document,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:50Z
+th_0002,IMG_20240227_085734,red_brown_stain,0,med,mannequin; blue tanks; bucket with black bags; tray with cables,claude-sonnet-5-5,2026-10-26T21:09:50Z
+th_0002,IMG_20240227_085743,ammunition,0,high,mannequin head with tape; blue tanks; cables,claude-sonnet-5-5,2026-10-26T21:09:52Z
+th_0002,IMG_20240227_085743,blade,0,high,mannequin head with tape; blue tanks; cables,claude-sonnet-5-5,2026-10-26T21:09:52Z
+th_0002,IMG_20240227_085743,bottle_glass,0,high,mannequin head with tape; blue tanks; cables,claude-sonnet-5-5,2026-10-26T21:09:52Z
+th_0002,IMG_20240227_085743,paper_document,0,high,mannequin head with tape; blue tanks; cables,claude-sonnet-5-5,2026-10-26T21:09:52Z
+th_0002,IMG_20240227_085743,red_brown_stain,0,high,mannequin head with tape; blue tanks; cables,claude-sonnet-5-5,2026-10-26T21:09:52Z
+th_0002,IMG_20240227_085754,ammunition,0,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:26Z
+th_0002,IMG_20240227_085754,blade,0,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:26Z
+th_0002,IMG_20240227_085754,bottle_glass,1,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:26Z
+th_0002,IMG_20240227_085754,paper_document,0,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:26Z
+th_0002,IMG_20240227_085754,red_brown_stain,0,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:26Z
+th_0002,IMG_20240227_085802,ammunition,0,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:27Z
+th_0002,IMG_20240227_085802,blade,0,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:27Z
+th_0002,IMG_20240227_085802,bottle_glass,1,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:27Z
+th_0002,IMG_20240227_085802,paper_document,0,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:27Z
+th_0002,IMG_20240227_085802,red_brown_stain,0,high,glass flask bottle with red cap on tank,claude-sonnet-5-5,2026-10-26T21:10:27Z
+th_0002,IMG_20240227_085822,ammunition,0,med,wide room: paper sheets on cart and floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T21:10:29Z
+th_0002,IMG_20240227_085822,blade,0,med,wide room: paper sheets on cart and floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T21:10:29Z
+th_0002,IMG_20240227_085822,bottle_glass,0,med,wide room: paper sheets on cart and floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T21:10:29Z
+th_0002,IMG_20240227_085822,paper_document,1,med,wide room: paper sheets on cart and floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T21:10:29Z
+th_0002,IMG_20240227_085822,red_brown_stain,0,med,wide room: paper sheets on cart and floor; plastic jerrycans,claude-sonnet-5-5,2026-10-26T21:10:29Z
+th_0002,IMG_20240227_085835,ammunition,0,med,table: plastic fertilizer bottles; printed booklet; paper towel roll,claude-sonnet-5-5,2026-10-26T21:10:30Z
+th_0002,IMG_20240227_085835,blade,0,med,table: plastic fertilizer bottles; printed booklet; paper towel roll,claude-sonnet-5-5,2026-10-26T21:10:30Z
+th_0002,IMG_20240227_085835,bottle_glass,1,med,table: plastic fertilizer bottles; printed booklet; paper towel roll,claude-sonnet-5-5,2026-10-26T21:10:30Z
+th_0002,IMG_20240227_085835,paper_document,1,med,table: plastic fertilizer bottles; printed booklet; paper towel roll,claude-sonnet-5-5,2026-10-26T21:10:30Z
+th_0002,IMG_20240227_085835,red_brown_stain,0,med,table: plastic fertilizer bottles; printed booklet; paper towel roll,claude-sonnet-5-5,2026-10-26T21:10:30Z
+th_0002,IMG_20240227_085853,ammunition,0,high,wide: paper note near marker 20; pen; cable ties,claude-sonnet-5-5,2026-10-26T21:10:32Z
+th_0002,IMG_20240227_085853,blade,0,high,wide: paper note near marker 20; pen; cable ties,claude-sonnet-5-5,2026-10-26T21:10:32Z
+th_0002,IMG_20240227_085853,bottle_glass,0,high,wide: paper note near marker 20; pen; cable ties,claude-sonnet-5-5,2026-10-26T21:10:32Z
+th_0002,IMG_20240227_085853,paper_document,1,high,wide: paper note near marker 20; pen; cable ties,claude-sonnet-5-5,2026-10-26T21:10:32Z
+th_0002,IMG_20240227_085853,red_brown_stain,0,high,wide: paper note near marker 20; pen; cable ties,claude-sonnet-5-5,2026-10-26T21:10:32Z
+th_0002,IMG_20240227_085900,ammunition,0,high,wide room: paper note and paper sheets,claude-sonnet-5-5,2026-10-26T21:10:33Z
+th_0002,IMG_20240227_085900,blade,0,high,wide room: paper note and paper sheets,claude-sonnet-5-5,2026-10-26T21:10:33Z
+th_0002,IMG_20240227_085900,bottle_glass,0,high,wide room: paper note and paper sheets,claude-sonnet-5-5,2026-10-26T21:10:33Z
+th_0002,IMG_20240227_085900,paper_document,1,high,wide room: paper note and paper sheets,claude-sonnet-5-5,2026-10-26T21:10:33Z
+th_0002,IMG_20240227_085900,red_brown_stain,0,high,wide room: paper note and paper sheets,claude-sonnet-5-5,2026-10-26T21:10:33Z
+th_0002,IMG_20240227_085937,ammunition,0,high,wide room: paper note and paper sheets on cart,claude-sonnet-5-5,2026-10-26T21:10:35Z
+th_0002,IMG_20240227_085937,blade,0,high,wide room: paper note and paper sheets on cart,claude-sonnet-5-5,2026-10-26T21:10:35Z
+th_0002,IMG_20240227_085937,bottle_glass,0,high,wide room: paper note and paper sheets on cart,claude-sonnet-5-5,2026-10-26T21:10:35Z
+th_0002,IMG_20240227_085937,paper_document,1,high,wide room: paper note and paper sheets on cart,claude-sonnet-5-5,2026-10-26T21:10:35Z
+th_0002,IMG_20240227_085937,red_brown_stain,0,high,wide room: paper note and paper sheets on cart,claude-sonnet-5-5,2026-10-26T21:10:35Z
+th_0003,IMG_20240227_090714,ammunition,0,low,floor: black phone and small card near marker 11,claude-sonnet-5-5,2026-10-26T21:10:36Z
+th_0003,IMG_20240227_090714,blade,0,low,floor: black phone and small card near marker 11,claude-sonnet-5-5,2026-10-26T21:10:36Z
+th_0003,IMG_20240227_090714,bottle_glass,0,low,floor: black phone and small card near marker 11,claude-sonnet-5-5,2026-10-26T21:10:36Z
+th_0003,IMG_20240227_090714,paper_document,1,low,floor: black phone and small card near marker 11,claude-sonnet-5-5,2026-10-26T21:10:36Z
+th_0003,IMG_20240227_090714,red_brown_stain,0,low,floor: black phone and small card near marker 11,claude-sonnet-5-5,2026-10-26T21:10:36Z
+th_0003,IMG_20240227_090732,ammunition,0,low,wide: briefcase; glasses; wallet on floor; no listed objects,claude-sonnet-5-5,2026-10-26T21:11:26Z
+th_0003,IMG_20240227_090732,blade,0,low,wide: briefcase; glasses; wallet on floor; no listed objects,claude-sonnet-5-5,2026-10-26T21:11:26Z
+th_0003,IMG_20240227_090732,bottle_glass,0,low,wide: briefcase; glasses; wallet on floor; no listed objects,claude-sonnet-5-5,2026-10-26T21:11:26Z
+th_0003,IMG_20240227_090732,paper_document,0,low,wide: briefcase; glasses; wallet on floor; no listed objects,claude-sonnet-5-5,2026-10-26T21:11:26Z
+th_0003,IMG_20240227_090732,red_brown_stain,0,low,wide: briefcase; glasses; wallet on floor; no listed objects,claude-sonnet-5-5,2026-10-26T21:11:26Z
+th_0003,IMG_20240227_090743,ammunition,0,low,wide boiler room; tripod; tape; tiny items near markers unclear,claude-sonnet-5-5,2026-10-26T21:11:27Z
+th_0003,IMG_20240227_090743,blade,0,low,wide boiler room; tripod; tape; tiny items near markers unclear,claude-sonnet-5-5,2026-10-26T21:11:27Z
+th_0003,IMG_20240227_090743,bottle_glass,0,low,wide boiler room; tripod; tape; tiny items near markers unclear,claude-sonnet-5-5,2026-10-26T21:11:27Z
+th_0003,IMG_20240227_090743,paper_document,0,low,wide boiler room; tripod; tape; tiny items near markers unclear,claude-sonnet-5-5,2026-10-26T21:11:27Z
+th_0003,IMG_20240227_090743,red_brown_stain,0,low,wide boiler room; tripod; tape; tiny items near markers unclear,claude-sonnet-5-5,2026-10-26T21:11:27Z
+th_0003,IMG_20240227_090754,ammunition,0,high,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T21:11:29Z
+th_0003,IMG_20240227_090754,blade,0,high,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T21:11:29Z
+th_0003,IMG_20240227_090754,bottle_glass,0,high,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T21:11:29Z
+th_0003,IMG_20240227_090754,paper_document,0,high,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T21:11:29Z
+th_0003,IMG_20240227_090754,red_brown_stain,0,high,black wallet on step with leaves,claude-sonnet-5-5,2026-10-26T21:11:29Z
+th_0003,IMG_20240227_090800,ammunition,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:11:30Z
+th_0003,IMG_20240227_090800,blade,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:11:30Z
+th_0003,IMG_20240227_090800,bottle_glass,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:11:30Z
+th_0003,IMG_20240227_090800,paper_document,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:11:30Z
+th_0003,IMG_20240227_090800,red_brown_stain,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:11:30Z
+th_0003,IMG_20240227_090807,ammunition,0,high,galvanised duct and marker,claude-sonnet-5-5,2026-10-26T21:11:32Z
+th_0003,IMG_20240227_090807,blade,0,high,galvanised duct and marker,claude-sonnet-5-5,2026-10-26T21:11:32Z
+th_0003,IMG_20240227_090807,bottle_glass,0,high,galvanised duct and marker,claude-sonnet-5-5,2026-10-26T21:11:32Z
+th_0003,IMG_20240227_090807,paper_document,0,high,galvanised duct and marker,claude-sonnet-5-5,2026-10-26T21:11:32Z
+th_0003,IMG_20240227_090807,red_brown_stain,0,high,galvanised duct and marker,claude-sonnet-5-5,2026-10-26T21:11:32Z
+th_0003,IMG_20240227_090814,ammunition,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:33Z
+th_0003,IMG_20240227_090814,blade,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:33Z
+th_0003,IMG_20240227_090814,bottle_glass,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:33Z
+th_0003,IMG_20240227_090814,paper_document,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:33Z
+th_0003,IMG_20240227_090814,red_brown_stain,1,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:33Z
+th_0003,IMG_20240227_090818,ammunition,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:35Z
+th_0003,IMG_20240227_090818,blade,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:35Z
+th_0003,IMG_20240227_090818,bottle_glass,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:35Z
+th_0003,IMG_20240227_090818,paper_document,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:35Z
+th_0003,IMG_20240227_090818,red_brown_stain,1,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:35Z
+th_0003,IMG_20240227_090824,ammunition,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:36Z
+th_0003,IMG_20240227_090824,blade,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:36Z
+th_0003,IMG_20240227_090824,bottle_glass,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:36Z
+th_0003,IMG_20240227_090824,paper_document,0,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:36Z
+th_0003,IMG_20240227_090824,red_brown_stain,1,low,syringe with red-brown residue; tweezers; orange rust ring on floor,claude-sonnet-5-5,2026-10-26T21:11:36Z
+th_0003,IMG_20240227_090830,ammunition,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T21:12:33Z
+th_0003,IMG_20240227_090830,blade,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T21:12:33Z
+th_0003,IMG_20240227_090830,bottle_glass,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T21:12:33Z
+th_0003,IMG_20240227_090830,paper_document,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T21:12:33Z
+th_0003,IMG_20240227_090830,red_brown_stain,0,high,plastic bag of white powder on metal duct,claude-sonnet-5-5,2026-10-26T21:12:33Z
+th_0003,IMG_20240227_090840,ammunition,0,med,phone on floor; transport pass card at top edge,claude-sonnet-5-5,2026-10-26T21:12:35Z
+th_0003,IMG_20240227_090840,blade,0,med,phone on floor; transport pass card at top edge,claude-sonnet-5-5,2026-10-26T21:12:35Z
+th_0003,IMG_20240227_090840,bottle_glass,0,med,phone on floor; transport pass card at top edge,claude-sonnet-5-5,2026-10-26T21:12:35Z
+th_0003,IMG_20240227_090840,paper_document,1,med,phone on floor; transport pass card at top edge,claude-sonnet-5-5,2026-10-26T21:12:35Z
+th_0003,IMG_20240227_090840,red_brown_stain,0,med,phone on floor; transport pass card at top edge,claude-sonnet-5-5,2026-10-26T21:12:35Z
+th_0003,IMG_20240227_090844,ammunition,0,high,ID pass card with photo beside marker 11,claude-sonnet-5-5,2026-10-26T21:12:36Z
+th_0003,IMG_20240227_090844,blade,0,high,ID pass card with photo beside marker 11,claude-sonnet-5-5,2026-10-26T21:12:36Z
+th_0003,IMG_20240227_090844,bottle_glass,0,high,ID pass card with photo beside marker 11,claude-sonnet-5-5,2026-10-26T21:12:36Z
+th_0003,IMG_20240227_090844,paper_document,1,high,ID pass card with photo beside marker 11,claude-sonnet-5-5,2026-10-26T21:12:36Z
+th_0003,IMG_20240227_090844,red_brown_stain,0,high,ID pass card with photo beside marker 11,claude-sonnet-5-5,2026-10-26T21:12:36Z
+th_0004,IMG_20240227_091516,ammunition,0,low,mannequin; gloves; briefcase; blue tube; orange-brown floor patch left,claude-sonnet-5-5,2026-10-26T21:12:38Z
+th_0004,IMG_20240227_091516,blade,0,low,mannequin; gloves; briefcase; blue tube; orange-brown floor patch left,claude-sonnet-5-5,2026-10-26T21:12:38Z
+th_0004,IMG_20240227_091516,bottle_glass,0,low,mannequin; gloves; briefcase; blue tube; orange-brown floor patch left,claude-sonnet-5-5,2026-10-26T21:12:38Z
+th_0004,IMG_20240227_091516,paper_document,0,low,mannequin; gloves; briefcase; blue tube; orange-brown floor patch left,claude-sonnet-5-5,2026-10-26T21:12:38Z
+th_0004,IMG_20240227_091516,red_brown_stain,1,low,mannequin; gloves; briefcase; blue tube; orange-brown floor patch left,claude-sonnet-5-5,2026-10-26T21:12:38Z
+th_0004,IMG_20240227_091532,ammunition,0,low,mannequin under duct; banknote on duct far right; floor patch faint,claude-sonnet-5-5,2026-10-26T21:12:39Z
+th_0004,IMG_20240227_091532,blade,0,low,mannequin under duct; banknote on duct far right; floor patch faint,claude-sonnet-5-5,2026-10-26T21:12:39Z
+th_0004,IMG_20240227_091532,bottle_glass,0,low,mannequin under duct; banknote on duct far right; floor patch faint,claude-sonnet-5-5,2026-10-26T21:12:39Z
+th_0004,IMG_20240227_091532,paper_document,0,low,mannequin under duct; banknote on duct far right; floor patch faint,claude-sonnet-5-5,2026-10-26T21:12:39Z
+th_0004,IMG_20240227_091532,red_brown_stain,0,low,mannequin under duct; banknote on duct far right; floor patch faint,claude-sonnet-5-5,2026-10-26T21:12:39Z
+th_0004,IMG_20240227_091543,ammunition,0,low,mannequin under duct; tan-brown streak on floor left,claude-sonnet-5-5,2026-10-26T21:12:41Z
+th_0004,IMG_20240227_091543,blade,0,low,mannequin under duct; tan-brown streak on floor left,claude-sonnet-5-5,2026-10-26T21:12:41Z
+th_0004,IMG_20240227_091543,bottle_glass,0,low,mannequin under duct; tan-brown streak on floor left,claude-sonnet-5-5,2026-10-26T21:12:41Z
+th_0004,IMG_20240227_091543,paper_document,0,low,mannequin under duct; tan-brown streak on floor left,claude-sonnet-5-5,2026-10-26T21:12:41Z
+th_0004,IMG_20240227_091543,red_brown_stain,1,low,mannequin under duct; tan-brown streak on floor left,claude-sonnet-5-5,2026-10-26T21:12:41Z
+th_0004,IMG_20240227_091556,ammunition,0,low,large orange-brown floor streak; white sheet far right; mannequin,claude-sonnet-5-5,2026-10-26T21:12:42Z
+th_0004,IMG_20240227_091556,blade,0,low,large orange-brown floor streak; white sheet far right; mannequin,claude-sonnet-5-5,2026-10-26T21:12:42Z
+th_0004,IMG_20240227_091556,bottle_glass,0,low,large orange-brown floor streak; white sheet far right; mannequin,claude-sonnet-5-5,2026-10-26T21:12:42Z
+th_0004,IMG_20240227_091556,paper_document,1,low,large orange-brown floor streak; white sheet far right; mannequin,claude-sonnet-5-5,2026-10-26T21:12:42Z
+th_0004,IMG_20240227_091556,red_brown_stain,1,low,large orange-brown floor streak; white sheet far right; mannequin,claude-sonnet-5-5,2026-10-26T21:12:42Z
+th_0004,IMG_20240227_091609,ammunition,0,med,briefcase; glasses; wallet on floor; mannequin,claude-sonnet-5-5,2026-10-26T21:12:44Z
+th_0004,IMG_20240227_091609,blade,0,med,briefcase; glasses; wallet on floor; mannequin,claude-sonnet-5-5,2026-10-26T21:12:44Z
+th_0004,IMG_20240227_091609,bottle_glass,0,med,briefcase; glasses; wallet on floor; mannequin,claude-sonnet-5-5,2026-10-26T21:12:44Z
+th_0004,IMG_20240227_091609,paper_document,0,med,briefcase; glasses; wallet on floor; mannequin,claude-sonnet-5-5,2026-10-26T21:12:44Z
+th_0004,IMG_20240227_091609,red_brown_stain,0,med,briefcase; glasses; wallet on floor; mannequin,claude-sonnet-5-5,2026-10-26T21:12:44Z
+th_0004,IMG_20240227_091620,ammunition,0,med,mannequin; gloves; briefcase; blue tube; dark wet marks near pipes not red-brown,claude-sonnet-5-5,2026-10-26T21:13:17Z
+th_0004,IMG_20240227_091620,blade,0,med,mannequin; gloves; briefcase; blue tube; dark wet marks near pipes not red-brown,claude-sonnet-5-5,2026-10-26T21:13:17Z
+th_0004,IMG_20240227_091620,bottle_glass,0,med,mannequin; gloves; briefcase; blue tube; dark wet marks near pipes not red-brown,claude-sonnet-5-5,2026-10-26T21:13:17Z
+th_0004,IMG_20240227_091620,paper_document,0,med,mannequin; gloves; briefcase; blue tube; dark wet marks near pipes not red-brown,claude-sonnet-5-5,2026-10-26T21:13:17Z
+th_0004,IMG_20240227_091620,red_brown_stain,0,med,mannequin; gloves; briefcase; blue tube; dark wet marks near pipes not red-brown,claude-sonnet-5-5,2026-10-26T21:13:17Z
+th_0004,IMG_20240227_091631,ammunition,0,high,latex glove and blue tube on floor,claude-sonnet-5-5,2026-10-26T21:13:18Z
+th_0004,IMG_20240227_091631,blade,0,high,latex glove and blue tube on floor,claude-sonnet-5-5,2026-10-26T21:13:18Z
+th_0004,IMG_20240227_091631,bottle_glass,0,high,latex glove and blue tube on floor,claude-sonnet-5-5,2026-10-26T21:13:18Z
+th_0004,IMG_20240227_091631,paper_document,0,high,latex glove and blue tube on floor,claude-sonnet-5-5,2026-10-26T21:13:18Z
+th_0004,IMG_20240227_091631,red_brown_stain,0,high,latex glove and blue tube on floor,claude-sonnet-5-5,2026-10-26T21:13:18Z
+th_0004,IMG_20240227_091637,ammunition,0,high,latex glove on floor,claude-sonnet-5-5,2026-10-26T21:13:20Z
+th_0004,IMG_20240227_091637,blade,0,high,latex glove on floor,claude-sonnet-5-5,2026-10-26T21:13:20Z
+th_0004,IMG_20240227_091637,bottle_glass,0,high,latex glove on floor,claude-sonnet-5-5,2026-10-26T21:13:20Z
+th_0004,IMG_20240227_091637,paper_document,0,high,latex glove on floor,claude-sonnet-5-5,2026-10-26T21:13:20Z
+th_0004,IMG_20240227_091637,red_brown_stain,0,high,latex glove on floor,claude-sonnet-5-5,2026-10-26T21:13:20Z
+th_0004,IMG_20240227_091642,ammunition,0,high,mannequin head close-up and marker,claude-sonnet-5-5,2026-10-26T21:13:21Z
+th_0004,IMG_20240227_091642,blade,0,high,mannequin head close-up and marker,claude-sonnet-5-5,2026-10-26T21:13:21Z
+th_0004,IMG_20240227_091642,bottle_glass,0,high,mannequin head close-up and marker,claude-sonnet-5-5,2026-10-26T21:13:21Z
+th_0004,IMG_20240227_091642,paper_document,0,high,mannequin head close-up and marker,claude-sonnet-5-5,2026-10-26T21:13:21Z
+th_0004,IMG_20240227_091642,red_brown_stain,0,high,mannequin head close-up and marker,claude-sonnet-5-5,2026-10-26T21:13:21Z
+th_0004,IMG_20240227_091650,ammunition,0,high,mannequin; briefcase; gloves; blue tube,claude-sonnet-5-5,2026-10-26T21:13:23Z
+th_0004,IMG_20240227_091650,blade,0,high,mannequin; briefcase; gloves; blue tube,claude-sonnet-5-5,2026-10-26T21:13:23Z
+th_0004,IMG_20240227_091650,bottle_glass,0,high,mannequin; briefcase; gloves; blue tube,claude-sonnet-5-5,2026-10-26T21:13:23Z
+th_0004,IMG_20240227_091650,paper_document,0,high,mannequin; briefcase; gloves; blue tube,claude-sonnet-5-5,2026-10-26T21:13:23Z
+th_0004,IMG_20240227_091650,red_brown_stain,0,high,mannequin; briefcase; gloves; blue tube,claude-sonnet-5-5,2026-10-26T21:13:23Z
+th_0004,IMG_20240227_091700,ammunition,0,high,latex gloves on floor,claude-sonnet-5-5,2026-10-26T21:13:24Z
+th_0004,IMG_20240227_091700,blade,0,high,latex gloves on floor,claude-sonnet-5-5,2026-10-26T21:13:24Z
+th_0004,IMG_20240227_091700,bottle_glass,0,high,latex gloves on floor,claude-sonnet-5-5,2026-10-26T21:13:24Z
+th_0004,IMG_20240227_091700,paper_document,0,high,latex gloves on floor,claude-sonnet-5-5,2026-10-26T21:13:24Z
+th_0004,IMG_20240227_091700,red_brown_stain,0,high,latex gloves on floor,claude-sonnet-5-5,2026-10-26T21:13:24Z
+th_0004,IMG_20240227_091708,ammunition,0,high,briefcase and glove on floor,claude-sonnet-5-5,2026-10-26T21:13:26Z
+th_0004,IMG_20240227_091708,blade,0,high,briefcase and glove on floor,claude-sonnet-5-5,2026-10-26T21:13:26Z
+th_0004,IMG_20240227_091708,bottle_glass,0,high,briefcase and glove on floor,claude-sonnet-5-5,2026-10-26T21:13:26Z
+th_0004,IMG_20240227_091708,paper_document,0,high,briefcase and glove on floor,claude-sonnet-5-5,2026-10-26T21:13:26Z
+th_0004,IMG_20240227_091708,red_brown_stain,0,high,briefcase and glove on floor,claude-sonnet-5-5,2026-10-26T21:13:26Z
+th_0004,IMG_20240227_091713,ammunition,0,low,banknote bundle on duct; currency not a listed document,claude-sonnet-5-5,2026-10-26T21:13:27Z
+th_0004,IMG_20240227_091713,blade,0,low,banknote bundle on duct; currency not a listed document,claude-sonnet-5-5,2026-10-26T21:13:27Z
+th_0004,IMG_20240227_091713,bottle_glass,0,low,banknote bundle on duct; currency not a listed document,claude-sonnet-5-5,2026-10-26T21:13:27Z
+th_0004,IMG_20240227_091713,paper_document,0,low,banknote bundle on duct; currency not a listed document,claude-sonnet-5-5,2026-10-26T21:13:27Z
+th_0004,IMG_20240227_091713,red_brown_stain,0,low,banknote bundle on duct; currency not a listed document,claude-sonnet-5-5,2026-10-26T21:13:27Z
+th_0004,IMG_20240227_091725,ammunition,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:14:02Z
+th_0004,IMG_20240227_091725,blade,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:14:02Z
+th_0004,IMG_20240227_091725,bottle_glass,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:14:02Z
+th_0004,IMG_20240227_091725,paper_document,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:14:02Z
+th_0004,IMG_20240227_091725,red_brown_stain,0,high,eyeglasses on floor,claude-sonnet-5-5,2026-10-26T21:14:02Z
+th_0004,IMG_20240227_091731,ammunition,0,high,black wallet on concrete step,claude-sonnet-5-5,2026-10-26T21:14:03Z
+th_0004,IMG_20240227_091731,blade,0,high,black wallet on concrete step,claude-sonnet-5-5,2026-10-26T21:14:03Z
+th_0004,IMG_20240227_091731,bottle_glass,0,high,black wallet on concrete step,claude-sonnet-5-5,2026-10-26T21:14:03Z
+th_0004,IMG_20240227_091731,paper_document,0,high,black wallet on concrete step,claude-sonnet-5-5,2026-10-26T21:14:03Z
+th_0004,IMG_20240227_091731,red_brown_stain,0,high,black wallet on concrete step,claude-sonnet-5-5,2026-10-26T21:14:03Z
+th_0005,IMG_20240227_093447,ammunition,0,low,dark room: crowbar; sneakers; binder on shelf; small bottle on floor,claude-sonnet-5-5,2026-10-26T21:14:05Z
+th_0005,IMG_20240227_093447,blade,0,low,dark room: crowbar; sneakers; binder on shelf; small bottle on floor,claude-sonnet-5-5,2026-10-26T21:14:05Z
+th_0005,IMG_20240227_093447,bottle_glass,1,low,dark room: crowbar; sneakers; binder on shelf; small bottle on floor,claude-sonnet-5-5,2026-10-26T21:14:05Z
+th_0005,IMG_20240227_093447,paper_document,0,low,dark room: crowbar; sneakers; binder on shelf; small bottle on floor,claude-sonnet-5-5,2026-10-26T21:14:05Z
+th_0005,IMG_20240227_093447,red_brown_stain,0,low,dark room: crowbar; sneakers; binder on shelf; small bottle on floor,claude-sonnet-5-5,2026-10-26T21:14:05Z
+th_0005,IMG_20240227_093503,ammunition,0,low,dark room: mannequin legs; overturned chair; small bottle left of chair,claude-sonnet-5-5,2026-10-26T21:14:07Z
+th_0005,IMG_20240227_093503,blade,0,low,dark room: mannequin legs; overturned chair; small bottle left of chair,claude-sonnet-5-5,2026-10-26T21:14:07Z
+th_0005,IMG_20240227_093503,bottle_glass,1,low,dark room: mannequin legs; overturned chair; small bottle left of chair,claude-sonnet-5-5,2026-10-26T21:14:07Z
+th_0005,IMG_20240227_093503,paper_document,0,low,dark room: mannequin legs; overturned chair; small bottle left of chair,claude-sonnet-5-5,2026-10-26T21:14:07Z
+th_0005,IMG_20240227_093503,red_brown_stain,0,low,dark room: mannequin legs; overturned chair; small bottle left of chair,claude-sonnet-5-5,2026-10-26T21:14:07Z
+th_0005,IMG_20240227_093514,ammunition,1,low,dark: small cartridge near marker 12; jars and binder on shelf,claude-sonnet-5-5,2026-10-26T21:14:08Z
+th_0005,IMG_20240227_093514,blade,0,low,dark: small cartridge near marker 12; jars and binder on shelf,claude-sonnet-5-5,2026-10-26T21:14:08Z
+th_0005,IMG_20240227_093514,bottle_glass,1,low,dark: small cartridge near marker 12; jars and binder on shelf,claude-sonnet-5-5,2026-10-26T21:14:08Z
+th_0005,IMG_20240227_093514,paper_document,1,low,dark: small cartridge near marker 12; jars and binder on shelf,claude-sonnet-5-5,2026-10-26T21:14:08Z
+th_0005,IMG_20240227_093514,red_brown_stain,0,low,dark: small cartridge near marker 12; jars and binder on shelf,claude-sonnet-5-5,2026-10-26T21:14:08Z
+th_0005,IMG_20240227_093526,ammunition,0,low,very dark: mannequin; overturned chair; shelf; small bottle at left floor,claude-sonnet-5-5,2026-10-26T21:14:10Z
+th_0005,IMG_20240227_093526,blade,0,low,very dark: mannequin; overturned chair; shelf; small bottle at left floor,claude-sonnet-5-5,2026-10-26T21:14:10Z
+th_0005,IMG_20240227_093526,bottle_glass,1,low,very dark: mannequin; overturned chair; shelf; small bottle at left floor,claude-sonnet-5-5,2026-10-26T21:14:10Z
+th_0005,IMG_20240227_093526,paper_document,0,low,very dark: mannequin; overturned chair; shelf; small bottle at left floor,claude-sonnet-5-5,2026-10-26T21:14:10Z
+th_0005,IMG_20240227_093526,red_brown_stain,0,low,very dark: mannequin; overturned chair; shelf; small bottle at left floor,claude-sonnet-5-5,2026-10-26T21:14:10Z
+th_0005,IMG_20240227_093536,ammunition,0,low,very dark: mannequin; glass jar on far counter; markers,claude-sonnet-5-5,2026-10-26T21:14:12Z
+th_0005,IMG_20240227_093536,blade,0,low,very dark: mannequin; glass jar on far counter; markers,claude-sonnet-5-5,2026-10-26T21:14:12Z
+th_0005,IMG_20240227_093536,bottle_glass,1,low,very dark: mannequin; glass jar on far counter; markers,claude-sonnet-5-5,2026-10-26T21:14:12Z
+th_0005,IMG_20240227_093536,paper_document,0,low,very dark: mannequin; glass jar on far counter; markers,claude-sonnet-5-5,2026-10-26T21:14:12Z
+th_0005,IMG_20240227_093536,red_brown_stain,0,low,very dark: mannequin; glass jar on far counter; markers,claude-sonnet-5-5,2026-10-26T21:14:12Z
+th_0005,IMG_20240227_093549,ammunition,0,high,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T21:14:14Z
+th_0005,IMG_20240227_093549,blade,0,high,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T21:14:14Z
+th_0005,IMG_20240227_093549,bottle_glass,0,high,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T21:14:14Z
+th_0005,IMG_20240227_093549,paper_document,0,high,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T21:14:14Z
+th_0005,IMG_20240227_093549,red_brown_stain,0,high,crowbar on wooden floor,claude-sonnet-5-5,2026-10-26T21:14:14Z
+th_0005,IMG_20240227_093555,ammunition,1,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T21:15:04Z
+th_0005,IMG_20240227_093555,blade,0,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T21:15:04Z
+th_0005,IMG_20240227_093555,bottle_glass,0,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T21:15:04Z
+th_0005,IMG_20240227_093555,paper_document,0,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T21:15:04Z
+th_0005,IMG_20240227_093555,red_brown_stain,0,high,brass cartridge case on floor,claude-sonnet-5-5,2026-10-26T21:15:04Z
+th_0005,IMG_20240227_093601,ammunition,0,med,pair of white sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T21:15:05Z
+th_0005,IMG_20240227_093601,blade,0,med,pair of white sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T21:15:05Z
+th_0005,IMG_20240227_093601,bottle_glass,0,med,pair of white sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T21:15:05Z
+th_0005,IMG_20240227_093601,paper_document,0,med,pair of white sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T21:15:05Z
+th_0005,IMG_20240227_093601,red_brown_stain,0,med,pair of white sneakers and crowbar tip on floor,claude-sonnet-5-5,2026-10-26T21:15:05Z
+th_0005,IMG_20240227_093605,ammunition,1,high,green shotgun shell on floor beside marker 60,claude-sonnet-5-5,2026-10-26T21:15:07Z
+th_0005,IMG_20240227_093605,blade,0,high,green shotgun shell on floor beside marker 60,claude-sonnet-5-5,2026-10-26T21:15:07Z
+th_0005,IMG_20240227_093605,bottle_glass,0,high,green shotgun shell on floor beside marker 60,claude-sonnet-5-5,2026-10-26T21:15:07Z
+th_0005,IMG_20240227_093605,paper_document,0,high,green shotgun shell on floor beside marker 60,claude-sonnet-5-5,2026-10-26T21:15:07Z
+th_0005,IMG_20240227_093605,red_brown_stain,0,high,green shotgun shell on floor beside marker 60,claude-sonnet-5-5,2026-10-26T21:15:07Z
+th_0005,IMG_20240227_093613,ammunition,1,low,dark: shotgun barrel on body; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T21:15:09Z
+th_0005,IMG_20240227_093613,blade,0,low,dark: shotgun barrel on body; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T21:15:09Z
+th_0005,IMG_20240227_093613,bottle_glass,0,low,dark: shotgun barrel on body; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T21:15:09Z
+th_0005,IMG_20240227_093613,paper_document,0,low,dark: shotgun barrel on body; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T21:15:09Z
+th_0005,IMG_20240227_093613,red_brown_stain,0,low,dark: shotgun barrel on body; green shotgun shell at bottom edge,claude-sonnet-5-5,2026-10-26T21:15:09Z
+th_0005,IMG_20240227_093621,ammunition,1,high,green shotgun shell on floor beside marker 15,claude-sonnet-5-5,2026-10-26T21:15:11Z
+th_0005,IMG_20240227_093621,blade,0,high,green shotgun shell on floor beside marker 15,claude-sonnet-5-5,2026-10-26T21:15:11Z
+th_0005,IMG_20240227_093621,bottle_glass,0,high,green shotgun shell on floor beside marker 15,claude-sonnet-5-5,2026-10-26T21:15:11Z
+th_0005,IMG_20240227_093621,paper_document,0,high,green shotgun shell on floor beside marker 15,claude-sonnet-5-5,2026-10-26T21:15:11Z
+th_0005,IMG_20240227_093621,red_brown_stain,0,high,green shotgun shell on floor beside marker 15,claude-sonnet-5-5,2026-10-26T21:15:11Z
+th_0005,IMG_20240227_093629,ammunition,0,low,very dark: mannequin head and rug; objects not visible,claude-sonnet-5-5,2026-10-26T21:15:12Z
+th_0005,IMG_20240227_093629,blade,0,low,very dark: mannequin head and rug; objects not visible,claude-sonnet-5-5,2026-10-26T21:15:12Z
+th_0005,IMG_20240227_093629,bottle_glass,0,low,very dark: mannequin head and rug; objects not visible,claude-sonnet-5-5,2026-10-26T21:15:12Z
+th_0005,IMG_20240227_093629,paper_document,0,low,very dark: mannequin head and rug; objects not visible,claude-sonnet-5-5,2026-10-26T21:15:12Z
+th_0005,IMG_20240227_093629,red_brown_stain,0,low,very dark: mannequin head and rug; objects not visible,claude-sonnet-5-5,2026-10-26T21:15:12Z
+th_0005,IMG_20240227_093639,ammunition,1,low,very dark rotated: mannequin; rug; sticks; shell may be present unseen,claude-sonnet-5-5,2026-10-26T21:15:14Z
+th_0005,IMG_20240227_093639,blade,0,low,very dark rotated: mannequin; rug; sticks; shell may be present unseen,claude-sonnet-5-5,2026-10-26T21:15:14Z
+th_0005,IMG_20240227_093639,bottle_glass,0,low,very dark rotated: mannequin; rug; sticks; shell may be present unseen,claude-sonnet-5-5,2026-10-26T21:15:14Z
+th_0005,IMG_20240227_093639,paper_document,0,low,very dark rotated: mannequin; rug; sticks; shell may be present unseen,claude-sonnet-5-5,2026-10-26T21:15:14Z
+th_0005,IMG_20240227_093639,red_brown_stain,0,low,very dark rotated: mannequin; rug; sticks; shell may be present unseen,claude-sonnet-5-5,2026-10-26T21:15:14Z
+th_0005,IMG_20240227_093648,ammunition,1,high,brass cartridge case on table beside marker 12,claude-sonnet-5-5,2026-10-26T21:15:15Z
+th_0005,IMG_20240227_093648,blade,0,high,brass cartridge case on table beside marker 12,claude-sonnet-5-5,2026-10-26T21:15:15Z
+th_0005,IMG_20240227_093648,bottle_glass,0,high,brass cartridge case on table beside marker 12,claude-sonnet-5-5,2026-10-26T21:15:15Z
+th_0005,IMG_20240227_093648,paper_document,0,high,brass cartridge case on table beside marker 12,claude-sonnet-5-5,2026-10-26T21:15:15Z
+th_0005,IMG_20240227_093648,red_brown_stain,0,high,brass cartridge case on table beside marker 12,claude-sonnet-5-5,2026-10-26T21:15:15Z
 th_0005,IMG_20240227_093657,ammunition,1,high,two brass cartridge cases on table,claude-sonnet-5-5,2026-10-26T20:59:46Z
 th_0005,IMG_20240227_093657,blade,0,high,two brass cartridge cases on table,claude-sonnet-5-5,2026-10-26T20:59:46Z
 th_0005,IMG_20240227_093657,bottle_glass,0,high,two brass cartridge cases on table,claude-sonnet-5-5,2026-10-26T20:59:46Z
@@ -399,3 +399,323 @@ th_0007,IMG_20240227_094433,blade,0,med,red-brown smears inside white foam box; 
 th_0007,IMG_20240227_094433,bottle_glass,0,med,red-brown smears inside white foam box; duffel bag,claude-sonnet-5-5,2026-10-26T21:00:58Z
 th_0007,IMG_20240227_094433,paper_document,0,med,red-brown smears inside white foam box; duffel bag,claude-sonnet-5-5,2026-10-26T21:00:58Z
 th_0007,IMG_20240227_094433,red_brown_stain,1,med,red-brown smears inside white foam box; duffel bag,claude-sonnet-5-5,2026-10-26T21:00:58Z
+th_0007,IMG_20240227_094440,ammunition,0,high,red smears inside white foam box; duffel bag,claude-sonnet-5-5,2026-10-26T21:01:37Z
+th_0007,IMG_20240227_094440,blade,0,high,red smears inside white foam box; duffel bag,claude-sonnet-5-5,2026-10-26T21:01:37Z
+th_0007,IMG_20240227_094440,bottle_glass,0,high,red smears inside white foam box; duffel bag,claude-sonnet-5-5,2026-10-26T21:01:37Z
+th_0007,IMG_20240227_094440,paper_document,0,high,red smears inside white foam box; duffel bag,claude-sonnet-5-5,2026-10-26T21:01:37Z
+th_0007,IMG_20240227_094440,red_brown_stain,1,high,red smears inside white foam box; duffel bag,claude-sonnet-5-5,2026-10-26T21:01:37Z
+th_0007,IMG_20240227_094451,ammunition,0,med,duffel bag; foam box exterior; interior not visible,claude-sonnet-5-5,2026-10-26T21:01:39Z
+th_0007,IMG_20240227_094451,blade,0,med,duffel bag; foam box exterior; interior not visible,claude-sonnet-5-5,2026-10-26T21:01:39Z
+th_0007,IMG_20240227_094451,bottle_glass,0,med,duffel bag; foam box exterior; interior not visible,claude-sonnet-5-5,2026-10-26T21:01:39Z
+th_0007,IMG_20240227_094451,paper_document,0,med,duffel bag; foam box exterior; interior not visible,claude-sonnet-5-5,2026-10-26T21:01:39Z
+th_0007,IMG_20240227_094451,red_brown_stain,0,med,duffel bag; foam box exterior; interior not visible,claude-sonnet-5-5,2026-10-26T21:01:39Z
+th_0007,IMG_20240227_094503,ammunition,0,high,duffel bag close-up; no listed objects,claude-sonnet-5-5,2026-10-26T21:01:40Z
+th_0007,IMG_20240227_094503,blade,0,high,duffel bag close-up; no listed objects,claude-sonnet-5-5,2026-10-26T21:01:40Z
+th_0007,IMG_20240227_094503,bottle_glass,0,high,duffel bag close-up; no listed objects,claude-sonnet-5-5,2026-10-26T21:01:40Z
+th_0007,IMG_20240227_094503,paper_document,0,high,duffel bag close-up; no listed objects,claude-sonnet-5-5,2026-10-26T21:01:40Z
+th_0007,IMG_20240227_094503,red_brown_stain,0,high,duffel bag close-up; no listed objects,claude-sonnet-5-5,2026-10-26T21:01:40Z
+th_0007,IMG_20240227_094509,ammunition,0,low,hand axe in bag; faint red marks on handle,claude-sonnet-5-5,2026-10-26T21:01:42Z
+th_0007,IMG_20240227_094509,blade,1,low,hand axe in bag; faint red marks on handle,claude-sonnet-5-5,2026-10-26T21:01:42Z
+th_0007,IMG_20240227_094509,bottle_glass,0,low,hand axe in bag; faint red marks on handle,claude-sonnet-5-5,2026-10-26T21:01:42Z
+th_0007,IMG_20240227_094509,paper_document,0,low,hand axe in bag; faint red marks on handle,claude-sonnet-5-5,2026-10-26T21:01:42Z
+th_0007,IMG_20240227_094509,red_brown_stain,1,low,hand axe in bag; faint red marks on handle,claude-sonnet-5-5,2026-10-26T21:01:42Z
+th_0007,IMG_20240227_094518,ammunition,0,high,red-brown smears and spots inside foam box,claude-sonnet-5-5,2026-10-26T21:01:44Z
+th_0007,IMG_20240227_094518,blade,0,high,red-brown smears and spots inside foam box,claude-sonnet-5-5,2026-10-26T21:01:44Z
+th_0007,IMG_20240227_094518,bottle_glass,0,high,red-brown smears and spots inside foam box,claude-sonnet-5-5,2026-10-26T21:01:44Z
+th_0007,IMG_20240227_094518,paper_document,0,high,red-brown smears and spots inside foam box,claude-sonnet-5-5,2026-10-26T21:01:44Z
+th_0007,IMG_20240227_094518,red_brown_stain,1,high,red-brown smears and spots inside foam box,claude-sonnet-5-5,2026-10-26T21:01:44Z
+th_0008,IMG_20240227_094114,ammunition,0,low,dark room: shoes; bottle on far cabinet; notebook on small table,claude-sonnet-5-5,2026-10-26T21:01:45Z
+th_0008,IMG_20240227_094114,blade,0,low,dark room: shoes; bottle on far cabinet; notebook on small table,claude-sonnet-5-5,2026-10-26T21:01:45Z
+th_0008,IMG_20240227_094114,bottle_glass,1,low,dark room: shoes; bottle on far cabinet; notebook on small table,claude-sonnet-5-5,2026-10-26T21:01:45Z
+th_0008,IMG_20240227_094114,paper_document,0,low,dark room: shoes; bottle on far cabinet; notebook on small table,claude-sonnet-5-5,2026-10-26T21:01:45Z
+th_0008,IMG_20240227_094114,red_brown_stain,0,low,dark room: shoes; bottle on far cabinet; notebook on small table,claude-sonnet-5-5,2026-10-26T21:01:45Z
+th_0008,IMG_20240227_094127,ammunition,0,low,dark room: bottle on yellow table; mat; legs,claude-sonnet-5-5,2026-10-26T21:01:47Z
+th_0008,IMG_20240227_094127,blade,0,low,dark room: bottle on yellow table; mat; legs,claude-sonnet-5-5,2026-10-26T21:01:47Z
+th_0008,IMG_20240227_094127,bottle_glass,1,low,dark room: bottle on yellow table; mat; legs,claude-sonnet-5-5,2026-10-26T21:01:47Z
+th_0008,IMG_20240227_094127,paper_document,0,low,dark room: bottle on yellow table; mat; legs,claude-sonnet-5-5,2026-10-26T21:01:47Z
+th_0008,IMG_20240227_094127,red_brown_stain,0,low,dark room: bottle on yellow table; mat; legs,claude-sonnet-5-5,2026-10-26T21:01:47Z
+th_0008,IMG_20240227_094141,ammunition,0,med,dark room: book on armchair; mat; pistol-like item near marker,claude-sonnet-5-5,2026-10-26T21:01:48Z
+th_0008,IMG_20240227_094141,blade,0,med,dark room: book on armchair; mat; pistol-like item near marker,claude-sonnet-5-5,2026-10-26T21:01:48Z
+th_0008,IMG_20240227_094141,bottle_glass,0,med,dark room: book on armchair; mat; pistol-like item near marker,claude-sonnet-5-5,2026-10-26T21:01:48Z
+th_0008,IMG_20240227_094141,paper_document,1,med,dark room: book on armchair; mat; pistol-like item near marker,claude-sonnet-5-5,2026-10-26T21:01:48Z
+th_0008,IMG_20240227_094141,red_brown_stain,0,med,dark room: book on armchair; mat; pistol-like item near marker,claude-sonnet-5-5,2026-10-26T21:01:48Z
+th_0008,IMG_20240227_094153,ammunition,1,low,dark: sneaker; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:21Z
+th_0008,IMG_20240227_094153,blade,0,low,dark: sneaker; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:21Z
+th_0008,IMG_20240227_094153,bottle_glass,0,low,dark: sneaker; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:21Z
+th_0008,IMG_20240227_094153,paper_document,0,low,dark: sneaker; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:21Z
+th_0008,IMG_20240227_094153,red_brown_stain,0,low,dark: sneaker; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:21Z
+th_0008,IMG_20240227_094200,ammunition,1,low,dark: sneakers; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:22Z
+th_0008,IMG_20240227_094200,blade,0,low,dark: sneakers; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:22Z
+th_0008,IMG_20240227_094200,bottle_glass,0,low,dark: sneakers; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:22Z
+th_0008,IMG_20240227_094200,paper_document,0,low,dark: sneakers; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:22Z
+th_0008,IMG_20240227_094200,red_brown_stain,0,low,dark: sneakers; small metal item beside marker 72 possibly a cartridge case,claude-sonnet-5-5,2026-10-26T21:02:22Z
+th_0008,IMG_20240227_094208,ammunition,1,low,very dark: small metallic cylinder below marker 72 looks like cartridge case,claude-sonnet-5-5,2026-10-26T21:02:24Z
+th_0008,IMG_20240227_094208,blade,0,low,very dark: small metallic cylinder below marker 72 looks like cartridge case,claude-sonnet-5-5,2026-10-26T21:02:24Z
+th_0008,IMG_20240227_094208,bottle_glass,0,low,very dark: small metallic cylinder below marker 72 looks like cartridge case,claude-sonnet-5-5,2026-10-26T21:02:24Z
+th_0008,IMG_20240227_094208,paper_document,0,low,very dark: small metallic cylinder below marker 72 looks like cartridge case,claude-sonnet-5-5,2026-10-26T21:02:24Z
+th_0008,IMG_20240227_094208,red_brown_stain,0,low,very dark: small metallic cylinder below marker 72 looks like cartridge case,claude-sonnet-5-5,2026-10-26T21:02:24Z
+th_0008,IMG_20240227_094215,ammunition,0,med,dark: cheese knife with slotted blade on tiles,claude-sonnet-5-5,2026-10-26T21:02:25Z
+th_0008,IMG_20240227_094215,blade,1,med,dark: cheese knife with slotted blade on tiles,claude-sonnet-5-5,2026-10-26T21:02:25Z
+th_0008,IMG_20240227_094215,bottle_glass,0,med,dark: cheese knife with slotted blade on tiles,claude-sonnet-5-5,2026-10-26T21:02:25Z
+th_0008,IMG_20240227_094215,paper_document,0,med,dark: cheese knife with slotted blade on tiles,claude-sonnet-5-5,2026-10-26T21:02:25Z
+th_0008,IMG_20240227_094215,red_brown_stain,0,med,dark: cheese knife with slotted blade on tiles,claude-sonnet-5-5,2026-10-26T21:02:25Z
+th_0008,IMG_20240227_094221,ammunition,0,low,very dark: pistol and mannequin hand; no listed objects seen,claude-sonnet-5-5,2026-10-26T21:02:27Z
+th_0008,IMG_20240227_094221,blade,0,low,very dark: pistol and mannequin hand; no listed objects seen,claude-sonnet-5-5,2026-10-26T21:02:27Z
+th_0008,IMG_20240227_094221,bottle_glass,0,low,very dark: pistol and mannequin hand; no listed objects seen,claude-sonnet-5-5,2026-10-26T21:02:27Z
+th_0008,IMG_20240227_094221,paper_document,0,low,very dark: pistol and mannequin hand; no listed objects seen,claude-sonnet-5-5,2026-10-26T21:02:27Z
+th_0008,IMG_20240227_094221,red_brown_stain,0,low,very dark: pistol and mannequin hand; no listed objects seen,claude-sonnet-5-5,2026-10-26T21:02:27Z
+th_0008,IMG_20240227_094230,ammunition,0,low,very dark: mannequin on rug; pistol near marker 23,claude-sonnet-5-5,2026-10-26T21:02:28Z
+th_0008,IMG_20240227_094230,blade,0,low,very dark: mannequin on rug; pistol near marker 23,claude-sonnet-5-5,2026-10-26T21:02:28Z
+th_0008,IMG_20240227_094230,bottle_glass,0,low,very dark: mannequin on rug; pistol near marker 23,claude-sonnet-5-5,2026-10-26T21:02:28Z
+th_0008,IMG_20240227_094230,paper_document,0,low,very dark: mannequin on rug; pistol near marker 23,claude-sonnet-5-5,2026-10-26T21:02:28Z
+th_0008,IMG_20240227_094230,red_brown_stain,0,low,very dark: mannequin on rug; pistol near marker 23,claude-sonnet-5-5,2026-10-26T21:02:28Z
+th_0008,IMG_20240227_094237,ammunition,0,med,very dark: mannequin head and marker,claude-sonnet-5-5,2026-10-26T21:02:30Z
+th_0008,IMG_20240227_094237,blade,0,med,very dark: mannequin head and marker,claude-sonnet-5-5,2026-10-26T21:02:30Z
+th_0008,IMG_20240227_094237,bottle_glass,0,med,very dark: mannequin head and marker,claude-sonnet-5-5,2026-10-26T21:02:30Z
+th_0008,IMG_20240227_094237,paper_document,0,med,very dark: mannequin head and marker,claude-sonnet-5-5,2026-10-26T21:02:30Z
+th_0008,IMG_20240227_094237,red_brown_stain,0,med,very dark: mannequin head and marker,claude-sonnet-5-5,2026-10-26T21:02:30Z
+th_0010,IMG_20240227_095201,ammunition,0,low,bins with labels; bucket; cloth; cardboard box with small bag,claude-sonnet-5-5,2026-10-26T21:02:31Z
+th_0010,IMG_20240227_095201,blade,0,low,bins with labels; bucket; cloth; cardboard box with small bag,claude-sonnet-5-5,2026-10-26T21:02:31Z
+th_0010,IMG_20240227_095201,bottle_glass,0,low,bins with labels; bucket; cloth; cardboard box with small bag,claude-sonnet-5-5,2026-10-26T21:02:31Z
+th_0010,IMG_20240227_095201,paper_document,0,low,bins with labels; bucket; cloth; cardboard box with small bag,claude-sonnet-5-5,2026-10-26T21:02:31Z
+th_0010,IMG_20240227_095201,red_brown_stain,0,low,bins with labels; bucket; cloth; cardboard box with small bag,claude-sonnet-5-5,2026-10-26T21:02:31Z
+th_0010,IMG_20240227_095210,ammunition,0,med,waste bins; bucket; cloth; cardboard box with small pack,claude-sonnet-5-5,2026-10-26T21:03:03Z
+th_0010,IMG_20240227_095210,blade,0,med,waste bins; bucket; cloth; cardboard box with small pack,claude-sonnet-5-5,2026-10-26T21:03:03Z
+th_0010,IMG_20240227_095210,bottle_glass,0,med,waste bins; bucket; cloth; cardboard box with small pack,claude-sonnet-5-5,2026-10-26T21:03:03Z
+th_0010,IMG_20240227_095210,paper_document,0,med,waste bins; bucket; cloth; cardboard box with small pack,claude-sonnet-5-5,2026-10-26T21:03:03Z
+th_0010,IMG_20240227_095210,red_brown_stain,0,med,waste bins; bucket; cloth; cardboard box with small pack,claude-sonnet-5-5,2026-10-26T21:03:03Z
+th_0010,IMG_20240227_095217,ammunition,0,med,waste bins; bucket; cloth; table,claude-sonnet-5-5,2026-10-26T21:03:05Z
+th_0010,IMG_20240227_095217,blade,0,med,waste bins; bucket; cloth; table,claude-sonnet-5-5,2026-10-26T21:03:05Z
+th_0010,IMG_20240227_095217,bottle_glass,0,med,waste bins; bucket; cloth; table,claude-sonnet-5-5,2026-10-26T21:03:05Z
+th_0010,IMG_20240227_095217,paper_document,0,med,waste bins; bucket; cloth; table,claude-sonnet-5-5,2026-10-26T21:03:05Z
+th_0010,IMG_20240227_095217,red_brown_stain,0,med,waste bins; bucket; cloth; table,claude-sonnet-5-5,2026-10-26T21:03:05Z
+th_0010,IMG_20240227_095227,ammunition,0,high,jeans and fabric on bin edge,claude-sonnet-5-5,2026-10-26T21:03:06Z
+th_0010,IMG_20240227_095227,blade,0,high,jeans and fabric on bin edge,claude-sonnet-5-5,2026-10-26T21:03:06Z
+th_0010,IMG_20240227_095227,bottle_glass,0,high,jeans and fabric on bin edge,claude-sonnet-5-5,2026-10-26T21:03:06Z
+th_0010,IMG_20240227_095227,paper_document,0,high,jeans and fabric on bin edge,claude-sonnet-5-5,2026-10-26T21:03:06Z
+th_0010,IMG_20240227_095227,red_brown_stain,0,high,jeans and fabric on bin edge,claude-sonnet-5-5,2026-10-26T21:03:06Z
+th_0010,IMG_20240227_095233,ammunition,0,low,bucket on bin; sheets of paper at bottom left,claude-sonnet-5-5,2026-10-26T21:03:08Z
+th_0010,IMG_20240227_095233,blade,0,low,bucket on bin; sheets of paper at bottom left,claude-sonnet-5-5,2026-10-26T21:03:08Z
+th_0010,IMG_20240227_095233,bottle_glass,0,low,bucket on bin; sheets of paper at bottom left,claude-sonnet-5-5,2026-10-26T21:03:08Z
+th_0010,IMG_20240227_095233,paper_document,1,low,bucket on bin; sheets of paper at bottom left,claude-sonnet-5-5,2026-10-26T21:03:08Z
+th_0010,IMG_20240227_095233,red_brown_stain,0,low,bucket on bin; sheets of paper at bottom left,claude-sonnet-5-5,2026-10-26T21:03:08Z
+th_0010,IMG_20240227_095244,ammunition,0,high,fabric over bin; marker,claude-sonnet-5-5,2026-10-26T21:03:10Z
+th_0010,IMG_20240227_095244,blade,0,high,fabric over bin; marker,claude-sonnet-5-5,2026-10-26T21:03:10Z
+th_0010,IMG_20240227_095244,bottle_glass,0,high,fabric over bin; marker,claude-sonnet-5-5,2026-10-26T21:03:10Z
+th_0010,IMG_20240227_095244,paper_document,0,high,fabric over bin; marker,claude-sonnet-5-5,2026-10-26T21:03:10Z
+th_0010,IMG_20240227_095244,red_brown_stain,0,high,fabric over bin; marker,claude-sonnet-5-5,2026-10-26T21:03:10Z
+th_0012,IMG_20240227_101750,ammunition,0,med,wide room: wallet and small passport-like booklet on floor,claude-sonnet-5-5,2026-10-26T21:03:11Z
+th_0012,IMG_20240227_101750,blade,0,med,wide room: wallet and small passport-like booklet on floor,claude-sonnet-5-5,2026-10-26T21:03:11Z
+th_0012,IMG_20240227_101750,bottle_glass,0,med,wide room: wallet and small passport-like booklet on floor,claude-sonnet-5-5,2026-10-26T21:03:11Z
+th_0012,IMG_20240227_101750,paper_document,1,med,wide room: wallet and small passport-like booklet on floor,claude-sonnet-5-5,2026-10-26T21:03:11Z
+th_0012,IMG_20240227_101750,red_brown_stain,0,med,wide room: wallet and small passport-like booklet on floor,claude-sonnet-5-5,2026-10-26T21:03:11Z
+th_0012,IMG_20240227_101758,ammunition,0,med,knife-like handle protruding from cloth; passport and wallet on floor,claude-sonnet-5-5,2026-10-26T21:03:13Z
+th_0012,IMG_20240227_101758,blade,1,med,knife-like handle protruding from cloth; passport and wallet on floor,claude-sonnet-5-5,2026-10-26T21:03:13Z
+th_0012,IMG_20240227_101758,bottle_glass,0,med,knife-like handle protruding from cloth; passport and wallet on floor,claude-sonnet-5-5,2026-10-26T21:03:13Z
+th_0012,IMG_20240227_101758,paper_document,1,med,knife-like handle protruding from cloth; passport and wallet on floor,claude-sonnet-5-5,2026-10-26T21:03:13Z
+th_0012,IMG_20240227_101758,red_brown_stain,0,med,knife-like handle protruding from cloth; passport and wallet on floor,claude-sonnet-5-5,2026-10-26T21:03:13Z
+th_0012,IMG_20240227_101806,ammunition,0,low,knife-like handle in cloth; passport; wallet; papers on cabinet,claude-sonnet-5-5,2026-10-26T21:03:14Z
+th_0012,IMG_20240227_101806,blade,1,low,knife-like handle in cloth; passport; wallet; papers on cabinet,claude-sonnet-5-5,2026-10-26T21:03:14Z
+th_0012,IMG_20240227_101806,bottle_glass,0,low,knife-like handle in cloth; passport; wallet; papers on cabinet,claude-sonnet-5-5,2026-10-26T21:03:14Z
+th_0012,IMG_20240227_101806,paper_document,1,low,knife-like handle in cloth; passport; wallet; papers on cabinet,claude-sonnet-5-5,2026-10-26T21:03:14Z
+th_0012,IMG_20240227_101806,red_brown_stain,0,low,knife-like handle in cloth; passport; wallet; papers on cabinet,claude-sonnet-5-5,2026-10-26T21:03:14Z
+th_0012,IMG_20240227_101819,ammunition,0,med,knife in clothing; wallet; passport near marker,claude-sonnet-5-5,2026-10-26T21:03:48Z
+th_0012,IMG_20240227_101819,blade,1,med,knife in clothing; wallet; passport near marker,claude-sonnet-5-5,2026-10-26T21:03:48Z
+th_0012,IMG_20240227_101819,bottle_glass,0,med,knife in clothing; wallet; passport near marker,claude-sonnet-5-5,2026-10-26T21:03:48Z
+th_0012,IMG_20240227_101819,paper_document,1,med,knife in clothing; wallet; passport near marker,claude-sonnet-5-5,2026-10-26T21:03:48Z
+th_0012,IMG_20240227_101819,red_brown_stain,0,med,knife in clothing; wallet; passport near marker,claude-sonnet-5-5,2026-10-26T21:03:48Z
+th_0012,IMG_20240227_101830,ammunition,0,high,knife with wooden handle in clothing,claude-sonnet-5-5,2026-10-26T21:03:50Z
+th_0012,IMG_20240227_101830,blade,1,high,knife with wooden handle in clothing,claude-sonnet-5-5,2026-10-26T21:03:50Z
+th_0012,IMG_20240227_101830,bottle_glass,0,high,knife with wooden handle in clothing,claude-sonnet-5-5,2026-10-26T21:03:50Z
+th_0012,IMG_20240227_101830,paper_document,0,high,knife with wooden handle in clothing,claude-sonnet-5-5,2026-10-26T21:03:50Z
+th_0012,IMG_20240227_101830,red_brown_stain,0,high,knife with wooden handle in clothing,claude-sonnet-5-5,2026-10-26T21:03:50Z
+th_0012,IMG_20240227_101835,ammunition,0,high,mannequin head and cables; no listed objects,claude-sonnet-5-5,2026-10-26T21:03:52Z
+th_0012,IMG_20240227_101835,blade,0,high,mannequin head and cables; no listed objects,claude-sonnet-5-5,2026-10-26T21:03:52Z
+th_0012,IMG_20240227_101835,bottle_glass,0,high,mannequin head and cables; no listed objects,claude-sonnet-5-5,2026-10-26T21:03:52Z
+th_0012,IMG_20240227_101835,paper_document,0,high,mannequin head and cables; no listed objects,claude-sonnet-5-5,2026-10-26T21:03:52Z
+th_0012,IMG_20240227_101835,red_brown_stain,0,high,mannequin head and cables; no listed objects,claude-sonnet-5-5,2026-10-26T21:03:52Z
+th_0012,IMG_20240227_101841,ammunition,0,med,knife in clothing; wallet at lower left,claude-sonnet-5-5,2026-10-26T21:03:53Z
+th_0012,IMG_20240227_101841,blade,1,med,knife in clothing; wallet at lower left,claude-sonnet-5-5,2026-10-26T21:03:53Z
+th_0012,IMG_20240227_101841,bottle_glass,0,med,knife in clothing; wallet at lower left,claude-sonnet-5-5,2026-10-26T21:03:53Z
+th_0012,IMG_20240227_101841,paper_document,0,med,knife in clothing; wallet at lower left,claude-sonnet-5-5,2026-10-26T21:03:53Z
+th_0012,IMG_20240227_101841,red_brown_stain,0,med,knife in clothing; wallet at lower left,claude-sonnet-5-5,2026-10-26T21:03:53Z
+th_0012,IMG_20240227_101848,ammunition,0,low,wallet; passport corner at right edge,claude-sonnet-5-5,2026-10-26T21:03:55Z
+th_0012,IMG_20240227_101848,blade,0,low,wallet; passport corner at right edge,claude-sonnet-5-5,2026-10-26T21:03:55Z
+th_0012,IMG_20240227_101848,bottle_glass,0,low,wallet; passport corner at right edge,claude-sonnet-5-5,2026-10-26T21:03:55Z
+th_0012,IMG_20240227_101848,paper_document,1,low,wallet; passport corner at right edge,claude-sonnet-5-5,2026-10-26T21:03:55Z
+th_0012,IMG_20240227_101848,red_brown_stain,0,low,wallet; passport corner at right edge,claude-sonnet-5-5,2026-10-26T21:03:55Z
+th_0012,IMG_20240227_101854,ammunition,0,high,passport on floor near marker 72,claude-sonnet-5-5,2026-10-26T21:03:56Z
+th_0012,IMG_20240227_101854,blade,0,high,passport on floor near marker 72,claude-sonnet-5-5,2026-10-26T21:03:56Z
+th_0012,IMG_20240227_101854,bottle_glass,0,high,passport on floor near marker 72,claude-sonnet-5-5,2026-10-26T21:03:56Z
+th_0012,IMG_20240227_101854,paper_document,1,high,passport on floor near marker 72,claude-sonnet-5-5,2026-10-26T21:03:56Z
+th_0012,IMG_20240227_101854,red_brown_stain,0,high,passport on floor near marker 72,claude-sonnet-5-5,2026-10-26T21:03:56Z
+th_0014,IMG_20240227_103410,ammunition,0,low,board with orange-brown mark near marker 11; gloves; tarps,claude-sonnet-5-5,2026-10-26T21:03:58Z
+th_0014,IMG_20240227_103410,blade,0,low,board with orange-brown mark near marker 11; gloves; tarps,claude-sonnet-5-5,2026-10-26T21:03:58Z
+th_0014,IMG_20240227_103410,bottle_glass,0,low,board with orange-brown mark near marker 11; gloves; tarps,claude-sonnet-5-5,2026-10-26T21:03:58Z
+th_0014,IMG_20240227_103410,paper_document,0,low,board with orange-brown mark near marker 11; gloves; tarps,claude-sonnet-5-5,2026-10-26T21:03:58Z
+th_0014,IMG_20240227_103410,red_brown_stain,1,low,board with orange-brown mark near marker 11; gloves; tarps,claude-sonnet-5-5,2026-10-26T21:03:58Z
+th_0014,IMG_20240227_103421,ammunition,0,low,sunglasses; tarp with dirt; board with gloves,claude-sonnet-5-5,2026-10-26T21:03:59Z
+th_0014,IMG_20240227_103421,blade,0,low,sunglasses; tarp with dirt; board with gloves,claude-sonnet-5-5,2026-10-26T21:03:59Z
+th_0014,IMG_20240227_103421,bottle_glass,0,low,sunglasses; tarp with dirt; board with gloves,claude-sonnet-5-5,2026-10-26T21:03:59Z
+th_0014,IMG_20240227_103421,paper_document,0,low,sunglasses; tarp with dirt; board with gloves,claude-sonnet-5-5,2026-10-26T21:03:59Z
+th_0014,IMG_20240227_103421,red_brown_stain,0,low,sunglasses; tarp with dirt; board with gloves,claude-sonnet-5-5,2026-10-26T21:03:59Z
+th_0014,IMG_20240227_103433,ammunition,0,low,brownish-orange stain near marker 11 on board; mannequins; tarps,claude-sonnet-5-5,2026-10-26T21:04:51Z
+th_0014,IMG_20240227_103433,blade,0,low,brownish-orange stain near marker 11 on board; mannequins; tarps,claude-sonnet-5-5,2026-10-26T21:04:51Z
+th_0014,IMG_20240227_103433,bottle_glass,0,low,brownish-orange stain near marker 11 on board; mannequins; tarps,claude-sonnet-5-5,2026-10-26T21:04:51Z
+th_0014,IMG_20240227_103433,paper_document,0,low,brownish-orange stain near marker 11 on board; mannequins; tarps,claude-sonnet-5-5,2026-10-26T21:04:51Z
+th_0014,IMG_20240227_103433,red_brown_stain,1,low,brownish-orange stain near marker 11 on board; mannequins; tarps,claude-sonnet-5-5,2026-10-26T21:04:51Z
+th_0014,IMG_20240227_103443,ammunition,0,med,white powdered board with fingerprint-like swirls and a hole,claude-sonnet-5-5,2026-10-26T21:04:52Z
+th_0014,IMG_20240227_103443,blade,0,med,white powdered board with fingerprint-like swirls and a hole,claude-sonnet-5-5,2026-10-26T21:04:52Z
+th_0014,IMG_20240227_103443,bottle_glass,0,med,white powdered board with fingerprint-like swirls and a hole,claude-sonnet-5-5,2026-10-26T21:04:52Z
+th_0014,IMG_20240227_103443,paper_document,0,med,white powdered board with fingerprint-like swirls and a hole,claude-sonnet-5-5,2026-10-26T21:04:52Z
+th_0014,IMG_20240227_103443,red_brown_stain,0,med,white powdered board with fingerprint-like swirls and a hole,claude-sonnet-5-5,2026-10-26T21:04:52Z
+th_0014,IMG_20240227_103449,ammunition,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:54Z
+th_0014,IMG_20240227_103449,blade,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:54Z
+th_0014,IMG_20240227_103449,bottle_glass,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:54Z
+th_0014,IMG_20240227_103449,paper_document,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:54Z
+th_0014,IMG_20240227_103449,red_brown_stain,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:54Z
+th_0014,IMG_20240227_103454,ammunition,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:55Z
+th_0014,IMG_20240227_103454,blade,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:55Z
+th_0014,IMG_20240227_103454,bottle_glass,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:55Z
+th_0014,IMG_20240227_103454,paper_document,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:55Z
+th_0014,IMG_20240227_103454,red_brown_stain,0,high,black glove on board,claude-sonnet-5-5,2026-10-26T21:04:55Z
+th_0014,IMG_20240227_103501,ammunition,0,low,brown-pink smudge near marker 11; small brown piece at bottom,claude-sonnet-5-5,2026-10-26T21:04:57Z
+th_0014,IMG_20240227_103501,blade,0,low,brown-pink smudge near marker 11; small brown piece at bottom,claude-sonnet-5-5,2026-10-26T21:04:57Z
+th_0014,IMG_20240227_103501,bottle_glass,0,low,brown-pink smudge near marker 11; small brown piece at bottom,claude-sonnet-5-5,2026-10-26T21:04:57Z
+th_0014,IMG_20240227_103501,paper_document,0,low,brown-pink smudge near marker 11; small brown piece at bottom,claude-sonnet-5-5,2026-10-26T21:04:57Z
+th_0014,IMG_20240227_103501,red_brown_stain,1,low,brown-pink smudge near marker 11; small brown piece at bottom,claude-sonnet-5-5,2026-10-26T21:04:57Z
+th_0014,IMG_20240227_103509,ammunition,0,med,mannequin legs; sunglasses on tarp; plastic sheet,claude-sonnet-5-5,2026-10-26T21:04:59Z
+th_0014,IMG_20240227_103509,blade,0,med,mannequin legs; sunglasses on tarp; plastic sheet,claude-sonnet-5-5,2026-10-26T21:04:59Z
+th_0014,IMG_20240227_103509,bottle_glass,0,med,mannequin legs; sunglasses on tarp; plastic sheet,claude-sonnet-5-5,2026-10-26T21:04:59Z
+th_0014,IMG_20240227_103509,paper_document,0,med,mannequin legs; sunglasses on tarp; plastic sheet,claude-sonnet-5-5,2026-10-26T21:04:59Z
+th_0014,IMG_20240227_103509,red_brown_stain,0,med,mannequin legs; sunglasses on tarp; plastic sheet,claude-sonnet-5-5,2026-10-26T21:04:59Z
+th_0014,IMG_20240227_103515,ammunition,0,high,sunglasses on carpet piece; dirty tarp,claude-sonnet-5-5,2026-10-26T21:05:00Z
+th_0014,IMG_20240227_103515,blade,0,high,sunglasses on carpet piece; dirty tarp,claude-sonnet-5-5,2026-10-26T21:05:00Z
+th_0014,IMG_20240227_103515,bottle_glass,0,high,sunglasses on carpet piece; dirty tarp,claude-sonnet-5-5,2026-10-26T21:05:00Z
+th_0014,IMG_20240227_103515,paper_document,0,high,sunglasses on carpet piece; dirty tarp,claude-sonnet-5-5,2026-10-26T21:05:00Z
+th_0014,IMG_20240227_103515,red_brown_stain,0,high,sunglasses on carpet piece; dirty tarp,claude-sonnet-5-5,2026-10-26T21:05:00Z
+th_0014,IMG_20240227_103523,ammunition,0,low,mannequin torso; tarps; faint pink mark on white leg,claude-sonnet-5-5,2026-10-26T21:05:02Z
+th_0014,IMG_20240227_103523,blade,0,low,mannequin torso; tarps; faint pink mark on white leg,claude-sonnet-5-5,2026-10-26T21:05:02Z
+th_0014,IMG_20240227_103523,bottle_glass,0,low,mannequin torso; tarps; faint pink mark on white leg,claude-sonnet-5-5,2026-10-26T21:05:02Z
+th_0014,IMG_20240227_103523,paper_document,0,low,mannequin torso; tarps; faint pink mark on white leg,claude-sonnet-5-5,2026-10-26T21:05:02Z
+th_0014,IMG_20240227_103523,red_brown_stain,0,low,mannequin torso; tarps; faint pink mark on white leg,claude-sonnet-5-5,2026-10-26T21:05:02Z
+th_0014,IMG_20240227_103530,ammunition,0,med,mannequins; jeans; paint bucket; faint pink mark on white mannequin not clear,claude-sonnet-5-5,2026-10-26T21:05:38Z
+th_0014,IMG_20240227_103530,blade,0,med,mannequins; jeans; paint bucket; faint pink mark on white mannequin not clear,claude-sonnet-5-5,2026-10-26T21:05:38Z
+th_0014,IMG_20240227_103530,bottle_glass,0,med,mannequins; jeans; paint bucket; faint pink mark on white mannequin not clear,claude-sonnet-5-5,2026-10-26T21:05:38Z
+th_0014,IMG_20240227_103530,paper_document,0,med,mannequins; jeans; paint bucket; faint pink mark on white mannequin not clear,claude-sonnet-5-5,2026-10-26T21:05:38Z
+th_0014,IMG_20240227_103530,red_brown_stain,0,med,mannequins; jeans; paint bucket; faint pink mark on white mannequin not clear,claude-sonnet-5-5,2026-10-26T21:05:38Z
+th_0015,IMG_20240227_102353,ammunition,0,med,glass-topped table; no bottle or glass vessel,claude-sonnet-5-5,2026-10-26T21:05:39Z
+th_0015,IMG_20240227_102353,blade,0,med,glass-topped table; no bottle or glass vessel,claude-sonnet-5-5,2026-10-26T21:05:39Z
+th_0015,IMG_20240227_102353,bottle_glass,0,med,glass-topped table; no bottle or glass vessel,claude-sonnet-5-5,2026-10-26T21:05:39Z
+th_0015,IMG_20240227_102353,paper_document,0,med,glass-topped table; no bottle or glass vessel,claude-sonnet-5-5,2026-10-26T21:05:39Z
+th_0015,IMG_20240227_102353,red_brown_stain,0,med,glass-topped table; no bottle or glass vessel,claude-sonnet-5-5,2026-10-26T21:05:39Z
+th_0015,IMG_20240227_102400,ammunition,0,low,white fragments on floor; possibly broken glass or ceramic,claude-sonnet-5-5,2026-10-26T21:05:41Z
+th_0015,IMG_20240227_102400,blade,0,low,white fragments on floor; possibly broken glass or ceramic,claude-sonnet-5-5,2026-10-26T21:05:41Z
+th_0015,IMG_20240227_102400,bottle_glass,1,low,white fragments on floor; possibly broken glass or ceramic,claude-sonnet-5-5,2026-10-26T21:05:41Z
+th_0015,IMG_20240227_102400,paper_document,0,low,white fragments on floor; possibly broken glass or ceramic,claude-sonnet-5-5,2026-10-26T21:05:41Z
+th_0015,IMG_20240227_102400,red_brown_stain,0,low,white fragments on floor; possibly broken glass or ceramic,claude-sonnet-5-5,2026-10-26T21:05:41Z
+th_0015,IMG_20240227_102959,ammunition,0,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:42Z
+th_0015,IMG_20240227_102959,blade,1,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:42Z
+th_0015,IMG_20240227_102959,bottle_glass,1,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:42Z
+th_0015,IMG_20240227_102959,paper_document,0,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:42Z
+th_0015,IMG_20240227_102959,red_brown_stain,0,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:42Z
+th_0015,IMG_20240227_103008,ammunition,0,med,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:44Z
+th_0015,IMG_20240227_103008,blade,1,med,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:44Z
+th_0015,IMG_20240227_103008,bottle_glass,1,med,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:44Z
+th_0015,IMG_20240227_103008,paper_document,0,med,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:44Z
+th_0015,IMG_20240227_103008,red_brown_stain,0,med,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:05:44Z
+th_0015,IMG_20240227_103017,ammunition,0,low,drinking glass on table; small red-brown spot on mattress,claude-sonnet-5-5,2026-10-26T21:05:45Z
+th_0015,IMG_20240227_103017,blade,0,low,drinking glass on table; small red-brown spot on mattress,claude-sonnet-5-5,2026-10-26T21:05:45Z
+th_0015,IMG_20240227_103017,bottle_glass,1,low,drinking glass on table; small red-brown spot on mattress,claude-sonnet-5-5,2026-10-26T21:05:45Z
+th_0015,IMG_20240227_103017,paper_document,0,low,drinking glass on table; small red-brown spot on mattress,claude-sonnet-5-5,2026-10-26T21:05:45Z
+th_0015,IMG_20240227_103017,red_brown_stain,1,low,drinking glass on table; small red-brown spot on mattress,claude-sonnet-5-5,2026-10-26T21:05:45Z
+th_0015,IMG_20240227_103026,ammunition,0,med,drinking glass; pliers; hammer on table; no blade,claude-sonnet-5-5,2026-10-26T21:05:47Z
+th_0015,IMG_20240227_103026,blade,0,med,drinking glass; pliers; hammer on table; no blade,claude-sonnet-5-5,2026-10-26T21:05:47Z
+th_0015,IMG_20240227_103026,bottle_glass,1,med,drinking glass; pliers; hammer on table; no blade,claude-sonnet-5-5,2026-10-26T21:05:47Z
+th_0015,IMG_20240227_103026,paper_document,0,med,drinking glass; pliers; hammer on table; no blade,claude-sonnet-5-5,2026-10-26T21:05:47Z
+th_0015,IMG_20240227_103026,red_brown_stain,0,med,drinking glass; pliers; hammer on table; no blade,claude-sonnet-5-5,2026-10-26T21:05:47Z
+th_0015,IMG_20240227_103032,ammunition,0,high,drinking glass and pliers on table,claude-sonnet-5-5,2026-10-26T21:05:48Z
+th_0015,IMG_20240227_103032,blade,0,high,drinking glass and pliers on table,claude-sonnet-5-5,2026-10-26T21:05:48Z
+th_0015,IMG_20240227_103032,bottle_glass,1,high,drinking glass and pliers on table,claude-sonnet-5-5,2026-10-26T21:05:48Z
+th_0015,IMG_20240227_103032,paper_document,0,high,drinking glass and pliers on table,claude-sonnet-5-5,2026-10-26T21:05:48Z
+th_0015,IMG_20240227_103032,red_brown_stain,0,high,drinking glass and pliers on table,claude-sonnet-5-5,2026-10-26T21:05:48Z
+th_0015,IMG_20240227_103038,ammunition,0,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:06:23Z
+th_0015,IMG_20240227_103038,blade,1,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:06:23Z
+th_0015,IMG_20240227_103038,bottle_glass,1,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:06:23Z
+th_0015,IMG_20240227_103038,paper_document,0,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:06:23Z
+th_0015,IMG_20240227_103038,red_brown_stain,0,high,scissors; hammer; pliers and drinking glass on table,claude-sonnet-5-5,2026-10-26T21:06:23Z
+th_0015,IMG_20240227_103043,ammunition,0,high,large scissors beside hammer on table,claude-sonnet-5-5,2026-10-26T21:06:24Z
+th_0015,IMG_20240227_103043,blade,1,high,large scissors beside hammer on table,claude-sonnet-5-5,2026-10-26T21:06:24Z
+th_0015,IMG_20240227_103043,bottle_glass,0,high,large scissors beside hammer on table,claude-sonnet-5-5,2026-10-26T21:06:24Z
+th_0015,IMG_20240227_103043,paper_document,0,high,large scissors beside hammer on table,claude-sonnet-5-5,2026-10-26T21:06:24Z
+th_0015,IMG_20240227_103043,red_brown_stain,0,high,large scissors beside hammer on table,claude-sonnet-5-5,2026-10-26T21:06:24Z
+th_0015,IMG_20240227_103052,ammunition,0,med,scissors; hammer; pliers; glass on side table; mannequin back,claude-sonnet-5-5,2026-10-26T21:06:26Z
+th_0015,IMG_20240227_103052,blade,1,med,scissors; hammer; pliers; glass on side table; mannequin back,claude-sonnet-5-5,2026-10-26T21:06:26Z
+th_0015,IMG_20240227_103052,bottle_glass,1,med,scissors; hammer; pliers; glass on side table; mannequin back,claude-sonnet-5-5,2026-10-26T21:06:26Z
+th_0015,IMG_20240227_103052,paper_document,0,med,scissors; hammer; pliers; glass on side table; mannequin back,claude-sonnet-5-5,2026-10-26T21:06:26Z
+th_0015,IMG_20240227_103052,red_brown_stain,0,med,scissors; hammer; pliers; glass on side table; mannequin back,claude-sonnet-5-5,2026-10-26T21:06:26Z
+th_0015,IMG_20240227_103059,ammunition,0,high,rope tied to chair leg; mannequin arm,claude-sonnet-5-5,2026-10-26T21:06:27Z
+th_0015,IMG_20240227_103059,blade,0,high,rope tied to chair leg; mannequin arm,claude-sonnet-5-5,2026-10-26T21:06:27Z
+th_0015,IMG_20240227_103059,bottle_glass,0,high,rope tied to chair leg; mannequin arm,claude-sonnet-5-5,2026-10-26T21:06:27Z
+th_0015,IMG_20240227_103059,paper_document,0,high,rope tied to chair leg; mannequin arm,claude-sonnet-5-5,2026-10-26T21:06:27Z
+th_0015,IMG_20240227_103059,red_brown_stain,0,high,rope tied to chair leg; mannequin arm,claude-sonnet-5-5,2026-10-26T21:06:27Z
+th_0016,IMG_20240227_104721,ammunition,0,med,wide corridor: mannequin with blue cover; keyboard; markers,claude-sonnet-5-5,2026-10-26T21:06:29Z
+th_0016,IMG_20240227_104721,blade,0,med,wide corridor: mannequin with blue cover; keyboard; markers,claude-sonnet-5-5,2026-10-26T21:06:29Z
+th_0016,IMG_20240227_104721,bottle_glass,0,med,wide corridor: mannequin with blue cover; keyboard; markers,claude-sonnet-5-5,2026-10-26T21:06:29Z
+th_0016,IMG_20240227_104721,paper_document,0,med,wide corridor: mannequin with blue cover; keyboard; markers,claude-sonnet-5-5,2026-10-26T21:06:29Z
+th_0016,IMG_20240227_104721,red_brown_stain,0,med,wide corridor: mannequin with blue cover; keyboard; markers,claude-sonnet-5-5,2026-10-26T21:06:29Z
+th_0016,IMG_20240227_104736,ammunition,0,high,mannequin with blue cover; keyboard; bucket in far room,claude-sonnet-5-5,2026-10-26T21:06:31Z
+th_0016,IMG_20240227_104736,blade,0,high,mannequin with blue cover; keyboard; bucket in far room,claude-sonnet-5-5,2026-10-26T21:06:31Z
+th_0016,IMG_20240227_104736,bottle_glass,0,high,mannequin with blue cover; keyboard; bucket in far room,claude-sonnet-5-5,2026-10-26T21:06:31Z
+th_0016,IMG_20240227_104736,paper_document,0,high,mannequin with blue cover; keyboard; bucket in far room,claude-sonnet-5-5,2026-10-26T21:06:31Z
+th_0016,IMG_20240227_104736,red_brown_stain,0,high,mannequin with blue cover; keyboard; bucket in far room,claude-sonnet-5-5,2026-10-26T21:06:31Z
+th_0016,IMG_20240227_104746,ammunition,0,high,mannequin; keyboard; planter box,claude-sonnet-5-5,2026-10-26T21:06:32Z
+th_0016,IMG_20240227_104746,blade,0,high,mannequin; keyboard; planter box,claude-sonnet-5-5,2026-10-26T21:06:32Z
+th_0016,IMG_20240227_104746,bottle_glass,0,high,mannequin; keyboard; planter box,claude-sonnet-5-5,2026-10-26T21:06:32Z
+th_0016,IMG_20240227_104746,paper_document,0,high,mannequin; keyboard; planter box,claude-sonnet-5-5,2026-10-26T21:06:32Z
+th_0016,IMG_20240227_104746,red_brown_stain,0,high,mannequin; keyboard; planter box,claude-sonnet-5-5,2026-10-26T21:06:32Z
+th_0016,IMG_20240227_104753,ammunition,0,high,twine on floor near marker 11,claude-sonnet-5-5,2026-10-26T21:06:34Z
+th_0016,IMG_20240227_104753,blade,0,high,twine on floor near marker 11,claude-sonnet-5-5,2026-10-26T21:06:34Z
+th_0016,IMG_20240227_104753,bottle_glass,0,high,twine on floor near marker 11,claude-sonnet-5-5,2026-10-26T21:06:34Z
+th_0016,IMG_20240227_104753,paper_document,0,high,twine on floor near marker 11,claude-sonnet-5-5,2026-10-26T21:06:34Z
+th_0016,IMG_20240227_104753,red_brown_stain,0,high,twine on floor near marker 11,claude-sonnet-5-5,2026-10-26T21:06:34Z
+th_0016,IMG_20240227_104802,ammunition,0,med,concrete floor; small white scraps; marker 60 on its side,claude-sonnet-5-5,2026-10-26T21:07:20Z
+th_0016,IMG_20240227_104802,blade,0,med,concrete floor; small white scraps; marker 60 on its side,claude-sonnet-5-5,2026-10-26T21:07:20Z
+th_0016,IMG_20240227_104802,bottle_glass,0,med,concrete floor; small white scraps; marker 60 on its side,claude-sonnet-5-5,2026-10-26T21:07:20Z
+th_0016,IMG_20240227_104802,paper_document,0,med,concrete floor; small white scraps; marker 60 on its side,claude-sonnet-5-5,2026-10-26T21:07:20Z
+th_0016,IMG_20240227_104802,red_brown_stain,0,med,concrete floor; small white scraps; marker 60 on its side,claude-sonnet-5-5,2026-10-26T21:07:20Z
+th_0016,IMG_20240227_104810,ammunition,0,med,red-brown spots on concrete beside marker 14,claude-sonnet-5-5,2026-10-26T21:07:22Z
+th_0016,IMG_20240227_104810,blade,0,med,red-brown spots on concrete beside marker 14,claude-sonnet-5-5,2026-10-26T21:07:22Z
+th_0016,IMG_20240227_104810,bottle_glass,0,med,red-brown spots on concrete beside marker 14,claude-sonnet-5-5,2026-10-26T21:07:22Z
+th_0016,IMG_20240227_104810,paper_document,0,med,red-brown spots on concrete beside marker 14,claude-sonnet-5-5,2026-10-26T21:07:22Z
+th_0016,IMG_20240227_104810,red_brown_stain,1,med,red-brown spots on concrete beside marker 14,claude-sonnet-5-5,2026-10-26T21:07:22Z
+th_0016,IMG_20240227_104815,ammunition,0,high,mannequin legs; blue cover; keyboard; no listed objects,claude-sonnet-5-5,2026-10-26T21:07:23Z
+th_0016,IMG_20240227_104815,blade,0,high,mannequin legs; blue cover; keyboard; no listed objects,claude-sonnet-5-5,2026-10-26T21:07:23Z
+th_0016,IMG_20240227_104815,bottle_glass,0,high,mannequin legs; blue cover; keyboard; no listed objects,claude-sonnet-5-5,2026-10-26T21:07:23Z
+th_0016,IMG_20240227_104815,paper_document,0,high,mannequin legs; blue cover; keyboard; no listed objects,claude-sonnet-5-5,2026-10-26T21:07:23Z
+th_0016,IMG_20240227_104815,red_brown_stain,0,high,mannequin legs; blue cover; keyboard; no listed objects,claude-sonnet-5-5,2026-10-26T21:07:23Z
+th_0016,IMG_20240227_104822,ammunition,0,high,keyboard on floor near marker 21,claude-sonnet-5-5,2026-10-26T21:07:25Z
+th_0016,IMG_20240227_104822,blade,0,high,keyboard on floor near marker 21,claude-sonnet-5-5,2026-10-26T21:07:25Z
+th_0016,IMG_20240227_104822,bottle_glass,0,high,keyboard on floor near marker 21,claude-sonnet-5-5,2026-10-26T21:07:25Z
+th_0016,IMG_20240227_104822,paper_document,0,high,keyboard on floor near marker 21,claude-sonnet-5-5,2026-10-26T21:07:25Z
+th_0016,IMG_20240227_104822,red_brown_stain,0,high,keyboard on floor near marker 21,claude-sonnet-5-5,2026-10-26T21:07:25Z
+th_0016,IMG_20240227_104830,ammunition,0,low,blue cover on mannequin with cord; small red mark on ledge,claude-sonnet-5-5,2026-10-26T21:07:27Z
+th_0016,IMG_20240227_104830,blade,0,low,blue cover on mannequin with cord; small red mark on ledge,claude-sonnet-5-5,2026-10-26T21:07:27Z
+th_0016,IMG_20240227_104830,bottle_glass,0,low,blue cover on mannequin with cord; small red mark on ledge,claude-sonnet-5-5,2026-10-26T21:07:27Z
+th_0016,IMG_20240227_104830,paper_document,0,low,blue cover on mannequin with cord; small red mark on ledge,claude-sonnet-5-5,2026-10-26T21:07:27Z
+th_0016,IMG_20240227_104830,red_brown_stain,0,low,blue cover on mannequin with cord; small red mark on ledge,claude-sonnet-5-5,2026-10-26T21:07:27Z
+th_0017,IMG_20240227_105217,ammunition,0,med,table with tools: knives; axe; hatchet; sickle; cloth,claude-sonnet-5-5,2026-10-26T21:07:28Z
+th_0017,IMG_20240227_105217,blade,1,med,table with tools: knives; axe; hatchet; sickle; cloth,claude-sonnet-5-5,2026-10-26T21:07:28Z
+th_0017,IMG_20240227_105217,bottle_glass,0,med,table with tools: knives; axe; hatchet; sickle; cloth,claude-sonnet-5-5,2026-10-26T21:07:28Z
+th_0017,IMG_20240227_105217,paper_document,0,med,table with tools: knives; axe; hatchet; sickle; cloth,claude-sonnet-5-5,2026-10-26T21:07:28Z
+th_0017,IMG_20240227_105217,red_brown_stain,0,med,table with tools: knives; axe; hatchet; sickle; cloth,claude-sonnet-5-5,2026-10-26T21:07:28Z
+th_0017,IMG_20240227_105226,ammunition,0,med,table: knives; axe; sickle; hammer; red-brown marks on cloth,claude-sonnet-5-5,2026-10-26T21:07:30Z
+th_0017,IMG_20240227_105226,blade,1,med,table: knives; axe; sickle; hammer; red-brown marks on cloth,claude-sonnet-5-5,2026-10-26T21:07:30Z
+th_0017,IMG_20240227_105226,bottle_glass,0,med,table: knives; axe; sickle; hammer; red-brown marks on cloth,claude-sonnet-5-5,2026-10-26T21:07:30Z
+th_0017,IMG_20240227_105226,paper_document,0,med,table: knives; axe; sickle; hammer; red-brown marks on cloth,claude-sonnet-5-5,2026-10-26T21:07:30Z
+th_0017,IMG_20240227_105226,red_brown_stain,1,med,table: knives; axe; sickle; hammer; red-brown marks on cloth,claude-sonnet-5-5,2026-10-26T21:07:30Z
+th_0017,IMG_20240227_105236,ammunition,0,low,wide: table with tools; bin; bag; blade tools small,claude-sonnet-5-5,2026-10-26T21:07:32Z
+th_0017,IMG_20240227_105236,blade,1,low,wide: table with tools; bin; bag; blade tools small,claude-sonnet-5-5,2026-10-26T21:07:32Z
+th_0017,IMG_20240227_105236,bottle_glass,0,low,wide: table with tools; bin; bag; blade tools small,claude-sonnet-5-5,2026-10-26T21:07:32Z
+th_0017,IMG_20240227_105236,paper_document,0,low,wide: table with tools; bin; bag; blade tools small,claude-sonnet-5-5,2026-10-26T21:07:32Z
+th_0017,IMG_20240227_105236,red_brown_stain,0,low,wide: table with tools; bin; bag; blade tools small,claude-sonnet-5-5,2026-10-26T21:07:32Z
