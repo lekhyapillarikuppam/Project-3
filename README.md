@@ -13,13 +13,14 @@ All outputs are *candidate observations* for a human to verify. Nothing here say
 1. `docs/PHASE0_SETUP.md` for laptop setup (Windows).
 2. `SPEC.md` is the source of truth (spec-driven development).
 3. `TASKS.md` is the phase checklist.
+4. `docs/PHASE1_STEPS.md` is the current phase.
 
 ## Phases
 
 | Phase | What | Status |
 | --- | --- | --- |
 | 0 | Foundation and spec skeleton | done when the gate in `docs/PHASE0_SETUP.md` passes |
-| 1 | Feasibility gate | not started |
+| 1 | Feasibility gate | code written; run `docs/PHASE1_STEPS.md` |
 | 2 | Data and categories | not started |
 | 3 | Stage A: silver labels | not started |
 | 4 | Gold labels and detectors on dev | not started |

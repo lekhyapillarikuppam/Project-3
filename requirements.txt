@@ -10,5 +10,6 @@ tqdm>=4.66
 requests>=2.31
 remotezip>=0.12      # read single files out of a remote zip (Phase 1)
 pyyaml>=6.0
-openpyxl>=3.1        # read exhibit-list spreadsheets
+openpyxl>=3.1        # read exhibit-list spreadsheets (.xlsx)
+xlrd>=2.0.1          # read older .xls spreadsheets
 pytest>=8.0

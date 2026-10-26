@@ -9,6 +9,7 @@ RAW_DIR = DATA_DIR / "raw"               # downloads; never edit by hand
 META_DIR = REPO_ROOT / "data_meta"       # small CSVs; committed
 RESULTS_DIR = REPO_ROOT / "results"
 APP_DIR = REPO_ROOT / "app"
+FEASIBILITY_DIR = RESULTS_DIR / "feasibility"
 
 # Reproducibility -----------------------------------------------------------
 SEED = 42
@@ -43,3 +44,13 @@ MARKER_METHODS = ("color_shape", "owlv2")
 # Evaluation (SPEC 6) -----------------------------------------------------------
 N_BOOTSTRAP = 1000
 CI_LEVEL = 0.95
+
+# Dataset (SPEC 4.1) -------------------------------------------------------------
+# Part 1 = scenes th_0001-0020. Other parts live in other Zenodo records; pass --url for them.
+ZENODO_ZIP_URLS = {
+    1: "https://zenodo.org/records/17151982/files/th_0001-0020.zip?download=1",
+}
+
+# Feasibility gate pass marks (SPEC 8.2) ---------------------------------------
+FEAS_MIN_FINDER_HIT = 0.70
+FEAS_MIN_READ_ACCURACY = 0.60

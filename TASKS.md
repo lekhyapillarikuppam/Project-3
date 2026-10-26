@@ -13,14 +13,17 @@ Tick items as you go. One phase at a time; do not start a phase before the previ
 - [ ] Read `SPEC.md` sections 1-3 and understand each data file
 - **Gate:** all boxes ticked
 
-## Phase 1: Feasibility gate
+## Phase 1: Feasibility gate (see `docs/PHASE1_STEPS.md`)
 
-- [ ] Test pulling only `img/` and `IPC/IPC_ENG/` from the remote Zenodo zip
-- [ ] Pick 3-5 scenes that have photos and markers, using the description sheets
-- [ ] Open about 20 photos; note marker look, photo quality, mannequins
-- [ ] Prototype the colour + shape marker finder; measure hit rate on close-ups (target 70%)
-- [ ] Prototype OCR + constrained read; measure accuracy (target 60%)
-- [ ] Decide: continue, OWLv2 for markers, or scene-level fallback; log it in `SPEC.md`
+- [ ] Add the Phase 1 files; `pytest` passes (44 passed after installing `requirements-ml.txt`)
+- [ ] Demo scene (`make_demo_scene.py`) reads look right
+- [ ] `fetch_scenes.py list` output pasted in chat; real layout confirmed in `SPEC.md` 4.1
+- [ ] Pick 5 scenes (4 with markers, 1 without) from the description sheet; download them
+- [ ] `inspect_exhibits.py` confirms the marker and description columns
+- [ ] `run_marker_probe.py` run on the 5 scenes
+- [ ] `truth.csv` filled by hand for about 40 photos (from the original photos)
+- [ ] `feasibility_report.py` run; verdict pasted in chat
+- [ ] Decision logged in `SPEC.md` section 9 (continue, tune, OWLv2 markers, or scene-level fallback)
 - [ ] Confirm license terms; decide how mannequin photos are shown
 
 ## Phase 2: Data and categories
