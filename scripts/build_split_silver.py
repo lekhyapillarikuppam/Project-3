@@ -35,8 +35,7 @@ def build_scene_split(photos: pd.DataFrame, exhibits: pd.DataFrame) -> pd.DataFr
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--meta", default=str(config.META_DIR))
-    ap.add_argument("--categories", nargs="+", default=list(config.CANDIDATE_CATEGORIES),
-                    help="categories to put in silver (default: all candidates)")
+    ap.add_argument("--candidates-out", default=str(config.RESULTS_DIR / "phase2" / "silver_candidates.csv"))
     args = ap.parse_args()
     meta = Path(args.meta)
 
@@ -47,17 +46,31 @@ def main():
     validate(scene_split, "scene_split")
     scene_split.to_csv(meta / "scene_split.csv", index=False)
 
-    silver = build_silver(photos, markers, cats, args.categories)
+    # all candidates first: this table is where the final categories come from (D-020)
+    candidates = build_silver(photos, markers, cats, list(config.CANDIDATE_CATEGORIES))
+    Path(args.candidates_out).parent.mkdir(parents=True, exist_ok=True)
+    candidates.to_csv(args.candidates_out, index=False)
+    silver = candidates[candidates.category.isin(config.FINAL_CATEGORIES)].reset_index(drop=True)
+    validate(silver, "silver")
     silver.to_csv(meta / "silver.csv", index=False)
 
     split_of = dict(zip(scene_split.scene_id, scene_split.split))
     n_scenes = scene_split.split.value_counts().to_dict()
     print(f"scene_split.csv: {len(scene_split)} scenes {n_scenes}; {int((scene_split.has_markers == 0).sum())} without markers")
-    print(f"silver.csv: {len(silver)} rows = {len(photos)} photos x {len(args.categories)} categories\n")
+    print(f"silver.csv: {len(silver)} rows = {len(photos)} photos x {len(config.FINAL_CATEGORIES)} final categories "
+          f"(all-candidate version: {args.candidates_out})\n")
 
-    print("Positive photos and scenes per category (silver), and the inclusion rule on test "
+    print("Positive photos and scenes per candidate category (silver), and the inclusion rule on test "
           f"({config.MIN_POSITIVE_PHOTOS} photos, {config.MIN_POSITIVE_SCENES} scenes):")
-    print(category_counts(silver, scene_split).to_string(index=False))
+    table = category_counts(candidates, scene_split)
+    print(table.to_string(index=False))
+    passing = tuple(c for c in config.CANDIDATE_CATEGORIES if c in set(table[table.passes_test].category))
+    same = passing == tuple(c for c in config.CANDIDATE_CATEGORIES if c in config.FINAL_CATEGORIES)
+    print(f"\nPassing the rule: {list(passing)}")
+    print("FINAL_CATEGORIES in config.py " + ("matches the table." if same else
+          "DOES NOT MATCH the table: update config.FINAL_CATEGORIES and log it (D-020)."))
+    print("Positive rows per final category in silver.csv:",
+          silver[silver.present == 1].category.value_counts().reindex(list(config.FINAL_CATEGORIES)).to_dict())
 
     unc = uncertain_photos(markers)
     p = photos.assign(split=photos.scene_id.map(split_of),

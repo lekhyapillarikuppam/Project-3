@@ -39,6 +39,16 @@ CANDIDATE_CATEGORIES = (
 )
 OTHER = "other"
 
+# Final categories (SPEC D-020): the candidates that pass the inclusion rule on the silver test split.
+# Chosen once, mechanically, by scripts/build_split_silver.py. The others are merged into `other` for metrics.
+FINAL_CATEGORIES = (
+    "ammunition",
+    "blade",
+    "bottle_glass",
+    "paper_document",
+    "red_brown_stain",
+)
+
 # Allowed values (SPEC 2) -------------------------------------------------------
 PHOTO_TYPES = ("overview", "mid", "close", "unknown")
 CATEGORY_SOURCES = ("rule", "llm", "manual")

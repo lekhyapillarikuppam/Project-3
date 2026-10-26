@@ -18,16 +18,16 @@ Phases were merged on 2026-10-26 (SPEC D-016).
 
 ## Phase 2: Data, categories, split, photo types, markers, silver
 
-- [ ] Merge Phase 2 spec into `SPEC.md` (4.5, 4.6, D-015 to D-017)
-- [ ] Tests first: `tests/test_dataprep.py` (AT-P-1 to AT-P-5), `tests/test_silver.py` (AT-S-1 to AT-S-6)
-- [ ] Download scenes th_0002 to th_0020; write `exhibits.csv`
-- [ ] Run the marker pipeline on every photo; write `markers.csv` (resumable)
-- [ ] `category_rules.csv` v1; `unmatched.csv`; confirm categories by hand
-- [ ] Exhibit-level category counts; choose final categories (3.2, never re-draw the seed)
-- [ ] `scene_split.csv`, `photos.csv` with photo types (check 20 photos by eye)
-- [ ] `exhibit_categories.csv` and `silver.csv`
-- [ ] List the other parts of the dataset (th_0021 onward)
-- **Gate:** all tests pass; at least 4 categories pass the inclusion rule or a logged decision says what to do instead
+- [x] Merge Phase 2 spec into `SPEC.md` (4.5, 4.6, D-015 to D-017)
+- [x] Tests first: `tests/test_dataprep.py` (AT-P-1 to AT-P-5), `tests/test_silver.py` (AT-S-1 to AT-S-6)
+- [x] Download all four parts (th_0001 to th_0080, 66 scenes with photos); write `exhibits.csv`
+- [x] Run the marker pipeline on every photo; write `markers.csv` (resumable)
+- [x] `category_rules.csv` v1; `unmatched.csv`; confirm categories by hand
+- [x] Exhibit-level category counts; final categories chosen mechanically (D-020: ammunition, blade, bottle_glass, paper_document, red_brown_stain); seed never re-drawn
+- [x] `scene_split.csv`, `photos.csv` with photo types (20 photos checked by eye: 2 wrong, 3 borderline)
+- [x] `exhibit_categories.csv` (all rows confirmed) and `silver.csv` (final categories only)
+- [x] Other parts of the dataset found, licences read (CC BY-NC-SA 4.0), downloaded (D-019)
+- **Gate (passed):** all tests pass; 5 categories pass the inclusion rule; D-020 and D-021 logged
 
 ## Phase 3: Gold labels, models, freeze, test evaluation
 

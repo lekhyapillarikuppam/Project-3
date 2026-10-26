@@ -105,7 +105,7 @@ from that file, so the model never has to be re-run.
 
 ### 3.1 Candidate categories
 
-Final 6-8 are chosen in Phase 2 after counting the exhibit lists.
+The final categories are chosen in Phase 2 by the inclusion rule below (decision D-020); the table lists the candidates.
 
 | Category (`category` value) | Typical exhibit wording |
 | --- | --- |
@@ -122,6 +122,8 @@ Final 6-8 are chosen in Phase 2 after counting the exhibit lists.
 
 A category is kept only if the **test** split has at least **15 positive photos
 from at least 6 scenes** (decision D-003). Otherwise it is merged into `other`.
+
+The rule is applied mechanically to the silver table of candidate categories (`build_split_silver.py`), once, and the result is `FINAL_CATEGORIES` in `config.py` (D-020). Categories that fail are not dropped from the data: their exhibits keep their candidate label in `exhibit_categories.csv`, but they are merged into `other` for all per-category metrics. The split seed is never re-drawn to make a category pass (D-017). The silver counts are an estimate; Phase 3 gold labels on the test split may move a category across the line, and then D-020 is revisited with a logged decision.
 
 ### 3.3 Other
 
@@ -316,6 +318,9 @@ Silver = the answer key built automatically from markers and exhibit lists.
   that has no marker, markers the finder or reader missed (read accuracy was 0.65 on the gate sample,
   so expect high precision and moderate recall), and exhibits whose marker is visible but the object is
   out of frame. Silver is **not** truth; it is an estimate to be checked against hand-corrected gold.
+- R-S-7. `silver.csv` holds the final categories only (`config.FINAL_CATEGORIES`), as a full photo x category matrix
+  (R-S-3). The same table for all candidate categories is `results/phase2/silver_candidates.csv` (not committed); it is
+  the basis of the inclusion table in D-020.
 
 Acceptance tests (`tests/test_silver.py`):
 
@@ -326,8 +331,6 @@ Acceptance tests (`tests/test_silver.py`):
 - AT-S-4. The output has exactly (photos x final categories) rows and passes `validate(df, "silver")`.
 - AT-S-5. A counted-looking marker whose number is not in the scene's list is ignored.
 - AT-S-6. A photo with no markers has all categories 0 and is not uncertain; a photo with one rejected box is uncertain.
-
-## Add as section 4.6
 
 ### 4.6 Data preparation (Phase 2)
 
@@ -466,6 +469,8 @@ tried without any download.
 | D-017 | 2026-10-26 | Split seed is never re-drawn to make a category pass the inclusion rule | Protects the evaluation from seed shopping |
 | D-018 | 2026-10-26 | Category rules are multi-label; `other` rules are exclusive | First-match-wins lost the stain on "knife with reddish trace" (th_0003, th_0009); the user asked for multi-label. Exclusive `other` keeps "glass table" and bodies out of `bottle_glass` |
 | D-019 | 2026-10-26 | Use all four parts of the FFS dataset on Zenodo (V 0.1, all CC BY-NC-SA 4.0, access open): part 1 record 17151982 `th_0001-0020.zip`, part 2 record 17164106 `th_0021-0040.zip` (42.3 GB), part 3 record 17164834 `th_0041-0060.zip` (40.1 GB), part 4 record 17165128 `th_0061_0080.zip` (47.5 GB). Only photos, English exhibit lists and description sheets are fetched, with `fetch_scenes.py --part N`. The dataset pages say newer versions exist; they were **not** used. Part 3 has no scenes 45, 47, 49, 51, 53; part 4's top folder is `th_0061_0080` | The merged data gives more scenes per category (D-003 inclusion rule needs 6 test scenes). Licences read from the Zenodo API on the same day; same share-alike terms as part 1, so the project keeps CC BY-NC-SA 4.0 for derived data |
+| D-020 | 2026-10-26 | **Final categories** (mechanical, rule of 3.2 on the silver test split, seed 42: 26 dev and 40 test scenes, 350 dev and 545 test photos): `ammunition`, `blade`, `bottle_glass`, `paper_document`, `red_brown_stain`. Merged into `other` for per-category metrics: `firearm`, `footwear`, `phone_electronics` | Test positives (photos / scenes): ammunition 43 / 7, blade 19 / 6, bottle_glass 59 / 13, paper_document 52 / 14, red_brown_stain 87 / 13 pass; firearm 20 / 4, footwear 10 / 4, phone_electronics 13 / 6 fail (15 photos and 6 scenes needed). Dev positives (photos / scenes): ammunition 45 / 5, blade 8 / 3, bottle_glass 46 / 7, firearm 25 / 3, footwear 5 / 2, paper_document 32 / 9, phone_electronics 13 / 5, red_brown_stain 40 / 7. Exhibit-level counts (exhibits / scenes, rule and confirmed rows, 531 exhibits in 75 scenes): blade 16 / 13, firearm 10 / 9, ammunition 38 / 17, bottle_glass 49 / 26, phone_electronics 15 / 14, paper_document 35 / 28, footwear 9 / 8, red_brown_stain 43 / 22, other 321 / 74. `blade` passes only just (6 scenes). Five categories pass, so the "fewer than 4" options of R-P-3 are not needed |
+| D-021 | 2026-10-26 | No third finder tuning round; the known gaps are accepted and measured instead | Known gaps: th_0005 markers have body V 22 to 50, below `v_min` 55; th_0008 has photos with a blue colour cast (marker body H about 130, S about 67); many dark photos give `unknown` photo type. Silver recall is therefore expected to be low in those scenes. Gold correction of every test photo (Phase 3) fixes the test side; dev is not corrected. No scene with photos is marker-free in parts 1 to 4 (the sheet rows with zero markers also have zero photographs: th_0039, th_0041, th_0045, th_0047, th_0049, th_0051, th_0053, th_0080), so the false-positive check uses photos in which no marker is visible, plus the marker-masking experiment |
 
 ## 10. Change log
 
@@ -480,3 +485,4 @@ tried without any download.
 | 2026-10-26 | 4.5, 4.6, 9 | Phase 2 spec merged: silver labels (R-S-1 to R-S-6, AT-S-1 to AT-S-6), data preparation (R-P-1 to R-P-7, AT-P-1 to AT-P-5), D-015 to D-017; phases renumbered (D-016) |
 | 2026-10-26 | 4.6, 9 | Category rules multi-label with exclusive `other` rules (R-P-2, AT-P-6, D-018); llm suggestions confirmed except th_0002 #16 (manual, other) |
 | 2026-10-26 | 4.1, 9 | Parts 2-4 of the dataset added (config URLs, `fetch_scenes.py --part` after the command, D-019) |
+| 2026-10-26 | 3.1, 3.2, 4.5, 9 | Phase 2 finished: final categories chosen mechanically (D-020, `config.FINAL_CATEGORIES`), `silver.csv` limited to them (R-S-7), no third tuning round (D-021); stray heading from the merged text removed |
