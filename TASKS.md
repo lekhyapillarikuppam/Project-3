@@ -38,9 +38,9 @@ Part 1 (code, spec, tools)
 - [ ] Stage B packaging, Kaggle script, import (AT-B-1 to AT-B-6)
 
 Part 2 (your labelling and runs)
-- [ ] Label all 545 test photos blind (gold pass 1); `data_meta/gold.csv` written
-- [ ] Second blind pass on 55 photos at least a day later; kappa per category (R-G-6)
-- [ ] Silver vs gold: precision, recall, F1, kappa with scene-cluster bootstrap intervals, slices (R-G-7)
+- [ ] Gold is AI-labelled, human-checked (D-026): AI labels all 545 test photos (`data_meta/gold_ai.csv`)
+- [ ] You review the AI-vs-silver disagreements and low-confidence pairs, blind (R-G-5), and audit 60 random photos (R-G-6); `data_meta/gold.csv` written
+- [ ] Silver vs gold, on all gold rows and on the audit photos only (`--human-only`): precision, recall, F1, kappa with scene-cluster bootstrap intervals, slices (R-G-7, R-G-12)
 - [ ] Stage B on dev (Kaggle): CLIP and OWLv2 raw files; import
 - [ ] Tune prompts, tiling choice and two thresholds per category on dev; always-present baseline; box merge
 - [ ] Freeze checklist (6.1) committed; tag `protocol-v1`; fill `SPEC.md` section 6

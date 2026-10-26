@@ -48,6 +48,17 @@ def bootstrap_stats(per_scene: np.ndarray, idx: np.ndarray) -> dict:
     return metrics(sums[:, 0], sums[:, 1], sums[:, 2], sums[:, 3])
 
 
+def human_audit_rows(gold: pd.DataFrame, sources: pd.DataFrame) -> pd.DataFrame:
+    """Gold rows whose label is the human's on a random audit photo (R-G-12 b): the unbiased subset."""
+    keep = sources.loc[sources["source"] == "human_audit", KEYS + ["category"]]
+    return gold.merge(keep, on=KEYS + ["category"], how="inner")
+
+
+def mode_name(human_only: bool) -> str:
+    """Which comparison a run made, for the printout (R-G-12)."""
+    return "audit photos only (human labels, random sample)" if human_only else "all gold rows (AI-labelled, human-checked)"
+
+
 def paired_labels(gold: pd.DataFrame, silver: pd.DataFrame, scene_split: pd.DataFrame,
                   photos: pd.DataFrame, markers: pd.DataFrame) -> pd.DataFrame:
     """One row per test photo and category: gold, silver and the three slice labels (R-G-7)."""

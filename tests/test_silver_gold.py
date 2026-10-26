@@ -107,3 +107,20 @@ def test_gold_prevalence_and_overall_numbers():
     # test photos a..l: gold blade = 1,0,1,1,0,0,1,0,0,0,1,1 -> 6 of 12
     assert row.gold_prevalence == pytest.approx(0.5)
     assert (row.TP, row.FP, row.FN, row.TN) == (4, 2, 2, 4)
+
+
+def test_at_g_17_human_only_uses_audit_photos_only():
+    gold_df, silver_df, split, photos, markers = tables()
+    # photos a, b, c, d, e, f (scenes s1, s2) are audit photos; the rest were decided by the AI or in review
+    audit = {"a", "b", "c", "d", "e", "f"}
+    src = gold_df[silver_gold.KEYS + ["category"]].copy()
+    src["source"] = ["human_audit" if p in audit else "ai" for p in src.photo_id]
+    kept = silver_gold.human_audit_rows(gold_df, src)
+    assert set(kept.photo_id) == audit and len(kept) == 12                  # 6 photos x 2 categories
+    t = silver_gold.silver_vs_gold(kept, silver_df, split, photos, markers, n_boot=20, seed=1)
+    row = t[(t.slice == "overall") & (t.category == "blade")].iloc[0]
+    # blade gold a..f = 1,0,1,1,0,0 and silver = 1,0,0,1,1,0 -> TP 2, FP 1, FN 1, TN 2
+    assert (row.TP, row.FP, row.FN, row.TN) == (2, 1, 1, 2)
+    assert row.n_photos == 6
+    assert silver_gold.mode_name(True) != silver_gold.mode_name(False)
+    assert "audit" in silver_gold.mode_name(True)

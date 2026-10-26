@@ -40,3 +40,4 @@ results/gold/*export*.csv
 results/stage_b/
 results/clip_scores_*.csv
 results/owlv2_raw_*.csv
+results/gold/ai_views/

@@ -383,23 +383,32 @@ Acceptance tests (`tests/test_dataprep.py`):
 Gold = the answer key the project trusts: the same photo x category matrix as silver, filled by a person
 looking at the photo.
 
-- R-G-1. Gold is made for **all test photos** (545) and every final category. Dev photos get no gold.
-- R-G-2. **Blind labelling.** The labelling page never shows silver. The exhibit list of the scene is hidden
-  and opens only on request (key L), so the labeller can peek when unsure but is not led by it. Marker
-  numbers on the photo may be read like any other part of the photo.
-- R-G-3. Definition. `present = 1` if at least one object of the category is clearly recognisable in the
-  photo, even if small or partly hidden, whether or not it has a marker or is on the exhibit list.
-  ammunition: cartridge cases, bullets, shotgun shells. blade: knife, cutter, scissors, axe, saw, razor.
-  bottle_glass: bottles, drinking glasses, vases, glass containers, broken glass. paper_document: sheets,
-  notebooks, books, newspapers, envelopes, letters, ID. red_brown_stain: a red-brown stain or trace on
+- R-G-1. Scope. Gold is made for all test photos (545) and every final category; dev photos get no gold.
+  Gold is **AI-labelled, human-checked**. Every result table, figure, the report and the web app say so in
+  those words. It is never called "hand-labelled" or "human gold" as a whole.
+- R-G-2. Independence of the AI labeller. It sees only the photo (images from `scripts/ai_label_view.py`:
+  the full photo, and zoomed quarter tiles when needed). It must not open silver, `markers.csv`, exhibit
+  lists, exhibit categories, any gold file or any other label file. It may read a marker number printed in
+  the photo like any other text in the photo. The rule is followed by instruction and is not technically
+  enforced; this is stated as a limitation. Each row records the labeller's exact model id.
+- R-G-3. Definition (the same for the AI and the human). `present = 1` if at least one object of the category
+  is clearly recognisable in the photo, even small or partly hidden, whether or not it has a marker or is on
+  the exhibit list. ammunition: cartridge cases, bullets, shotgun shells. blade: knife, cutter, scissors, axe,
+  saw, razor. bottle_glass: bottles, drinking glasses, vases, glass containers, broken glass. paper_document:
+  sheets, notebooks, books, newspapers, envelopes, letters, ID. red_brown_stain: a red-brown stain or trace on
   any surface or object (never called blood). Not recognisable even when zoomed: 0.
-- R-G-4. Completeness. `data_meta/gold.csv` is written only when every test photo has a label for every
-  final category (`scripts/import_gold.py`; `--allow-partial` is for progress checks and writes nothing with `--dry-run`).
-- R-G-5. `corrected = 1` when gold differs from silver for that photo and category. It is computed by the
-  import script, not by the labelling page.
-- R-G-6. Reliability. One annotator (the author). A second blind pass over 55 random test photos
-  (`make_gold_tool.py --pass2 55`), done at least a day after pass 1, gives per-category agreement and
-  Cohen's kappa (`import_gold.py --agreement`). A category with kappa below 0.70 is flagged in the results.
+- R-G-4. AI output: `data_meta/gold_ai.csv` with `scene_id, photo_id, category, present, confidence, note, labeller,
+  labelled_at`. `confidence` is `low`, `med` or `high` (low = unsure, or the object would be tiny, dark or
+  hidden). One call of `scripts/ai_label_write.py` writes all categories of one photo. The file must cover all
+  test photos before the human check starts.
+- R-G-5. Review set (human decides, blind). Every photo x category pair where the AI label differs from silver,
+  or where the AI confidence is `low`. Saved in `data_meta/gold_review_pairs.csv` with the reason
+  (`disagree` or `low_conf`). The human decides these pairs on a page that shows neither the AI label nor
+  silver (`make_gold_tool.py --review`).
+- R-G-6. Audit set (human labels everything, blind). 60 random photos from those with no review pair (AI and
+  silver agree and the AI is confident), drawn once with seed `config.SEED` and saved in
+  `data_meta/gold_audit_photos.csv`. The human labels all categories of these photos
+  (`make_gold_tool.py --audit 60`). This estimates how often an "agreed" label is still wrong.
 - R-G-7. Silver-vs-gold report (`scripts/silver_vs_gold.py`, results in `results/silver_vs_gold.csv`):
   per category, silver against gold on the test split: TP, FP, FN, TN, precision, recall, F1 and Cohen's
   kappa, each with a 95% interval from a **scene-level cluster bootstrap** (resample scenes with replacement,
@@ -409,16 +418,39 @@ looking at the photo.
 - R-G-8. Reading the result: silver precision shows how often a marker-based label is wrong; silver recall
   shows what the markers miss (objects without markers, unread markers). This is the project's answer to
   "how trustworthy is the answer key".
+- R-G-9. Final gold. Where the human decided (review pair or audit photo), the human label is used; everywhere
+  else the AI label. `corrected = 1` when gold differs from silver. `data_meta/gold_sources.csv` records the source
+  of every row (`human_review`, `human_audit` or `ai`) with the AI label, AI confidence, silver label and human label.
+- R-G-10. Completeness. `data_meta/gold.csv` is written only when every review pair and every audit photo has a
+  human decision (`scripts/import_gold.py --merge <review.csv> <audit.csv>`; `--allow-partial --dry-run` is for progress).
+- R-G-11. Always reported: the human-decided share of gold rows; on the audit rows, AI-vs-human agreement and
+  kappa per category (an unbiased check, because the audit photos are random); on the review rows, how often the
+  human sided with the AI and with silver.
+- R-G-12. Silver-vs-gold (R-G-7) is reported twice: (a) on all gold rows, and (b) on the audit photos only
+  (`--human-only`), where every label is the human's and the sample is random, so (b) is unbiased but has wide
+  intervals. Rows decided as `ai` agree with silver by construction of the review set, so (a) can overstate how
+  good silver is; (b) is the check on that.
+- R-G-13. Limitations written into the report: one human checker; the AI labeller can miss tiny or dark objects
+  and the audit measures how often; labels the human did not see are the AI's.
+- R-G-14. The older all-by-hand modes of `make_gold_tool.py` (no flag, `--pass2`) stay available but are not part
+  of the main method.
 
 Acceptance tests:
 
-- AT-G-1 to AT-G-6: `tests/test_gold.py` (tool data has test photos only and no silver; pass 2 sample is
+- AT-G-1 to AT-G-6 (all-by-hand mode, R-G-14): `tests/test_gold.py` (tool data has test photos only and no silver; pass 2 sample is
   deterministic; import marks corrections; incomplete labels are refused; kappa; intra-rater agreement).
 - AT-G-7. Silver-vs-gold on a hand-computed example (for instance 10 photos, one category) gives the exact
   TP, FP, FN, TN, precision, recall, F1 and kappa.
 - AT-G-8. The scene bootstrap is deterministic for a seed and resamples whole scenes (a photo never
   appears without its scene-mates); with every photo in one scene per resample the interval collapses sensibly.
 - AT-G-9. Slice rows add up to the overall counts.
+- AT-G-10 to AT-G-16: `tests/test_ai_gold.py`. AT-G-10 review pairs are disagreements and low confidence;
+  AT-G-11 audit photos come only from fully agreed photos and are deterministic; AT-G-12 AI label upsert
+  replaces a photo and checks its input; AT-G-13 the review page shows only the listed categories and no AI
+  labels; AT-G-14 merge: human wins and sources are recorded; AT-G-15 merge refuses missing human decisions
+  unless partial; AT-G-16 check statistics measure AI error on the audit and who was right in review.
+- AT-G-17. `silver_vs_gold.py --human-only` uses only the audit photos (rows whose source is `human_audit`
+  in `data_meta/gold_sources.csv`); its counts match a hand example; the script prints which mode it ran in.
 
 ## 5. Stage B: detectors
 
@@ -551,6 +583,9 @@ tried without any download.
 | D-023 | 2026-10-27 | Gold labelling is blind (silver hidden, exhibit list on request), one annotator, with a blind second pass on 55 photos | Avoids anchoring on silver; reliability measured with kappa |
 | D-024 | 2026-10-27 | CLIP baseline sees the whole photo padded to a square; OWLv2 sees the photo plus 2x2 tiles; tiling decided on dev from the saved tile column | Fair baseline; small objects need more pixels |
 | D-025 | 2026-10-27 | Models: CLIP ViT-L/14 and OWLv2 base ensemble; photos shrunk to 2400 px for upload | Fits a free Kaggle GPU; boxes mapped back to original pixels |
+| D-026 | 2026-10-27 | Gold labels are AI-labelled and human-checked (replaces the all-by-hand plan of D-023 for the main method) | The author cannot hand-label 545 photos in time; the check design keeps an honest, measured human role |
+| D-027 | 2026-10-27 | Human check = blind decisions on all AI-vs-silver disagreements and low-confidence labels, plus a blind full labelling of 60 random fully-agreed photos | Disagreements are where labels are least certain; the random audit measures the remaining error |
+| D-028 | 2026-10-27 | Label provenance is kept in `gold_sources.csv`, not in the `gold` contract | Keeps the contract unchanged; every row stays traceable |
 
 ## 10. Change log
 
@@ -567,3 +602,4 @@ tried without any download.
 | 2026-10-26 | 4.1, 9 | Parts 2-4 of the dataset added (config URLs, `fetch_scenes.py --part` after the command, D-019) |
 | 2026-10-26 | 3.1, 3.2, 4.5, 9 | Phase 2 finished: final categories chosen mechanically (D-020, `config.FINAL_CATEGORIES`), `silver.csv` limited to them (R-S-7), no third tuning round (D-021); stray heading from the merged text removed |
 | 2026-10-27 | 2, 4.7, 5, 6.1, 9 | Phase 3 spec merged: gold labels (R-G-1 to R-G-8, AT-G-1 to AT-G-9), Stage B (R-B-1 to R-B-7, AT-B-1 to AT-B-6), freeze checklist, per-split Stage B files, D-022 to D-025 |
+| 2026-10-27 | 4.7, 9 | Phase 3b: gold labels are AI-labelled and human-checked; R-G-1 to R-G-6 replaced, R-G-9 to R-G-14 added, AT-G-10 to AT-G-17, D-026 to D-028 |
