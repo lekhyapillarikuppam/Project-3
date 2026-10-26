@@ -60,9 +60,9 @@ python scripts/run_marker_probe.py --scenes th_9999
 ```
 
 Open `results\feasibility\overlays\th_9999\` and look at the images. Each box shows
-`final number (raw OCR read)`. The photos contain 7; 3 and 12; 18; nothing; 9.
-Expected: 7, 3, 12 and 9 are read correctly. The "18" is not in the demo exhibit list, so it
-should snap to 16 or be rejected. That is the constrained read working, not a bug.
+`final number (raw OCR read)`. The photos contain 14; 32 and 11; 35; nothing; 7.
+Expected: 14, 32, 11 and 7 are read correctly. The "35" is not in the demo exhibit list, so it
+should snap to 36 or be rejected (never become a wrong confident number). That is the constrained read working.
 
 If boxes are missing or the reads are wrong, tell me before going on.
 

@@ -1,9 +1,11 @@
-"""Acceptance tests AT-A3-1 to AT-A3-6 (SPEC 4.4)."""
+"""Acceptance tests AT-A3-1 to AT-A3-10 (SPEC 4.4)."""
 
 import numpy as np
 import pytest
 
-from ffs.ocr import constrained_read, preprocess_crop
+import cv2
+
+from ffs.ocr import constrained_read, pick_best, preprocess_crop
 from ffs.synthetic import cluttered_background, draw_marker
 
 
@@ -29,6 +31,40 @@ def test_at_a3_5_empty_read_is_rejected():
 
 def test_at_a3_6_extra_digit_snaps_to_shorter_number():
     assert constrained_read("123", 0.8, {12, 7}) == (12, "snapped")
+
+
+def test_at_a3_7_one_digit_read_is_never_snapped():
+    assert constrained_read("1", 1.0, {3, 7, 9, 12, 16}) == (None, "rejected")
+
+
+def test_at_a3_8_one_digit_exact_match_is_accepted():
+    assert constrained_read("1", 1.0, {1, 7}) == (1, "accepted")
+
+
+def test_at_a3_9_better_status_wins_over_confidence():
+    valid = {12, 16}
+    reads = [("1", 1.0), ("12", 0.8)]
+    assert pick_best(reads, valid) == {"raw": "12", "conf": 0.8, "marker_no": 12, "status": "accepted"}
+
+
+def test_at_a3_10_two_digit_marker_keeps_both_digits():
+    img = cluttered_background(500, 500)
+    box = draw_marker(img, 100, 100, 150, 190, "12")
+    crop = img[box.y:box.y + box.h, box.x:box.x + box.w]
+    for wide in (False, True):
+        out = preprocess_crop(crop, wide=wide)
+        n, _ = cv2.connectedComponents((out == 0).astype(np.uint8))
+        assert n - 1 == 2, f"wide={wide}: expected 2 digit blobs"
+
+
+def test_at_a3_11_digits_fill_the_preprocessed_image():
+    img = cluttered_background(500, 500)
+    box = draw_marker(img, 100, 100, 150, 190, "7")
+    crop = img[box.y:box.y + box.h, box.x:box.x + box.w]
+    out = preprocess_crop(crop)[16:-16, 16:-16]          # drop the white border
+    rows = np.where((out == 0).any(axis=1))[0]
+    assert (rows.max() - rows.min() + 1) / out.shape[0] >= 0.4
+    assert rows.max() - rows.min() + 1 >= 80
 
 
 def test_unknown_number_far_from_everything_is_rejected():

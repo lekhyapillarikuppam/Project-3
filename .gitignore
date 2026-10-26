@@ -23,3 +23,7 @@ results/feasibility/overlays/
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Phase 1 debug and demo output
+debug_marker_*.png
+results/feasibility/probe_*.csv

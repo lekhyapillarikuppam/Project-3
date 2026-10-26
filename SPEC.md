@@ -167,6 +167,12 @@ Facts that follow from the listing:
   shooting order. Phase 2 uses this to tag photo types by the photo protocol
   (overview shots first, then close-ups).
 - Each exhibit list is a separate `.xlsx`; the scene id is in the file name (`IPC_Th_0002`).
+- From the description sheet (read in Phase 1): every scene th_0002 to th_0020 has between 3 and 14
+  markers, all interiors. **Part 1 has no marker-free scene.** Marker-free photos exist inside scenes;
+  marker-free scenes (for false-positive measurement) must be looked for in parts 2-4 in Phase 2.
+- Marker numbers are mostly **two-digit** (11-21, 30-35, 60, 69, 72, 90) and the same numbers recur
+  across scenes. A few lists repeat a number (th_0014: 15 twice, th_0015: 13 twice). Keep every
+  exhibit row; a repeated number maps one marker to several exhibits.
 
 How code recognises files (case-insensitive, by path component names):
 
@@ -231,7 +237,11 @@ Acceptance tests (synthetic images, `tests/test_markers.py`):
 - R-A3-1. Crop = box grown by 10% on each side, clipped to the image.
 - R-A3-2. Preprocessing: keep the dark ink pixels inside the yellow region,
   render them as black digits on white, scale so the height is at least 96 px,
-  add a white border.
+  add a white border. Two variants are made: **tight** (the yellow region as found) and
+  **wide** (the region grown by 12% of the crop size, so digits touching the marker's edge
+  are not lost). Then crop to the bounding box of all ink plus a margin of 30% of the ink
+  height, so the digits fill the image whatever the marker size (decision D-012), and scale so
+  the ink is at least 80 px tall.
 - R-A3-3. OCR is EasyOCR restricted to the digits `0123456789`. Pieces are joined
   left to right. `ocr_conf` is the mean piece confidence. The joined text is kept as `raw_ocr`.
 - R-A3-4. Constrained read, given `valid` = the marker numbers of that scene's exhibit list:
@@ -242,6 +252,11 @@ Acceptance tests (synthetic images, `tests/test_markers.py`):
   3. If several exist, prefer the one whose changed digit is a visually confusable
      pair (0-8, 1-7, 3-8, 5-6, 6-8, 4-9). If still not unique: `rejected`.
   4. Anything else, including empty text: status `rejected`, `marker_no` empty.
+- R-A3-5. A **one-digit** read is accepted only by exact match (rule 1). It is never
+  snapped, because a single digit is within one edit of nearly every number on the
+  list (decision D-010).
+- R-A3-6. OCR runs on both preprocessing variants; the result with the best status
+  (accepted, then snapped, then rejected) wins, ties broken by confidence (decision D-011).
 
 Acceptance tests (`tests/test_ocr.py`):
 
@@ -251,6 +266,12 @@ Acceptance tests (`tests/test_ocr.py`):
 - AT-A3-4. raw "18", conf 0.8, valid {16, 19}: snapped 16 (8-6 is confusable, 8-9 is not).
 - AT-A3-5. raw "", valid {1}: rejected.
 - AT-A3-6. raw "123", conf 0.8, valid {12, 7}: snapped 12.
+- AT-A3-7. raw "1", conf 1.0, valid {3, 7, 9, 12, 16}: rejected (R-A3-5; found in the Phase 1 demo).
+- AT-A3-8. raw "1", valid {1, 7}: accepted 1.
+- AT-A3-9. Two reads ("1" conf 1.0 and "12" conf 0.8), valid {12, 16}: the "12" read wins (R-A3-6).
+- AT-A3-11. After preprocessing, the ink bounding box is at least 40% of the image height
+  (before the white border), for a small digit on a large marker.
+- AT-A3-10. Synthetic two-digit markers keep both digits after preprocessing (two ink components).
 
 ### 4.5 Silver and gold labels  (Phase 3 and 4)
 
@@ -289,7 +310,7 @@ enough marker numbers to build silver labels?
 
 1. `python scripts/fetch_scenes.py list` prints the layout of the remote zip. Confirm section 4.1.
 2. `python scripts/fetch_scenes.py pull --scenes ...` downloads photos and English
-   exhibit lists for 3-5 scenes (include at least one marker-free scene).
+   exhibit lists for 3-5 scenes (part 1 has no marker-free scene; the truth sample includes marker-free photos).
 3. `python scripts/run_marker_probe.py --scenes ...` finds markers, reads numbers,
    writes `results/feasibility/probe_markers.csv`, `probe_photos.csv`, annotated
    overlay images, and a blank `truth.csv` (never overwritten, so your labels are safe).
@@ -338,6 +359,9 @@ tried without any download.
 | D-006 | 2026-10-26 | Model captions are a stretch goal, not core | Keeps the core focused on detection and evaluation |
 | D-007 | 2026-10-26 | Marker finder uses yellow + dark ink, not a strict triangle test | Tent-shaped placards can look like triangles, trapezoids or rectangles |
 | D-008 | 2026-10-26 | Find files in the zip by path component names; confirm the layout by running `list` | Real layout could not be inspected before Phase 1. Confirmed the same day (section 4.1) |
+| D-010 | 2026-10-26 | One-digit OCR reads are accepted only by exact match, never snapped | Phase 1 demo: a read of "1" (true 12) snapped to 7 with confidence 1.0, because 7 is a confusable one-edit neighbour |
+| D-012 | 2026-10-26 | Crop the preprocessed image to the ink box before upscaling | Real EasyOCR failed on a small digit centred in a large white canvas (test_real_ocr_reads_a_synthetic_digit) |
+| D-011 | 2026-10-26 | Run OCR on a tight and a wide ink mask and keep the better result | Demo: the second digit sat outside the yellow region and was discarded |
 | D-009 | 2026-10-26 | Take a file's scene only from a scene folder or a file-name token, never the archive folder; ignore macOS junk files | First real listing assigned all 40 exhibit lists to th_0001 and counted `._` files as photos |
 
 ## 10. Change log
@@ -347,3 +371,4 @@ tried without any download.
 | 2026-10-26 | all | Phase 0: initial spec, sections 1-3 written |
 | 2026-10-26 | 4, 8, 9 | Phase 1: marker finder, OCR and exhibit reading requirements; feasibility gate procedure and metrics; D-007, D-008 |
 | 2026-10-26 | 4.1, 9 | Layout confirmed from the real zip; fixed scene detection and junk files (R-A0-4, R-A0-5, D-009) |
+| 2026-10-26 | 4.1, 4.4, 8.1, 9 | Demo run on the laptop: one-digit snapping banned, two OCR mask variants (R-A3-5, R-A3-6, D-010, D-011); ink-box crop (D-012); part 1 facts (no marker-free scene, two-digit numbers) |

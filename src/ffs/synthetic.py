@@ -21,9 +21,17 @@ def cluttered_background(h, w, seed=0):
 
 
 def draw_marker(img, x, y, w, h, text):
-    """A tent-like yellow trapezoid with a black number. Returns the true box."""
+    """A tent-like yellow trapezoid with a black number that fits inside. Returns the true box."""
     pts = np.array([[x + w * 0.15, y], [x + w * 0.85, y], [x + w, y + h], [x, y + h]], np.int32)
     cv2.fillPoly(img, [pts], YELLOW_BGR)
-    cv2.putText(img, text, (x + int(w * 0.22), y + int(h * 0.78)), cv2.FONT_HERSHEY_SIMPLEX,
-                h / 55, (0, 0, 0), max(2, h // 18), cv2.LINE_AA)
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    scale = h / 55
+    thick = max(2, h // 18)
+    (tw, th), _ = cv2.getTextSize(text, font, scale, thick)
+    if tw > 0.62 * w:                       # two-digit numbers: shrink to stay inside the marker
+        scale *= 0.62 * w / tw
+        thick = max(2, int(thick * 0.62 * w / tw))
+        (tw, th), _ = cv2.getTextSize(text, font, scale, thick)
+    org = (x + (w - tw) // 2, y + int(h * 0.55) + th // 2)
+    cv2.putText(img, text, org, font, scale, (0, 0, 0), thick, cv2.LINE_AA)
     return Box(x, y, w, h, 1.0)

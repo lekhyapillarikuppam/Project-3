@@ -20,14 +20,14 @@ from ffs import config  # noqa: E402
 from ffs.synthetic import cluttered_background, draw_marker  # noqa: E402
 
 PHOTOS = {  # photo -> list of (x, y, w, h, number)
-    "IMG_0001": [(600, 400, 150, 190, "7")],
-    "IMG_0002": [(300, 300, 150, 190, "3"), (1000, 700, 150, 190, "12")],
-    "IMG_0003": [(700, 500, 160, 200, "18")],   # 18 is not in the list: should snap to 16 or be rejected
+    "IMG_0001": [(600, 400, 150, 190, "14")],
+    "IMG_0002": [(300, 300, 150, 190, "32"), (1000, 700, 150, 190, "11")],
+    "IMG_0003": [(700, 500, 160, 200, "35")],   # 35 is not in the list: should be snapped to 33/36 or rejected
     "IMG_0004": [],                              # no marker
-    "IMG_0005": [(500, 800, 140, 180, "9")],
+    "IMG_0005": [(500, 800, 140, 180, "7")],    # one single digit, as a control
 }
-EXHIBITS = [["Marker", "Description"], [3, "mobile phone"], [7, "knife with black handle"],
-            [9, "5 white A4 sheets"], [12, "half-empty bottle of vodka"], [16, "red-brown stain"]]
+EXHIBITS = [["Marker", "Description"], [7, "knife with black handle"], [11, "mobile phone"],
+            [14, "5 white A4 sheets"], [32, "half-empty bottle of vodka"], [36, "red-brown stain"]]
 
 
 def main():
