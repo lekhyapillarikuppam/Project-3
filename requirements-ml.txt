@@ -1,0 +1,7 @@
+# ML packages: install at the start of Phase 1, not before.
+# On Windows without an NVIDIA GPU, plain pip installs the CPU build of torch.
+torch>=2.2
+torchvision>=0.17
+transformers>=4.40   # OWLv2
+open_clip_torch>=2.24  # CLIP
+easyocr>=1.7         # reads marker numbers

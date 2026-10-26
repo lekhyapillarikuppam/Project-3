@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Data: photos and raw downloads never go in git
+data/*
+!data/.gitkeep
+
+# Archives, secrets, model weights
+*.zip
+*.pt
+*.pth
+*.safetensors
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
