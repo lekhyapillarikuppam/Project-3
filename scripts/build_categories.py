@@ -3,11 +3,12 @@
   python scripts/build_categories.py
 
 Writes:
-  results/phase2/unmatched.csv       descriptions no rule matches, with a suggested category
-                                     (source = llm, confirmed = 0): YOU confirm or correct these
-  data_meta/exhibit_categories.csv   rule rows (confirmed 1) + the unconfirmed suggestions
-Prints exhibit-level counts (exhibits and scenes per category) before any model is run.
-Unconfirmed llm rows count as `other` everywhere downstream (silver ignores them).
+  data_meta/exhibit_categories.csv   one row per exhibit and category: rule rows, plus the llm/manual row of
+                                     every exhibit no rule matches. Existing rows keep their `confirmed` value;
+                                     NEW suggestions are unconfirmed (confirmed = 0) until you confirm them.
+  results/phase2/unmatched.csv       the exhibits no rule matches, with their category and source
+Prints the NEW unmatched descriptions and exhibit-level counts per category (exhibits and scenes), counting
+only rule rows and confirmed rows. Unconfirmed llm rows count as `other` downstream (silver ignores them).
 """
 
 import argparse
@@ -20,16 +21,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import pandas as pd  # noqa: E402
 
 from ffs import config  # noqa: E402
-from ffs.dataprep import match_category  # noqa: E402
+from ffs.dataprep import build_exhibit_categories, match_categories  # noqa: E402
 from ffs.schemas import validate  # noqa: E402
 
 # Suggestions for descriptions no rule matches. First match wins; anything else is suggested as `other`.
 # These are guesses to be confirmed by a person, not decisions.
 SUGGESTIONS = [
-    (r"\bbook\b", "paper_document"),          # printed paper
-    (r"\bvase\b", "bottle_glass"),            # glass or ceramic object
-    (r"\b(jar|cans?)\b", "bottle_glass"),
-    (r"\bsyringe\b", "other"),
+    (r"\b(books?|notebook|notepad|newspaper|envelope|bible)\b", "paper_document"),   # printed or written paper
+    (r"\b(vase|beer can)\b", "bottle_glass"),                                          # drinking vessels, glass or metal
+    (r"\b(pc screen|camera)\b", "phone_electronics"),
 ]
 
 
@@ -49,31 +49,34 @@ def main():
 
     exhibits = pd.read_csv(meta / "exhibits.csv")
     rules = pd.read_csv(meta / "category_rules.csv")
-    exhibits["rule_category"] = [match_category(d, rules) for d in exhibits["description"]]
+    path = meta / "exhibit_categories.csv"
+    existing = pd.read_csv(path) if path.exists() else None
 
-    matched = exhibits[exhibits.rule_category.notna()]
-    unmatched = exhibits[exhibits.rule_category.isna()].copy()
-    unmatched["category"] = unmatched["description"].map(suggest)
-    unmatched["source"], unmatched["confirmed"] = "llm", 0
-
-    cats = pd.concat([
-        pd.DataFrame({"scene_id": matched.scene_id, "marker_no": matched.marker_no,
-                      "category": matched.rule_category, "source": "rule", "confirmed": 1}),
-        unmatched[["scene_id", "marker_no", "category", "source", "confirmed"]]], ignore_index=True)
+    cats = build_exhibit_categories(exhibits, rules, suggest, existing)
     cats = cats.sort_values(["scene_id", "marker_no"], kind="stable").reset_index(drop=True)
     validate(cats, "exhibit_categories")
-    cats.to_csv(meta / "exhibit_categories.csv", index=False)
+    cats.to_csv(path, index=False)
+
+    no_rule = [not match_categories(d, rules) for d in exhibits.description]     # per exhibit, so repeated numbers stay apart
+    keys = ["scene_id", "marker_no"]
+    unmatched = exhibits[no_rule].merge(cats[cats.source != "rule"], on=keys, how="left")
     out.mkdir(parents=True, exist_ok=True)
     unmatched[["scene_id", "marker_no", "description", "category", "source", "confirmed"]].to_csv(
         out / "unmatched.csv", index=False)
 
-    print(f"{len(exhibits)} exhibits: {len(matched)} matched by a rule, {len(unmatched)} unmatched")
+    known = set() if existing is None else set(zip(existing.scene_id, existing.marker_no))
+    new = unmatched[[(s, n) not in known for s, n in zip(unmatched.scene_id, unmatched.marker_no)]]
+    print(f"{len(exhibits)} exhibits, {exhibits.scene_id.nunique()} scenes; {len(unmatched)} match no rule, "
+          f"{len(new)} of them new:")
+    if len(new):
+        print(new[["scene_id", "marker_no", "description", "category"]].to_string(index=False))
+
+    usable = cats[(cats.source == "rule") | (cats.confirmed == 1)]
     rows = []
     for cat in list(config.CANDIDATE_CATEGORIES) + [config.OTHER]:
-        by_rule = matched[matched.rule_category == cat]
-        with_sugg = cats[cats.category == cat]
-        rows.append({"category": cat, "rule: exhibits": len(by_rule), "rule: scenes": by_rule.scene_id.nunique(),
-                     "rule+suggested: exhibits": len(with_sugg), "rule+suggested: scenes": with_sugg.scene_id.nunique()})
+        g = usable[usable.category == cat]               # one row per marker number, so a repeated number counts once
+        rows.append({"category": cat, "exhibits": len(g), "scenes": g.scene_id.nunique()})
+    print("\nExhibit-level counts (rule rows and confirmed rows):")
     print(pd.DataFrame(rows).to_string(index=False))
 
 

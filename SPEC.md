@@ -335,7 +335,12 @@ Acceptance tests (`tests/test_silver.py`):
   photos; keep its rows but it is not split). Read with `exhibits.read_exhibit_file`. Rows with an empty
   marker number are dropped and counted in a printed report. Repeated numbers are kept.
 - R-P-2. `category_rules.csv` (version 1): case-insensitive regex patterns on the English description,
-  first match wins, from the candidate list in section 3.1 and from what the descriptions really contain.
+  from the candidate list in section 3.1 and from what the descriptions really contain. Rules are
+  **multi-label** (D-018): every matching rule adds its category to the exhibit, so "knife with reddish
+  trace" is both `blade` and `red_brown_stain`. Rules whose category is `other` (for example "glass table",
+  body words) are **exclusive**: if one matches, the exhibit is `other` only. `exhibit_categories.csv` has one
+  row per exhibit and category. Rebuilding it keeps the existing `llm` and `manual` rows of exhibits that still
+  match no rule, with their `confirmed` value, so confirmations are never lost.
   Descriptions matching no rule are listed in `results/phase2/unmatched.csv`; Claude Code proposes a category
   for each (`source = llm`, `confirmed = 0`). Only rows confirmed by the user (`confirmed = 1`) or rule rows count;
   unconfirmed llm rows are treated as `other`.
@@ -364,6 +369,8 @@ Acceptance tests (`tests/test_dataprep.py`):
 - AT-P-3. Photo type thresholds: box height fraction 0.35 -> close, 0.15 -> mid, 0.03 -> overview, no box -> unknown.
 - AT-P-4. `exhibits.csv` drops rows with empty marker numbers and keeps repeated numbers.
 - AT-P-5. The marker script skips a scene that is already done.
+- AT-P-6. Multi-label rules: "Knife with reddish trace" gives `blade` and `red_brown_stain`; "Glass table"
+  gives `other` only (exclusive rule), although "glass" alone would match `bottle_glass`.
 
 ## 5. Stage B: detectors  (filled in Phase 3)
 
@@ -457,6 +464,8 @@ tried without any download.
 | D-015 | 2026-10-26 | Phase 1 gate passed: continue with colour + shape finder and EasyOCR (H 0.87, A 0.65, precision 0.98 on 31 photos, optimistic because tuned and tested on the same photos) | After D-013 and D-014 |
 | D-016 | 2026-10-26 | Phases 2 and 3 merged into one Phase 2 (data, categories, split, photo types, markers on all photos, silver); old phases 4+5 merged into Phase 3 (gold, Kaggle models, freeze, test evaluation); web app is Phase 4 | Speed; the user asked to combine phases |
 | D-017 | 2026-10-26 | Split seed is never re-drawn to make a category pass the inclusion rule | Protects the evaluation from seed shopping |
+| D-018 | 2026-10-26 | Category rules are multi-label; `other` rules are exclusive | First-match-wins lost the stain on "knife with reddish trace" (th_0003, th_0009); the user asked for multi-label. Exclusive `other` keeps "glass table" and bodies out of `bottle_glass` |
+| D-019 | 2026-10-26 | Use all four parts of the FFS dataset on Zenodo (V 0.1, all CC BY-NC-SA 4.0, access open): part 1 record 17151982 `th_0001-0020.zip`, part 2 record 17164106 `th_0021-0040.zip` (42.3 GB), part 3 record 17164834 `th_0041-0060.zip` (40.1 GB), part 4 record 17165128 `th_0061_0080.zip` (47.5 GB). Only photos, English exhibit lists and description sheets are fetched, with `fetch_scenes.py --part N`. The dataset pages say newer versions exist; they were **not** used. Part 3 has no scenes 45, 47, 49, 51, 53; part 4's top folder is `th_0061_0080` | The merged data gives more scenes per category (D-003 inclusion rule needs 6 test scenes). Licences read from the Zenodo API on the same day; same share-alike terms as part 1, so the project keeps CC BY-NC-SA 4.0 for derived data |
 
 ## 10. Change log
 
@@ -469,3 +478,5 @@ tried without any download.
 | 2026-10-26 | 4.3, 9 | Gate failed (H 0.56, A 0.35); tuning round 1: relative ink rule R-A2-8, new thresholds in R-A2-2 and R-A2-3, AT-A2-5, AT-A2-6, D-013 |
 | 2026-10-26 | 4.4, 8.2, 9 | Tuning round 2: R-A3-7 and R-A3-9 (R-A3-8 tried and reverted), AT-A3-12 and AT-A3-13, report-only precision metric, D-014 |
 | 2026-10-26 | 4.5, 4.6, 9 | Phase 2 spec merged: silver labels (R-S-1 to R-S-6, AT-S-1 to AT-S-6), data preparation (R-P-1 to R-P-7, AT-P-1 to AT-P-5), D-015 to D-017; phases renumbered (D-016) |
+| 2026-10-26 | 4.6, 9 | Category rules multi-label with exclusive `other` rules (R-P-2, AT-P-6, D-018); llm suggestions confirmed except th_0002 #16 (manual, other) |
+| 2026-10-26 | 4.1, 9 | Parts 2-4 of the dataset added (config URLs, `fetch_scenes.py --part` after the command, D-019) |

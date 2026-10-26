@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import pandas as pd
 
+from . import config
 from .schemas import validate
 
 
@@ -28,6 +29,26 @@ def uncertain_photos(markers: pd.DataFrame) -> set[tuple[str, str]]:
     """Photos with at least one rejected box (R-S-5). Used as an analysis slice, not stored in silver."""
     rejected = markers[markers["status"] == "rejected"]
     return set(zip(rejected["scene_id"], rejected["photo_id"]))
+
+
+def category_counts(silver: pd.DataFrame, scene_split: pd.DataFrame,
+                    min_photos: int = config.MIN_POSITIVE_PHOTOS,
+                    min_scenes: int = config.MIN_POSITIVE_SCENES) -> pd.DataFrame:
+    """Positive photos and scenes per category in dev and test, and the inclusion rule on test (SPEC 3.2).
+
+    Report only: no category is dropped here, the user decides the final categories from this table.
+    """
+    pos = silver[silver["present"] == 1].merge(scene_split[["scene_id", "split"]], on="scene_id")
+    rows = []
+    for cat in sorted(silver["category"].unique()):
+        row = {"category": cat}
+        for split in config.SPLITS:
+            g = pos[(pos.category == cat) & (pos.split == split)]
+            row[f"{split}_photos"], row[f"{split}_scenes"] = len(g), g.scene_id.nunique()
+        row["passes_test"] = row["test_photos"] >= min_photos and row["test_scenes"] >= min_scenes
+        rows.append(row)
+    return pd.DataFrame(rows, columns=["category", "dev_photos", "dev_scenes", "test_photos", "test_scenes",
+                                       "passes_test"])
 
 
 def build_silver(photos: pd.DataFrame, markers: pd.DataFrame, exhibit_categories: pd.DataFrame,

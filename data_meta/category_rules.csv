@@ -1,11 +1,11 @@
 pattern,category,version
 \bglass table\b,other,1
-\b(corpse|corps|body|head)\b,other,1
-cartridge|gauge case|\bcasing,ammunition,1
+\b(corp\w*|body|head|arm|hand|wrist|wound|flesh|hairs)\b,other,1
+cartridge|catridge|gauge case|\bcasing|\bbullet,ammunition,1
 \b(shotgun|firegun|handgun|pistol|revolver|rifle|gun)\b,firearm,1
 \b(knife|cutter|scissors?|axe|saw|razor)\b,blade,1
 \b(bottles?|vodka|glass)\b,bottle_glass,1
 \b(smart ?phone|mobile phone|phone|laptop|computer|tablet|keyboard)\b,phone_electronics,1
 \b(a4|papper|passeport|passport|id card)\b|\bpapers?\b(?! clip),paper_document,1
 \b(shoes?|boots?|sandals?|sneakers?)\b,footwear,1
-reddis(h|ch) trace|stain|red-?brown,red_brown_stain,1
+"redd?i[a-z]{1,3} (trace|mark)s?|stain|red-?brown",red_brown_stain,1

@@ -79,3 +79,15 @@ def test_unconfirmed_llm_rows_do_not_count():
     cats = exhibit_cats([("s1", 7, "blade", "llm", 1)])                 # once the user confirms it, it counts
     out = silver.build_silver(photos("p1"), markers([("s1", "p1", 7, "accepted")]), cats, CATEGORIES)
     assert row(out, "p1", "blade").present == 1
+
+
+def test_category_counts_apply_the_inclusion_rule_on_test_scenes():
+    rows = [("s%d" % i, "p%d" % j, "blade", 1) for i in range(3) for j in range(4)]       # 12 photos, 3 scenes
+    rows += [("s9", "p%d" % j, "blade", 1) for j in range(5)]                             # 5 photos in 1 more scene
+    rows += [("s0", "p0", "firearm", 1)]
+    sil = pd.DataFrame(rows, columns=["scene_id", "photo_id", "category", "present"])
+    split = pd.DataFrame({"scene_id": ["s0", "s1", "s2", "s9"], "split": ["dev", "test", "test", "test"]})
+    t = silver.category_counts(sil, split, min_photos=8, min_scenes=3).set_index("category")
+    assert t.loc["blade", ["dev_photos", "dev_scenes", "test_photos", "test_scenes"]].tolist() == [4, 1, 13, 3]
+    assert bool(t.loc["blade", "passes_test"])                      # 13 >= 8 photos and 3 >= 3 scenes
+    assert not bool(t.loc["firearm", "passes_test"]) and t.loc["firearm", "dev_photos"] == 1

@@ -22,12 +22,42 @@ def clean_exhibits(raw: pd.DataFrame) -> tuple[pd.DataFrame, int]:
     return clean.reset_index(drop=True), int((~has_number).sum())
 
 
-def match_category(description: str, rules: pd.DataFrame) -> str | None:
-    """Category of the first rule whose pattern is found in the description, else None (R-P-2)."""
+def match_categories(description: str, rules: pd.DataFrame) -> list[str]:
+    """Every category whose rule matches the description, in rule order (R-P-2, D-018).
+
+    A matching `other` rule is exclusive: the exhibit is `other` only. No match gives [].
+    """
+    hits = []
     for pattern, category in zip(rules["pattern"], rules["category"]):
-        if re.search(pattern, description, flags=re.IGNORECASE):
-            return category
-    return None
+        if re.search(pattern, description, flags=re.IGNORECASE) and category not in hits:
+            hits.append(category)
+    return [config.OTHER] if config.OTHER in hits else hits
+
+
+def build_exhibit_categories(exhibits: pd.DataFrame, rules: pd.DataFrame, suggest,
+                             existing: pd.DataFrame | None = None) -> pd.DataFrame:
+    """One row per exhibit and category (R-P-2).
+
+    Rule matches give `rule` rows (confirmed 1). An exhibit no rule matches keeps its CONFIRMED llm or manual
+    row from `existing`; otherwise `suggest(description)` gives a fresh unconfirmed `llm` row. So rebuilding
+    never loses a confirmation, and unconfirmed suggestions follow the latest suggestion list.
+    """
+    kept = {}
+    if existing is not None:
+        confirmed = existing[(existing["source"] != "rule") & (existing["confirmed"] == 1)]
+        for row in confirmed.itertuples():
+            kept.setdefault((row.scene_id, int(row.marker_no)), []).append(row)
+    rows = []
+    for e in exhibits.itertuples():
+        cats = match_categories(e.description, rules)
+        if cats:
+            rows += [(e.scene_id, e.marker_no, c, "rule", 1) for c in cats]
+        elif (e.scene_id, e.marker_no) in kept:
+            rows += [(r.scene_id, r.marker_no, r.category, r.source, r.confirmed) for r in kept[(e.scene_id, e.marker_no)]]
+        else:
+            rows.append((e.scene_id, e.marker_no, suggest(e.description), "llm", 0))
+    out = pd.DataFrame(rows, columns=["scene_id", "marker_no", "category", "source", "confirmed"])
+    return out.drop_duplicates().reset_index(drop=True)
 
 
 def split_scenes(scene_ids, seed: int = config.SEED, dev_fraction: float = config.DEV_FRACTION) -> dict[str, str]:

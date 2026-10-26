@@ -1,4 +1,4 @@
-"""Acceptance tests AT-P-1 to AT-P-5 (SPEC 4.6): data preparation."""
+﻿"""Acceptance tests AT-P-1 to AT-P-5 (SPEC 4.6): data preparation."""
 
 import pandas as pd
 
@@ -12,13 +12,12 @@ def make_rules():
         "version": [1, 1, 1]})
 
 
-def test_at_p_1_rules_match_descriptions_and_first_match_wins():
+def test_at_p_1_rules_match_descriptions():
     rules = make_rules()
-    assert dataprep.match_category("knife with black handle", rules) == "blade"
-    assert dataprep.match_category("Half-empty bottle of vodka", rules) == "bottle_glass"   # case-insensitive
-    assert dataprep.match_category("mobile phone", rules) == "phone_electronics"
-    assert dataprep.match_category("xylophone", rules) is None
-    assert dataprep.match_category("knife in a glass", rules) == "blade"                    # earlier rule wins
+    assert dataprep.match_categories("knife with black handle", rules) == ["blade"]
+    assert dataprep.match_categories("Half-empty bottle of vodka", rules) == ["bottle_glass"]   # case-insensitive
+    assert dataprep.match_categories("mobile phone", rules) == ["phone_electronics"]
+    assert dataprep.match_categories("xylophone", rules) == []
 
 
 def test_at_p_2_split_is_by_scene_disjoint_deterministic_and_about_40_60():
@@ -71,3 +70,23 @@ def test_image_size_swaps_when_exif_says_turned(tmp_path):
     Image.new("RGB", (40, 20)).save(turned, exif=exif)
     assert dataprep.image_size(plain) == (40, 20)
     assert dataprep.image_size(turned) == (20, 40)
+
+def test_at_p_6_rules_are_multi_label_and_other_rules_are_exclusive():
+    rules = pd.concat([pd.DataFrame({"pattern": [r"\bglass table\b"], "category": ["other"], "version": [1]}),
+                       make_rules(),
+                       pd.DataFrame({"pattern": [r"reddis(h|ch) trace"], "category": ["red_brown_stain"],
+                                     "version": [1]})], ignore_index=True)       # same order as category_rules.csv
+    assert dataprep.match_categories("Knife with reddish trace", rules) == ["blade", "red_brown_stain"]
+    assert dataprep.match_categories("Glass table", rules) == ["other"]       # "glass" alone would be bottle_glass
+    assert dataprep.match_categories("Glass table with reddish trace", rules) == ["other"]
+
+
+def test_rebuilding_exhibit_categories_keeps_confirmed_rows_and_adds_new_suggestions():
+    exhibits = pd.DataFrame({"scene_id": ["s1", "s1", "s1"], "marker_no": [1, 2, 3],
+                             "description": ["knife", "cans", "vase"]})
+    existing = pd.DataFrame({"scene_id": ["s1"], "marker_no": [2], "category": ["other"],
+                             "source": ["manual"], "confirmed": [1]})
+    out = dataprep.build_exhibit_categories(exhibits, make_rules(), lambda d: "bottle_glass", existing)
+    assert out.values.tolist() == [["s1", 1, "blade", "rule", 1],
+                                   ["s1", 2, "other", "manual", 1],             # kept, not re-suggested
+                                   ["s1", 3, "bottle_glass", "llm", 0]]         # new: unconfirmed

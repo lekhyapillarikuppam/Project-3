@@ -53,6 +53,9 @@ CI_LEVEL = 0.95
 # Part 1 = scenes th_0001-0020. Other parts live in other Zenodo records; pass --url for them.
 ZENODO_ZIP_URLS = {
     1: "https://zenodo.org/records/17151982/files/th_0001-0020.zip?download=1",
+    2: "https://zenodo.org/records/17164106/files/th_0021-0040.zip?download=1",
+    3: "https://zenodo.org/records/17164834/files/th_0041-0060.zip?download=1",
+    4: "https://zenodo.org/records/17165128/files/th_0061_0080.zip?download=1",   # underscore is in the real file name
 }
 
 # Feasibility gate pass marks (SPEC 8.2) ---------------------------------------
