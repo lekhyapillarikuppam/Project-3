@@ -1,0 +1,6 @@
+scene_id,photo_id,marker_idx,x,y,w,h,method,det_score,raw_ocr,ocr_conf,marker_no,status
+th_9999,IMG_0001,0,599,399,153,194,color_shape,0.864,7,1.0,7,accepted
+th_9999,IMG_0002,0,299,299,153,194,color_shape,0.986,3,1.0,3,accepted
+th_9999,IMG_0002,1,999,699,152,192,color_shape,0.883,1,1.0,7,snapped
+th_9999,IMG_0003,0,699,499,162,203,color_shape,0.866,1,1.0,7,snapped
+th_9999,IMG_0005,0,499,799,143,183,color_shape,0.985,9,1.0,9,accepted

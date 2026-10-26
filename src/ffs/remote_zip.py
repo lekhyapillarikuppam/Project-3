@@ -14,7 +14,10 @@ from collections import Counter, defaultdict
 from pathlib import Path, PurePosixPath
 
 SCENE_DIR_RE = re.compile(r"^th_(\d{4})$", re.IGNORECASE)
-SCENE_ANY_RE = re.compile(r"th_(\d{4})", re.IGNORECASE)
+# In a FILE NAME only (never a folder): IPC_Th_0002.xlsx or th_0004_IPC_ENG.xlsx match,
+# but the archive name th_0001-0020 does not (that bug put every list in th_0001).
+SCENE_FILE_RE = re.compile(r"(?<![A-Za-z0-9])th_(\d{4})(?![\d-])", re.IGNORECASE)
+JUNK_NAMES = {".ds_store", "thumbs.db"}
 PHOTO_EXTS = {".jpg", ".jpeg", ".png"}
 TABLE_EXTS = {".xlsx", ".xls", ".csv"}
 BLOCKED_DIRS = {"pano", "scan", "ipc_fr", "__macosx"}  # R-A0-1
@@ -29,7 +32,8 @@ def scene_of(name: str) -> str | None:
     for part in _parts(name):
         if SCENE_DIR_RE.match(part):
             return part.lower()
-    m = SCENE_ANY_RE.search(name)
+    parts = _parts(name)
+    m = SCENE_FILE_RE.search(parts[-1]) if parts else None
     return f"th_{m.group(1)}" if m else None
 
 
@@ -40,6 +44,8 @@ def kind_of(name: str) -> str:
     parts = _parts(name)
     if not parts:
         return "other"
+    if parts[-1].startswith("._") or parts[-1].lower() in JUNK_NAMES:
+        return "blocked"   # macOS resource-fork and system junk files
     dirs = [p.lower() for p in parts[:-1]]
     stem = PurePosixPath(parts[-1]).stem.lower()
     ext = PurePosixPath(parts[-1]).suffix.lower()

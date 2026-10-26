@@ -1,0 +1,6 @@
+scene_id,photo_id,relpath,n_boxes,read_nos
+th_9999,IMG_0001,th_9999/img/IMG_0001.jpg,1,7
+th_9999,IMG_0002,th_9999/img/IMG_0002.jpg,2,3;7
+th_9999,IMG_0003,th_9999/img/IMG_0003.jpg,1,7
+th_9999,IMG_0004,th_9999/img/IMG_0004.jpg,0,
+th_9999,IMG_0005,th_9999/img/IMG_0005.jpg,1,9

@@ -14,6 +14,11 @@ def test_scene_of():
     assert rz.scene_of("img/th_0003/IMG_1.jpg") == "th_0003"
     assert rz.scene_of("IPC/IPC_ENG/th_0004_IPC_ENG.xlsx") == "th_0004"
     assert rz.scene_of("description/summary.xlsx") is None
+    # Real layout (Zenodo part 1): single top-level folder named th_0001-0020
+    assert rz.scene_of("th_0001-0020/IPC/IPC_ENG/IPC_Th_0002.xlsx") == "th_0002"
+    assert rz.scene_of("th_0001-0020/img/th_0005/IMG_20240227_085541.jpg") == "th_0005"
+    assert rz.scene_of("th_0001-0020/description/Forensic_scene_th_0001-0020_ENG.xlsx") is None
+    assert rz.scene_of("th_0001-0020/Read_me_ENG.pdf") is None
 
 
 @pytest.mark.parametrize("name,kind", [
@@ -25,6 +30,14 @@ def test_scene_of():
     ("th_0001/IPC/IPC_FR/liste.xlsx", "blocked"),
     ("th_0001/pano/p.jpg", "blocked"),
     ("th_0001/scan/cloud.las", "blocked"),
+    ("th_0001-0020/img/th_0002/IMG_20240227_085541.jpg", "photo"),
+    ("th_0001-0020/img/th_0002/._IMG_20240227_085541.jpg", "blocked"),
+    ("th_0001-0020/IPC/IPC_ENG/IPC_Th_0003.xlsx", "exhibit_list"),
+    ("th_0001-0020/IPC/IPC_ENG/._IPC_Th_0003.xlsx", "blocked"),
+    ("th_0001-0020/IPC/IPC_ENG/.DS_Store", "blocked"),
+    ("th_0001-0020/description/Forensic_scene_th_0001-0020_ENG.xlsx", "description"),
+    ("th_0001-0020/description/Forensic_scene_th_0001-0020_FR.xlsx", "blocked"),
+    ("th_0001-0020/Read_me_ENG.pdf", "other"),
     ("th_0001/img/", "other"),
     ("th_0001/notes.txt", "other"),
 ])
@@ -85,3 +98,19 @@ def test_summarize_counts_scenes():
     assert s["scenes"]["th_0001"] == {"photo": 2, "exhibit_list": 1}
     assert s["by_kind"]["blocked"] == (1, 999)
     assert "th_0001: 2 photos" in rz.format_summary(s)
+
+
+def test_real_layout_summary_assigns_lists_to_the_right_scenes():
+    names = ["th_0001-0020/img/th_0002/IMG_20240227_085541.jpg",
+             "th_0001-0020/img/th_0002/._IMG_20240227_085541.jpg",
+             "th_0001-0020/img/th_0003/IMG_20240227_090000.jpg",
+             "th_0001-0020/IPC/IPC_ENG/IPC_Th_0001.xlsx",
+             "th_0001-0020/IPC/IPC_ENG/IPC_Th_0002.xlsx",
+             "th_0001-0020/IPC/IPC_ENG/._IPC_Th_0002.xlsx",
+             "th_0001-0020/IPC/IPC_ENG/.DS_Store"]
+    s = rz.summarize([SimpleNamespace(filename=n, file_size=1) for n in names])
+    assert s["scenes"] == {"th_0001": {"exhibit_list": 1},
+                           "th_0002": {"photo": 1, "exhibit_list": 1},
+                           "th_0003": {"photo": 1}}
+    assert rz.wanted(names[4], {"th_0002"}) and not rz.wanted(names[3], {"th_0002"})
+    assert not rz.wanted(names[1], None) and not rz.wanted(names[5], None)

@@ -20,7 +20,7 @@ If not: `.venv\Scripts\Activate.ps1`
 
 Honest limits: I could not reach Zenodo from my workspace, so the download code and the real
 EasyOCR reading were **not** tested on real data. The marker finder, the constrained read, the
-spreadsheet reader and the metrics are tested on synthetic data (44 tests). Step 3 is a checkpoint
+spreadsheet reader and the metrics are tested on synthetic data (53 tests). Step 3 is a checkpoint
 for exactly this reason.
 
 ## Step 1. Add the Phase 1 files
@@ -47,7 +47,7 @@ pytest
 ```
 
 - The ML install is large (a few hundred MB to 2 GB) and takes several minutes.
-- Expect `44 passed`. (Before the ML install one test is skipped; after it, it runs.)
+- Expect `53 passed`. (Before the ML install one test is skipped; after it, it runs.)
 - The first OCR run downloads EasyOCR model files (about 100 MB). That needs internet.
 
 If the OCR test fails, copy the failure and paste it in the chat.
@@ -68,29 +68,27 @@ If boxes are missing or the reads are wrong, tell me before going on.
 
 Then delete the demo: `Remove-Item -Recurse data\raw\th_9999, results\feasibility`
 
-## Step 4. CHECKPOINT: look at the real zip layout
+## Step 4. Real zip layout (done)
 
-```
-python scripts/fetch_scenes.py list
-```
-
-This reads only the zip's table of contents (a few MB). It prints the folder layout, counts per
-kind (photo, exhibit list, blocked) and photos per scene, and saves it to `data\raw\`.
-
-**Paste the whole output into the chat and stop.** I have not seen the real layout, so I will
-confirm it and update `SPEC.md` section 4.1 (and the code, if needed) before you download anything big.
+`python scripts/fetch_scenes.py list` was run and the layout is now confirmed in `SPEC.md` section 4.1.
+It found a bug (all exhibit lists were assigned to th_0001, and macOS junk files were counted), which the
+update fixes. After applying the update you can rerun `list` to see the corrected counts: 20 exhibit lists
+(one per scene) and real photo counts per scene. Scene th_0001 has no photos.
 
 ## Step 5. Choose 5 scenes
 
-(After the checkpoint.) Download the description sheets and one scene:
+1. Download the description sheet (it is always included) together with one scene's photos:
 
 ```
-python scripts/fetch_scenes.py pull --scenes th_0001 --dry-run
-python scripts/fetch_scenes.py pull --scenes th_0001
+python scripts/fetch_scenes.py pull --scenes th_0002 --dry-run
+python scripts/fetch_scenes.py pull --scenes th_0002
 ```
 
-Open the description spreadsheet in `data\raw\` in Excel. Pick **4 scenes with markers and photos**
-(prefer scenes with 3 or more markers) and **1 scene with no markers**. Tell me the five ids.
+2. Open `data\raw\th_0001-0020\description\Forensic_scene_th_0001-0020_ENG.xlsx` in Excel.
+   It describes all 20 scenes (type, number of markers, marker numbers, main traces).
+3. Pick **4 scenes from th_0002 to th_0020 that have markers** (prefer 3 or more markers, and a mix of
+   indoor and outdoor if the sheet says so) and **1 scene with no markers** (if one exists with photos).
+4. Tell me the five ids and paste the rows of those scenes from the sheet, if you like. I can sanity check the choice.
 
 ## Step 6. Download them and check the exhibit lists
 
@@ -151,9 +149,9 @@ git push
 
 ## Phase 1 gate
 
-- [ ] `pytest` passes (44 passed)
+- [ ] `pytest` passes (53 passed)
 - [ ] Demo scene reads look right
-- [ ] Real zip layout pasted in chat and confirmed
+- [x] Real zip layout pasted in chat and confirmed
 - [ ] 5 scenes downloaded; exhibit columns confirmed
 - [ ] `truth.csv` filled for about 40 photos
 - [ ] `feasibility_report.py` run and pasted in chat

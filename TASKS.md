@@ -15,9 +15,9 @@ Tick items as you go. One phase at a time; do not start a phase before the previ
 
 ## Phase 1: Feasibility gate (see `docs/PHASE1_STEPS.md`)
 
-- [ ] Add the Phase 1 files; `pytest` passes (44 passed after installing `requirements-ml.txt`)
+- [ ] Add the Phase 1 files; `pytest` passes (53 passed after installing `requirements-ml.txt`)
 - [ ] Demo scene (`make_demo_scene.py`) reads look right
-- [ ] `fetch_scenes.py list` output pasted in chat; real layout confirmed in `SPEC.md` 4.1
+- [x] `fetch_scenes.py list` output pasted in chat; real layout confirmed in `SPEC.md` 4.1
 - [ ] Pick 5 scenes (4 with markers, 1 without) from the description sheet; download them
 - [ ] `inspect_exhibits.py` confirms the marker and description columns
 - [ ] `run_marker_probe.py` run on the 5 scenes

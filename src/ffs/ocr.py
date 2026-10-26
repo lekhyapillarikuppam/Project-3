@@ -100,7 +100,17 @@ def get_reader():
 def read_digits(prepped: np.ndarray, reader=None) -> tuple[str, float]:
     """(joined digits left to right, mean confidence) (R-A3-3)."""
     reader = reader or get_reader()
-    pieces = reader.readtext(prepped, allowlist="0123456789", detail=1, paragraph=False)
+    pieces = reader.readtext(
+        prepped,
+        allowlist="0123456789",
+        detail=1,
+        paragraph=False,
+        text_threshold=0.3,
+        low_text=0.1,
+        link_threshold=0.1,
+        mag_ratio=2.0,
+    )
+
     if not pieces:
         return "", 0.0
     pieces = sorted(pieces, key=lambda r: min(pt[0] for pt in r[0]))

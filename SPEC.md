@@ -1,6 +1,6 @@
 # SPEC: AI-Assisted Evidence Inventory with Marker-Based Ground Truth
 
-Status: Phase 1. Sections 1-3, 4.1-4.4 and 8 are written. Other sections are stubs that
+Status: Phase 1. Sections 1-3, 4.1-4.4 and 8 are written; 4.1 is confirmed against the real zip. Other sections are stubs that
 get filled in the phase named next to each one, **before** the code for that phase is written.
 
 Rule: if code and spec disagree, change the spec first, then the code, and add a
@@ -144,24 +144,47 @@ suggestion or a manual decision.
 
 ## 4. Stage A: marker reader and answer key  (4.1-4.4 written in Phase 1; 4.5 in Phase 3)
 
-### 4.1 Raw data layout
+### 4.1 Raw data layout (confirmed 2026-10-26 from `fetch_scenes.py list`, part 1)
 
-The internal layout of the Zenodo zips is **not yet confirmed**. Phase 1 runs
-`scripts/fetch_scenes.py list`, which prints the layout; the confirmed layout is
-recorded here afterwards (see decision D-008). Until then code finds files by
-path component names (case-insensitive):
+The Zenodo part-1 zip (`th_0001-0020.zip`, scenes th_0001 to th_0020) has one
+top-level folder, `th_0001-0020/`, containing:
 
-- A scene is any path component that matches `th_NNNN` (e.g. `th_0007`).
-- Photos are files under a component named `img` (`.jpg`, `.jpeg`, `.png`).
-- English exhibit lists are files under a component named `IPC_ENG`.
-- Description sheets are files under a component named `description`.
-- Components `pano`, `scan` and `IPC_FR`, and anything else, are never downloaded.
+```
+th_0001-0020/
+  Read_me_ENG.pdf, Read_me_FR.pdf
+  description/Forensic_scene_th_0001-0020_ENG.xlsx   one sheet for all 20 scenes (+ _FR)
+  IPC/IPC_ENG/IPC_Th_0001.xlsx ... IPC_Th_0020.xlsx   one exhibit list per scene (+ IPC_FR/)
+  img/th_0002/IMG_20240227_085541.jpg ...             photos, one folder per scene
+  (panoramas and scans: about 41 GB, never downloaded)
+```
+
+Facts that follow from the listing:
+
+- Scene th_0001 has an exhibit list but **no photos** (consistent with the dataset
+  paper: some scenes have no documentation photos). Scenes th_0002 to th_0020 have photos.
+- The archive contains many macOS junk files (`._*`, `.DS_Store`). They are ignored.
+- Photo names are camera timestamps (`IMG_YYYYMMDD_HHMMSS.jpg`), so name order is
+  shooting order. Phase 2 uses this to tag photo types by the photo protocol
+  (overview shots first, then close-ups).
+- Each exhibit list is a separate `.xlsx`; the scene id is in the file name (`IPC_Th_0002`).
+
+How code recognises files (case-insensitive, by path component names):
+
+- A scene is a folder named `th_NNNN` (photos), or `th_NNNN` / `Th_NNNN` as a
+  separate token in a file name (exhibit lists). The archive folder `th_0001-0020`
+  is **not** a scene (this was a bug found by the first real listing; D-009).
+- Photos are `.jpg`/`.jpeg`/`.png` files under a folder named `img`.
+- English exhibit lists are spreadsheets under `IPC_ENG`.
+- Description sheets are English spreadsheets under `description`.
+- Everything else is never downloaded: `pano`, `scan`, `IPC_FR`, French files, and junk.
 
 Requirements:
 
 - R-A0-1. Fetching never downloads `pano/` or `scan/` content.
 - R-A0-2. Files are written only inside `data/raw/` (no path traversal).
 - R-A0-3. Files already present with the same size are skipped.
+- R-A0-4. macOS junk files (`._*`, `.DS_Store`) are never downloaded or read.
+- R-A0-5. A file's scene is never taken from the archive's top-level folder name.
 
 ### 4.2 Exhibit lists (reading)
 
@@ -314,7 +337,8 @@ tried without any download.
 | D-005 | 2026-10-26 | Presence-level metrics only | FFS has no box annotations |
 | D-006 | 2026-10-26 | Model captions are a stretch goal, not core | Keeps the core focused on detection and evaluation |
 | D-007 | 2026-10-26 | Marker finder uses yellow + dark ink, not a strict triangle test | Tent-shaped placards can look like triangles, trapezoids or rectangles |
-| D-008 | 2026-10-26 | Find files in the zip by path component names; confirm the layout by running `list` | Real layout could not be inspected before Phase 1 |
+| D-008 | 2026-10-26 | Find files in the zip by path component names; confirm the layout by running `list` | Real layout could not be inspected before Phase 1. Confirmed the same day (section 4.1) |
+| D-009 | 2026-10-26 | Take a file's scene only from a scene folder or a file-name token, never the archive folder; ignore macOS junk files | First real listing assigned all 40 exhibit lists to th_0001 and counted `._` files as photos |
 
 ## 10. Change log
 
@@ -322,3 +346,4 @@ tried without any download.
 | --- | --- | --- |
 | 2026-10-26 | all | Phase 0: initial spec, sections 1-3 written |
 | 2026-10-26 | 4, 8, 9 | Phase 1: marker finder, OCR and exhibit reading requirements; feasibility gate procedure and metrics; D-007, D-008 |
+| 2026-10-26 | 4.1, 9 | Layout confirmed from the real zip; fixed scene detection and junk files (R-A0-4, R-A0-5, D-009) |
