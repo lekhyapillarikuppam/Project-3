@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 import pandas as pd  # noqa: E402
 from PIL import Image, ImageOps  # noqa: E402
 
-from ffs import config  # noqa: E402
+from ffs import config, gold  # noqa: E402
 
 LONG_SIDE = 1568
 
@@ -58,6 +58,7 @@ def main():
             p = out / f"{stem}_t{i}.jpg"
             fit(img.crop(box)).save(p, "JPEG", quality=90)
             paths.append(p)
+    gold.log_view(out / "view_log.csv", args.scene, args.photo)
     for p in paths:
         print(p)
 

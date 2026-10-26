@@ -114,3 +114,10 @@ def test_at_g_16_check_stats_measure_ai_error_on_audit_and_who_was_right_in_revi
     r = st["review"].set_index("category").loc["blade"]
     assert r.human_sided_with_ai == pytest.approx(1.0) and r.human_sided_with_silver == pytest.approx(0.5)
     assert 0 < st["human_share"] < 1
+
+
+def test_at_g_18_view_guard_remembers_viewed_photos(tmp_path):
+    log = tmp_path / "view_log.csv"
+    assert not gold.was_viewed(log, "s1", "a")
+    gold.log_view(log, "s1", "a")
+    assert gold.was_viewed(log, "s1", "a") and not gold.was_viewed(log, "s1", "b")

@@ -269,3 +269,24 @@ def check_stats(sources: pd.DataFrame) -> dict:
     n = len(sources)
     out["human_share"] = float((sources["source"] != "ai").mean()) if n else float("nan")
     return out
+
+
+# ---- View guard: no AI label without a produced view (SPEC R-G-2) ----------------------------
+def log_view(path, scene: str, photo: str, now: str | None = None) -> None:
+    """Remember that images of this photo were produced for the AI labeller."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    now = now or pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%dT%H:%M:%SZ")
+    new = not path.exists()
+    with open(path, "a", encoding="utf-8") as f:
+        if new:
+            f.write("scene_id,photo_id,viewed_at\n")
+        f.write(f"{scene},{photo},{now}\n")
+
+
+def was_viewed(path, scene: str, photo: str) -> bool:
+    path = Path(path)
+    if not path.exists():
+        return False
+    v = pd.read_csv(path)
+    return bool(((v["scene_id"] == scene) & (v["photo_id"] == photo)).any())

@@ -6,7 +6,7 @@
   python scripts/ai_label_write.py --status
 
 Writes data_meta/gold_ai.csv. One call sets all categories of one photo (re-running a photo replaces it).
-Only test-split photos are accepted. Confidence: high = clearly sure, med = fairly sure, low = unsure or the
+Only test-split photos are accepted, and only after ai_label_view.py has produced images for them (view guard). Confidence: high = clearly sure, med = fairly sure, low = unsure or the
 object would be tiny, dark or hidden. Low confidence sends the label to the human review set.
 """
 
@@ -21,6 +21,7 @@ import pandas as pd  # noqa: E402
 from ffs import config, gold  # noqa: E402
 
 PATH = config.META_DIR / "gold_ai.csv"
+VIEW_LOG = config.RESULTS_DIR / "gold" / "ai_views" / "view_log.csv"
 
 
 def main():
@@ -56,6 +57,9 @@ def main():
     test = set(split.loc[split.split == "test", "scene_id"])
     if args.scene not in test or not ((photos.scene_id == args.scene) & (photos.photo_id == args.photo)).any():
         sys.exit("Not a test photo.")
+    if not gold.was_viewed(VIEW_LOG, args.scene, args.photo):
+        sys.exit("Refusing: no view was produced for this photo. Run ai_label_view.py first, look at the images, "
+                 "and if an image does not load, do not label the photo.")
     labels = {k.strip(): int(v) for k, v in (kv.split("=") for kv in args.labels.split(","))}
     gold.upsert_ai_labels(PATH, args.scene, args.photo, labels, args.conf, args.note, args.labeller, cats)
     print("saved", args.scene, args.photo)
