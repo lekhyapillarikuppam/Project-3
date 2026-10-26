@@ -1,4 +1,4 @@
-"""Acceptance tests AT-A3-1 to AT-A3-10 (SPEC 4.4)."""
+﻿"""Acceptance tests AT-A3-1 to AT-A3-10 (SPEC 4.4)."""
 
 import numpy as np
 import pytest
@@ -96,3 +96,44 @@ def test_real_ocr_reads_a_synthetic_digit():
     box = find_markers(img)[0]
     result = read_marker(img, box, valid={3, 7, 9})
     assert result["marker_no"] == 7
+
+
+def _rotated_marker_image(text, angle):
+    """A marker drawn upright, then the whole picture turned by `angle` degrees about its centre."""
+    img = cluttered_background(900, 1200)
+    draw_marker(img, 500, 300, 150, 190, text)
+    turn = cv2.getRotationMatrix2D((575, 395), angle, 1.0)
+    return cv2.warpAffine(img, turn, (1200, 900), borderMode=cv2.BORDER_REPLICATE)
+
+
+def test_at_a3_12_rotated_marker_is_read():
+    pytest.importorskip("easyocr")
+    from ffs.markers import find_markers
+    from ffs.ocr import read_marker
+
+    img = _rotated_marker_image("12", 50)         # plain EasyOCR reads this as "4"
+    boxes = find_markers(img)
+    assert len(boxes) == 1
+    result = read_marker(img, boxes[0], valid={12, 16})
+    assert result["marker_no"] == 12
+
+
+def test_at_a3_13_closeup_with_ruler_strip_is_shrunk_and_read():
+    pytest.importorskip("easyocr")
+    from ffs.markers import crop_box, find_markers
+    from ffs.ocr import read_marker
+
+    img = cluttered_background(2400, 3000)
+    draw_marker(img, 800, 600, 1200, 1000, "12")
+    for i in range(10):                                   # a ruler-like strip of black bars near the bottom
+        y = 1500 + (i % 2) * 14
+        cv2.rectangle(img, (880 + i * 100, y), (930 + i * 100, y + 14), (0, 0, 0), -1)
+    boxes = find_markers(img)
+    assert len(boxes) == 1
+
+    out = preprocess_crop(crop_box(img, boxes[0]))[16:-16, 16:-16]   # drop the white border
+    assert out.shape[0] <= 220
+    n, _ = cv2.connectedComponents((out == 0).astype(np.uint8))
+    assert n - 1 == 2                                     # the two digits only, no ruler pieces
+
+    assert read_marker(img, boxes[0], valid={12, 16})["marker_no"] == 12

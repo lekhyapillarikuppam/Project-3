@@ -64,6 +64,21 @@ def constrained_read(raw: str, conf: float, valid: set[int],
     return None, "rejected"                                # rule 4
 
 
+MAX_HEIGHT = 220          # R-A3-9
+MIN_PIECE_FRAC = 0.30     # ink pieces shorter than this share of the tallest piece are dropped
+
+
+def drop_short_pieces(ink: np.ndarray) -> np.ndarray:
+    """Keep only ink pieces about as tall as the digits; the printed ruler strip is thin and short."""
+    n, labels, stats, _ = cv2.connectedComponentsWithStats(ink.astype(np.uint8))
+    if n <= 1:
+        return ink
+    heights = stats[:, cv2.CC_STAT_HEIGHT]
+    keep = heights >= MIN_PIECE_FRAC * heights[1:].max()
+    keep[0] = False                                         # label 0 is the background
+    return keep[labels]
+
+
 def preprocess_crop(crop_bgr: np.ndarray, params: MarkerParams = MarkerParams(),
                     min_height: int = 140, wide: bool = False) -> np.ndarray:
     """Black digits on a white background, large enough for OCR (R-A3-2).
@@ -90,6 +105,7 @@ def preprocess_crop(crop_bgr: np.ndarray, params: MarkerParams = MarkerParams(),
     else:                                                   # no yellow found: judge against the whole crop
         ink = v < ink_threshold(float(np.median(v)), params)
 
+    ink = drop_short_pieces(ink)                            # R-A3-9: no ruler strip, no specks
     out = np.full(v.shape, 255, np.uint8)
     out[ink] = 0
     ys, xs = np.where(ink)
@@ -99,6 +115,9 @@ def preprocess_crop(crop_bgr: np.ndarray, params: MarkerParams = MarkerParams(),
     scale = max(1.0, min_height / out.shape[0])
     if scale > 1.0:
         out = cv2.resize(out, None, fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
+    elif out.shape[0] > MAX_HEIGHT:                         # R-A3-9: EasyOCR misreads very large images
+        out = cv2.resize(out, None, fx=MAX_HEIGHT / out.shape[0], fy=MAX_HEIGHT / out.shape[0],
+                         interpolation=cv2.INTER_AREA)
     return cv2.copyMakeBorder(out, 16, 16, 16, 16, cv2.BORDER_CONSTANT, value=255)
 
 
@@ -139,11 +158,30 @@ def read_digits(prepped: np.ndarray, reader=None) -> tuple[str, float]:
     return text, conf
 
 
+RETRY_ANGLES = (30, -30, 60, -60)
+RETRY_BELOW_CONF = 0.60
+
+
+def rotate_on_white(img: np.ndarray, angle: float) -> np.ndarray:
+    """Turn a black-on-white image, growing the canvas so no corner is cut off."""
+    h, w = img.shape[:2]
+    turn = cv2.getRotationMatrix2D((w / 2, h / 2), angle, 1.0)
+    cos, sin = abs(turn[0, 0]), abs(turn[0, 1])
+    new_w, new_h = int(h * sin + w * cos), int(h * cos + w * sin)
+    turn[0, 2] += new_w / 2 - w / 2
+    turn[1, 2] += new_h / 2 - h / 2
+    return cv2.warpAffine(img, turn, (new_w, new_h), flags=cv2.INTER_LINEAR, borderValue=255)
+
+
 def read_marker(img_bgr: np.ndarray, box: Box, valid: set[int], reader=None,
                 params: MarkerParams = MarkerParams()) -> dict:
     """Full A3 step for one marker box. Keys match the `markers` contract columns."""
     crop = crop_box(img_bgr, box)
-    reads = [read_digits(preprocess_crop(crop, params, wide=w), reader) for w in (False, True)]
+    preps = [preprocess_crop(crop, params, wide=w) for w in (False, True)]
+    reads = [read_digits(p, reader) for p in preps]
     best = pick_best(reads, valid)
+    if best["status"] == "rejected" or best["conf"] < RETRY_BELOW_CONF:   # R-A3-7: tilted markers
+        reads += [read_digits(rotate_on_white(p, a), reader) for p in preps for a in RETRY_ANGLES]
+        best = pick_best(reads, valid)
     return {"raw_ocr": best["raw"], "ocr_conf": round(best["conf"], 3),
             "marker_no": best["marker_no"], "status": best["status"]}

@@ -40,3 +40,15 @@ def test_unlabelled_rows_are_ignored():
 def test_number_set_handles_blanks_and_floats():
     assert number_set("") == set() and number_set(None) == set()
     assert number_set("3; 7.0,12") == {"3", "7", "12"}
+
+
+def test_precision_counts_only_accepted_and_snapped_numbers_in_the_photo():
+    truth, photos, markers = tables()
+    markers["marker_no"] = ["3", "9", None]
+    markers["status"] = ["accepted", "snapped", "rejected"]
+    m = compute_metrics(truth, photos, markers)
+    assert math.isclose(m["precision"], 1 / 2)             # 3 is true, 9 is not, rejected is ignored
+
+
+def test_precision_is_nan_without_status_columns():
+    assert math.isnan(compute_metrics(*tables())["precision"])

@@ -29,6 +29,19 @@ def number_set(cell) -> set[str]:
     return {_norm(t) for t in str(cell).replace(",", ";").split(";") if t.strip()}
 
 
+def _precision(labelled: pd.DataFrame, markers: pd.DataFrame) -> float:
+    """Share of accepted/snapped numbers that are really in the photo (report only, SPEC 8.2)."""
+    if not {"marker_no", "status"} <= set(markers.columns):
+        return float("nan")
+    keys = ["scene_id", "photo_id"]
+    m = markers[markers["status"].isin(["accepted", "snapped"])].merge(
+        labelled[keys + ["true_set"]], on=keys, how="inner")   # labelled photos only
+    if m.empty:
+        return float("nan")
+    hits = [_norm(str(n)) in t for n, t in zip(m["marker_no"], m["true_set"])]
+    return float(sum(hits)) / len(hits)
+
+
 def compute_metrics(truth: pd.DataFrame, photos: pd.DataFrame, markers: pd.DataFrame) -> dict:
     t = truth.dropna(subset=["n_markers_visible"]).copy()
     t["n_markers_visible"] = t["n_markers_visible"].astype(float).astype(int)
@@ -58,6 +71,7 @@ def compute_metrics(truth: pd.DataFrame, photos: pd.DataFrame, markers: pd.DataF
         "read_accuracy": ratio(sum(len(a & b) for a, b in zip(df.true_set, df.read_set)), n_true),
         "raw_read_accuracy": ratio(sum(len(a & b) for a, b in zip(df.true_set, df.raw_set)), n_true),
     }
+    metrics["precision"] = _precision(df, markers)
     metrics["pass_finder"] = bool(metrics["finder_hit_rate"] >= MIN_FINDER_HIT)
     metrics["pass_read"] = bool(metrics["read_accuracy"] >= MIN_READ_ACCURACY)
 

@@ -268,6 +268,15 @@ Acceptance tests (synthetic images, `tests/test_markers.py`):
   list (decision D-010).
 - R-A3-6. OCR runs on both preprocessing variants; the result with the best status
   (accepted, then snapped, then rejected) wins, ties broken by confidence (decision D-011).
+- R-A3-7. Rotation retries (D-014a). If the best read so far is `rejected` or has `ocr_conf` below 0.60,
+  both preprocessed images are also rotated by +30, -30, +60 and -60 degrees (white fill, canvas grown so
+  nothing is cut) and read again. All reads compete under R-A3-6.
+- R-A3-8. (Tried in D-014b and **reverted**: scaling crops under 120 px to at least 200 px tall instead of
+  140 changed neither H, A nor precision. Not part of the pipeline.)
+- R-A3-9. Close-ups (D-014c). Ink pieces shorter than 30% of the tallest ink piece are dropped before
+  the ink-box crop (this removes the ruler strip printed on the marker and specks). After the crop the
+  image is scaled down, never up, so it is at most 220 px tall. Evidence: EasyOCR misread the 1,000 px
+  wide close-ups when given the full-size image.
 
 Acceptance tests (`tests/test_ocr.py`):
 
@@ -283,6 +292,10 @@ Acceptance tests (`tests/test_ocr.py`):
 - AT-A3-11. After preprocessing, the ink bounding box is at least 40% of the image height
   (before the white border), for a small digit on a large marker.
 - AT-A3-10. Synthetic two-digit markers keep both digits after preprocessing (two ink components).
+- AT-A3-12. A synthetic marker rotated 50 degrees (plain EasyOCR reads it as "4") is read correctly by `read_marker` (rotation retries, R-A3-7).
+- AT-A3-13. A synthetic marker with a ruler strip, drawn 1,200 px wide, is preprocessed to at most 220 px
+  tall with only the digit pieces left (R-A3-9), and is read correctly by `read_marker`.
+- AT-A3-14. (Removed with R-A3-8, see D-014b.)
 
 ### 4.5 Silver and gold labels  (Phase 3 and 4)
 
@@ -340,6 +353,9 @@ these photos does not leak into the detector evaluation.
 - **Finder false positives per photo** = sum of max(0, boxes found - n_markers_visible) / number of photos.
 - **Constrained read accuracy** A = (true numbers present in the photo's final read numbers) / (all true numbers).
 - **Raw read accuracy** = the same, but counting only exact `raw_ocr` matches, to show what the constrained read adds.
+- **Precision** (report only, not a gate) = among markers with status `accepted` or `snapped` in labelled
+  photos, the share whose `marker_no` is in that photo's `true_marker_nos`. It shows how often a number
+  the pipeline commits to is wrong. Aim for at least 0.90, flag it if lower.
 
 Pass marks (proposed): H at least 0.70 **and** A at least 0.60.
 
@@ -373,6 +389,7 @@ tried without any download.
 | D-010 | 2026-10-26 | One-digit OCR reads are accepted only by exact match, never snapped | Phase 1 demo: a read of "1" (true 12) snapped to 7 with confidence 1.0, because 7 is a confusable one-edit neighbour |
 | D-012 | 2026-10-26 | Crop the preprocessed image to the ink box before upscaling | Real EasyOCR failed on a small digit centred in a large white canvas (test_real_ocr_reads_a_synthetic_digit) |
 | D-011 | 2026-10-26 | Run OCR on a tight and a wide ink mask and keep the better result | Demo: the second digit sat outside the yellow region and was discarded |
+| D-014 | 2026-10-26 | Tuning round 2 (the last): (a) rotation retries R-A3-7, (b) min height 200 for small markers R-A3-8, (c) close-ups: drop short ink pieces and cap the OCR image at 220 px R-A3-9, (d) only if A stays below 0.60: fix small-blob rejection and split big blobs. Each change is kept only if it raises A or H and precision (report-only metric, SPEC 8.2) falls by at most 0.05. **Outcome** (H / A / precision / false boxes per photo; start 0.87 / 0.49 / 1.00 / 0.23): (a) kept, 0.87 / 0.57 / 1.00 / 0.23; (b) **reverted**, no change at all (0.87 / 0.57 / 1.00 / 0.23), R-A3-8 and AT-A3-14 removed; (c) kept, 0.87 / 0.65 / 0.98 / 0.23; (d) **not done**, because A reached 0.60 after (c). The small-blob ink-fraction rejection (th_0011 100604) is therefore still open | Evidence: close-ups th_0002 085557/085623/085653 have correct boxes and sharp digits but the 1,500 px preprocessed image (ruler strip included) gave "2", "" and "7"; shrinking to 220 px gave 12, 14 and 17 (conf 0.89-1.00). th_0011 100709 and 100552: the "12" is on the side face of a tent marker, rotated and sheared. th_0011 100604 "32" and "19": 33-43 px blobs rejected only by the ink fraction (0.014 and 0.000, minimum 0.02). **Caveat: tuning and evaluation use the same 31 hand-labelled photos, so the gate numbers are optimistic.** |
 | D-009 | 2026-10-26 | Take a file's scene only from a scene folder or a file-name token, never the archive folder; ignore macOS junk files | First real listing assigned all 40 exhibit lists to th_0001 and counted `._` files as photos |
 | D-013 | 2026-10-26 | Finder tuning round 1: H 16-40, S min 150, V min 55, min solidity 0.60, min area fraction 3e-5; ink is relative to the marker body, capped at V 90 (R-A2-8) | Gate failed (H 0.56, A 0.35). th_0006 photos are underexposed: marker body V about 98 (below v_min 110 and the old fixed ink threshold 90), S about 250, H 18-20. Higher S min keeps wood and walls out |
 
@@ -385,3 +402,4 @@ tried without any download.
 | 2026-10-26 | 4.1, 9 | Layout confirmed from the real zip; fixed scene detection and junk files (R-A0-4, R-A0-5, D-009) |
 | 2026-10-26 | 4.1, 4.4, 8.1, 9 | Demo run on the laptop: one-digit snapping banned, two OCR mask variants (R-A3-5, R-A3-6, D-010, D-011); ink-box crop (D-012); part 1 facts (no marker-free scene, two-digit numbers) |
 | 2026-10-26 | 4.3, 9 | Gate failed (H 0.56, A 0.35); tuning round 1: relative ink rule R-A2-8, new thresholds in R-A2-2 and R-A2-3, AT-A2-5, AT-A2-6, D-013 |
+| 2026-10-26 | 4.4, 8.2, 9 | Tuning round 2: R-A3-7 and R-A3-9 (R-A3-8 tried and reverted), AT-A3-12 and AT-A3-13, report-only precision metric, D-014 |

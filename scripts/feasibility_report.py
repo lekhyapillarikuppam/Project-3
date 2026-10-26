@@ -46,6 +46,7 @@ def main():
         f"Read accuracy (constrained) A:  {m['read_accuracy']:.2f}   (pass mark {MIN_READ_ACCURACY:.2f})  "
         f"{'PASS' if m['pass_read'] else 'FAIL'}",
         f"Read accuracy (raw OCR only):   {m['raw_read_accuracy']:.2f}",
+        f"Precision (report only):        {m['precision']:.2f}   (aim 0.90)",
         "",
         "Per scene:",
         m["per_scene"].round(2).to_string(index=False),
