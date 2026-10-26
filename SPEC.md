@@ -142,7 +142,7 @@ suggestion or a manual decision.
 
 ---
 
-## 4. Stage A: marker reader and answer key  (4.1-4.4 written in Phase 1; 4.5 in Phase 3)
+## 4. Stage A: marker reader and answer key  (4.1-4.4 written in Phase 1; 4.5-4.6 in Phase 2)
 
 ### 4.1 Raw data layout (confirmed 2026-10-26 from `fetch_scenes.py list`, part 1)
 
@@ -297,18 +297,80 @@ Acceptance tests (`tests/test_ocr.py`):
   tall with only the digit pieces left (R-A3-9), and is read correctly by `read_marker`.
 - AT-A3-14. (Removed with R-A3-8, see D-014b.)
 
-### 4.5 Silver and gold labels  (Phase 3 and 4)
+### 4.5 Silver labels (gold is Phase 3)
 
-TBD. Silver label construction from markers and exhibit categories, gold
-correction procedure, and the acceptance test: given a photo where marker 7 is
-read and exhibit 7 is a knife, silver has `blade` present for that photo.
+Silver = the answer key built automatically from markers and exhibit lists.
 
-## 5. Stage B: detectors  (filled in Phase 4)
+- R-S-1. A marker is **counted** if its `status` is `accepted` or `snapped` and its `marker_no` is in
+  that scene's exhibit list. Rejected boxes are never counted.
+- R-S-2. For a photo and a final category c: `present = 1` if at least one counted marker in the photo
+  belongs to an exhibit of category c (`exhibit_categories.csv`, rule rows and confirmed llm/manual rows only);
+  otherwise `present = 0`. `marker_nos` lists the counted numbers that made it 1.
+- R-S-3. Silver is a full matrix: every photo has one row for every final category (not `other`).
+- R-S-4. If a scene's list repeats a number (th_0014: 15 twice), the marker maps to all of those
+  exhibits: the union of their categories is present.
+- R-S-5. An **uncertain photo** is one with at least one rejected box. It is not stored in `silver.csv`;
+  it is computed from `markers.csv` and used as an analysis slice (silver quality on certain vs
+  uncertain photos).
+- R-S-6. Known limits of silver (these are what Phase 3 measures against gold): it misses evidence
+  that has no marker, markers the finder or reader missed (read accuracy was 0.65 on the gate sample,
+  so expect high precision and moderate recall), and exhibits whose marker is visible but the object is
+  out of frame. Silver is **not** truth; it is an estimate to be checked against hand-corrected gold.
+
+Acceptance tests (`tests/test_silver.py`):
+
+- AT-S-1. Marker 7 read as accepted in a photo, exhibit 7 is "knife": `blade` present with `marker_nos = "7"`;
+  every other category 0.
+- AT-S-2. A rejected box adds no label.
+- AT-S-3. A scene list with number 15 twice (knife, bottle): a counted marker 15 sets both `blade` and `bottle_glass`.
+- AT-S-4. The output has exactly (photos x final categories) rows and passes `validate(df, "silver")`.
+- AT-S-5. A counted-looking marker whose number is not in the scene's list is ignored.
+- AT-S-6. A photo with no markers has all categories 0 and is not uncertain; a photo with one rejected box is uncertain.
+
+## Add as section 4.6
+
+### 4.6 Data preparation (Phase 2)
+
+- R-P-1. `exhibits.csv`: all English exhibit lists of scenes th_0002 to th_0020 (th_0001 has a list but no
+  photos; keep its rows but it is not split). Read with `exhibits.read_exhibit_file`. Rows with an empty
+  marker number are dropped and counted in a printed report. Repeated numbers are kept.
+- R-P-2. `category_rules.csv` (version 1): case-insensitive regex patterns on the English description,
+  first match wins, from the candidate list in section 3.1 and from what the descriptions really contain.
+  Descriptions matching no rule are listed in `results/phase2/unmatched.csv`; Claude Code proposes a category
+  for each (`source = llm`, `confirmed = 0`). Only rows confirmed by the user (`confirmed = 1`) or rule rows count;
+  unconfirmed llm rows are treated as `other`.
+- R-P-3. Category counts are reported at exhibit level (exhibits and scenes per category) **before** any
+  model is run. Final categories follow the inclusion rule of section 3.2, checked on the test split once
+  silver exists. If fewer than 4 categories pass, the options are: add scenes from more parts of the dataset,
+  merge categories, or lower the bar with wider reported intervals. Choose one and log it as a decision.
+  **Never re-draw the split seed to make a category pass.**
+- R-P-4. `scene_split.csv`: only scenes that have photos. Shuffle with `config.SEED` (42), the first
+  `round(DEV_FRACTION * n)` scenes are `dev`, the rest `test`. Same seed gives the same split. `has_markers` is
+  1 if the scene's list has at least one marker. `n_photos` counts photos.
+- R-P-5. `photo_type` from the largest found marker box in the photo, as a fraction of photo height:
+  `close` if at least `CLOSE_MIN_FRAC` (0.30), `mid` if at least `MID_MIN_FRAC` (0.10), else `overview`;
+  `unknown` if no box was found. Thresholds live in `config.py`; any change is logged. Check 20 random
+  photos by eye when first built and record the result in the decision log.
+- R-P-6. `markers.csv` for all photos of the scenes in `scene_split.csv`, with the final pipeline (finder +
+  tight/wide OCR + rotation retries + constrained read against that scene's list), method `color_shape`.
+  The script is resumable: a scene already done is skipped, so new scenes can be added later.
+- R-P-7. `photos.csv`: width and height read from the image header, `relpath` under `data/raw/`.
+
+Acceptance tests (`tests/test_dataprep.py`):
+
+- AT-P-1. Rule matching: "knife with black handle" -> `blade`; "half-empty bottle of vodka" -> `bottle_glass`;
+  "mobile phone" -> `phone_electronics`; an unlisted word -> no match.
+- AT-P-2. The split is by scene, disjoint, deterministic for a seed, and about 40/60.
+- AT-P-3. Photo type thresholds: box height fraction 0.35 -> close, 0.15 -> mid, 0.03 -> overview, no box -> unknown.
+- AT-P-4. `exhibits.csv` drops rows with empty marker numbers and keeps repeated numbers.
+- AT-P-5. The marker script skips a scene that is already done.
+
+## 5. Stage B: detectors  (filled in Phase 3)
 
 TBD. Models (CLIP, OWLv2), prompts per category, tiling, thresholds
 (confident / uncertain / dropped), box merge rule.
 
-## 6. Evaluation protocol  (filled in Phase 4, frozen by git tag `protocol-v1`)
+## 6. Evaluation protocol  (filled in Phase 3, frozen by git tag `protocol-v1`)
 
 TBD. Planned content (from the project plan): scene-level dev/test split
 (about 40/60, fixed seed); per-category precision, recall, F1 and AP; macro
@@ -319,7 +381,7 @@ slices by photo type and marker read; marker-masking experiment with a
 random-patch control; false-positive rate on marker-free scenes; error analysis
 of about 30 false positives and 30 false negatives per method.
 
-## 7. Web app  (filled in Phase 6)
+## 7. Web app  (filled in Phase 4)
 
 TBD. Static site over precomputed results. Must have: landing, scene viewer,
 results, about and limits. Stretch: verification, scene summary, export,
@@ -392,6 +454,9 @@ tried without any download.
 | D-014 | 2026-10-26 | Tuning round 2 (the last): (a) rotation retries R-A3-7, (b) min height 200 for small markers R-A3-8, (c) close-ups: drop short ink pieces and cap the OCR image at 220 px R-A3-9, (d) only if A stays below 0.60: fix small-blob rejection and split big blobs. Each change is kept only if it raises A or H and precision (report-only metric, SPEC 8.2) falls by at most 0.05. **Outcome** (H / A / precision / false boxes per photo; start 0.87 / 0.49 / 1.00 / 0.23): (a) kept, 0.87 / 0.57 / 1.00 / 0.23; (b) **reverted**, no change at all (0.87 / 0.57 / 1.00 / 0.23), R-A3-8 and AT-A3-14 removed; (c) kept, 0.87 / 0.65 / 0.98 / 0.23; (d) **not done**, because A reached 0.60 after (c). The small-blob ink-fraction rejection (th_0011 100604) is therefore still open | Evidence: close-ups th_0002 085557/085623/085653 have correct boxes and sharp digits but the 1,500 px preprocessed image (ruler strip included) gave "2", "" and "7"; shrinking to 220 px gave 12, 14 and 17 (conf 0.89-1.00). th_0011 100709 and 100552: the "12" is on the side face of a tent marker, rotated and sheared. th_0011 100604 "32" and "19": 33-43 px blobs rejected only by the ink fraction (0.014 and 0.000, minimum 0.02). **Caveat: tuning and evaluation use the same 31 hand-labelled photos, so the gate numbers are optimistic.** |
 | D-009 | 2026-10-26 | Take a file's scene only from a scene folder or a file-name token, never the archive folder; ignore macOS junk files | First real listing assigned all 40 exhibit lists to th_0001 and counted `._` files as photos |
 | D-013 | 2026-10-26 | Finder tuning round 1: H 16-40, S min 150, V min 55, min solidity 0.60, min area fraction 3e-5; ink is relative to the marker body, capped at V 90 (R-A2-8) | Gate failed (H 0.56, A 0.35). th_0006 photos are underexposed: marker body V about 98 (below v_min 110 and the old fixed ink threshold 90), S about 250, H 18-20. Higher S min keeps wood and walls out |
+| D-015 | 2026-10-26 | Phase 1 gate passed: continue with colour + shape finder and EasyOCR (H 0.87, A 0.65, precision 0.98 on 31 photos, optimistic because tuned and tested on the same photos) | After D-013 and D-014 |
+| D-016 | 2026-10-26 | Phases 2 and 3 merged into one Phase 2 (data, categories, split, photo types, markers on all photos, silver); old phases 4+5 merged into Phase 3 (gold, Kaggle models, freeze, test evaluation); web app is Phase 4 | Speed; the user asked to combine phases |
+| D-017 | 2026-10-26 | Split seed is never re-drawn to make a category pass the inclusion rule | Protects the evaluation from seed shopping |
 
 ## 10. Change log
 
@@ -403,3 +468,4 @@ tried without any download.
 | 2026-10-26 | 4.1, 4.4, 8.1, 9 | Demo run on the laptop: one-digit snapping banned, two OCR mask variants (R-A3-5, R-A3-6, D-010, D-011); ink-box crop (D-012); part 1 facts (no marker-free scene, two-digit numbers) |
 | 2026-10-26 | 4.3, 9 | Gate failed (H 0.56, A 0.35); tuning round 1: relative ink rule R-A2-8, new thresholds in R-A2-2 and R-A2-3, AT-A2-5, AT-A2-6, D-013 |
 | 2026-10-26 | 4.4, 8.2, 9 | Tuning round 2: R-A3-7 and R-A3-9 (R-A3-8 tried and reverted), AT-A3-12 and AT-A3-13, report-only precision metric, D-014 |
+| 2026-10-26 | 4.5, 4.6, 9 | Phase 2 spec merged: silver labels (R-S-1 to R-S-6, AT-S-1 to AT-S-6), data preparation (R-P-1 to R-P-7, AT-P-1 to AT-P-5), D-015 to D-017; phases renumbered (D-016) |

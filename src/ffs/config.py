@@ -18,6 +18,10 @@ SEED = 42
 DEV_FRACTION = 0.4
 SPLITS = ("dev", "test")
 
+# Photo type from the largest marker box, as a fraction of photo height (SPEC R-P-5) ---
+CLOSE_MIN_FRAC = 0.30
+MID_MIN_FRAC = 0.10
+
 # Category inclusion rule (SPEC D-003) ----------------------------------------
 MIN_POSITIVE_PHOTOS = 15
 MIN_POSITIVE_SCENES = 6
