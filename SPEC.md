@@ -78,8 +78,8 @@ Identifiers: `scene_id` is the dataset's scene folder name (e.g. `th_0024`).
 | `data_meta/markers.csv` | marker found in a photo | `scene_id, photo_id, marker_idx, x, y, w, h, method, det_score, raw_ocr, ocr_conf, marker_no, status` |
 | `data_meta/silver.csv` | photo x category | `scene_id, photo_id, category, present, marker_nos` |
 | `data_meta/gold.csv` | photo x category (test scenes only) | `scene_id, photo_id, category, present, corrected, labelled_at` |
-| `results/clip_scores.csv` | photo x category x prompt | `scene_id, photo_id, category, prompt, score` |
-| `results/owlv2_raw.csv` | raw box | `scene_id, photo_id, category, prompt, score, x, y, w, h, tile` |
+| `results/clip_scores_<split>.csv` | photo x category x prompt | `scene_id, photo_id, category, prompt, score` |
+| `results/owlv2_raw_<split>.csv` | raw box | `scene_id, photo_id, category, prompt, score, x, y, w, h, tile` |
 
 Value rules:
 
@@ -98,6 +98,9 @@ Value rules:
 Design rule: OWLv2 is run once on a GPU with a low score cut-off and **all**
 boxes are saved to `owlv2_raw.csv`. Thresholds are tuned afterwards on a laptop
 from that file, so the model never has to be re-run.
+
+`clip_scores` and `owlv2_raw` are written per split: `results/clip_scores_dev.csv`, `results/clip_scores_test.csv`,
+`results/owlv2_raw_dev.csv`, `results/owlv2_raw_test.csv` (D-022). Columns are unchanged.
 
 ---
 
@@ -144,7 +147,7 @@ suggestion or a manual decision.
 
 ---
 
-## 4. Stage A: marker reader and answer key  (4.1-4.4 written in Phase 1; 4.5-4.6 in Phase 2)
+## 4. Stage A: marker reader and answer key  (4.1-4.4 written in Phase 1; 4.5-4.6 in Phase 2; 4.7 in Phase 3)
 
 ### 4.1 Raw data layout (confirmed 2026-10-26 from `fetch_scenes.py list`, part 1)
 
@@ -375,10 +378,76 @@ Acceptance tests (`tests/test_dataprep.py`):
 - AT-P-6. Multi-label rules: "Knife with reddish trace" gives `blade` and `red_brown_stain`; "Glass table"
   gives `other` only (exclusive rule), although "glass" alone would match `bottle_glass`.
 
-## 5. Stage B: detectors  (filled in Phase 3)
+### 4.7 Gold labels (Phase 3)
 
-TBD. Models (CLIP, OWLv2), prompts per category, tiling, thresholds
-(confident / uncertain / dropped), box merge rule.
+Gold = the answer key the project trusts: the same photo x category matrix as silver, filled by a person
+looking at the photo.
+
+- R-G-1. Gold is made for **all test photos** (545) and every final category. Dev photos get no gold.
+- R-G-2. **Blind labelling.** The labelling page never shows silver. The exhibit list of the scene is hidden
+  and opens only on request (key L), so the labeller can peek when unsure but is not led by it. Marker
+  numbers on the photo may be read like any other part of the photo.
+- R-G-3. Definition. `present = 1` if at least one object of the category is clearly recognisable in the
+  photo, even if small or partly hidden, whether or not it has a marker or is on the exhibit list.
+  ammunition: cartridge cases, bullets, shotgun shells. blade: knife, cutter, scissors, axe, saw, razor.
+  bottle_glass: bottles, drinking glasses, vases, glass containers, broken glass. paper_document: sheets,
+  notebooks, books, newspapers, envelopes, letters, ID. red_brown_stain: a red-brown stain or trace on
+  any surface or object (never called blood). Not recognisable even when zoomed: 0.
+- R-G-4. Completeness. `data_meta/gold.csv` is written only when every test photo has a label for every
+  final category (`scripts/import_gold.py`; `--allow-partial` is for progress checks and writes nothing with `--dry-run`).
+- R-G-5. `corrected = 1` when gold differs from silver for that photo and category. It is computed by the
+  import script, not by the labelling page.
+- R-G-6. Reliability. One annotator (the author). A second blind pass over 55 random test photos
+  (`make_gold_tool.py --pass2 55`), done at least a day after pass 1, gives per-category agreement and
+  Cohen's kappa (`import_gold.py --agreement`). A category with kappa below 0.70 is flagged in the results.
+- R-G-7. Silver-vs-gold report (`scripts/silver_vs_gold.py`, results in `results/silver_vs_gold.csv`):
+  per category, silver against gold on the test split: TP, FP, FN, TN, precision, recall, F1 and Cohen's
+  kappa, each with a 95% interval from a **scene-level cluster bootstrap** (resample scenes with replacement,
+  1000 resamples, seed `config.SEED`). Also the gold prevalence (share of test photos with the category).
+  Slices: by `photo_type`; certain vs uncertain photos (R-S-5); photos with at least one counted marker
+  vs none.
+- R-G-8. Reading the result: silver precision shows how often a marker-based label is wrong; silver recall
+  shows what the markers miss (objects without markers, unread markers). This is the project's answer to
+  "how trustworthy is the answer key".
+
+Acceptance tests:
+
+- AT-G-1 to AT-G-6: `tests/test_gold.py` (tool data has test photos only and no silver; pass 2 sample is
+  deterministic; import marks corrections; incomplete labels are refused; kappa; intra-rater agreement).
+- AT-G-7. Silver-vs-gold on a hand-computed example (for instance 10 photos, one category) gives the exact
+  TP, FP, FN, TN, precision, recall, F1 and kappa.
+- AT-G-8. The scene bootstrap is deterministic for a seed and resamples whole scenes (a photo never
+  appears without its scene-mates); with every photo in one scene per resample the interval collapses sensibly.
+- AT-G-9. Slice rows add up to the overall counts.
+
+## 5. Stage B: detectors
+
+Two zero-shot models score the photos. Neither ever sees silver, gold or exhibit lists (hard rule).
+
+- R-B-1. **CLIP baseline** (`openai/clip-vit-large-patch14`): the whole photo, padded to a square (nothing
+  is cropped away), against 3 text prompts per category. Score = image-text logit (cosine x 100). Photo-level
+  presence = max over the category's prompts above a per-category threshold (tuned on dev). Saved raw.
+- R-B-2. **OWLv2 main** (`google/owlv2-base-patch16-ensemble`): text queries per category (short noun phrases).
+  Each photo is run as the full photo (tile 0) and as 2 x 2 overlapping tiles (tiles 1 to 4, 25% overlap),
+  so small objects get more pixels. Boxes are mapped back to **original photo pixels**. All boxes with
+  score at least 0.05 are kept, at most 20 per photo, query and tile. Photo-level presence = best box score
+  of the category above a per-category threshold (tuned on dev).
+- R-B-3. Raw outputs are saved once per split and thresholds are tuned afterwards on a laptop, so models are
+  not re-run for tuning. The tile column lets dev decide whether tiling helps (use tile 0 only vs all tiles).
+- R-B-4. The code is `kaggle/stage_b_run.py` (one file, run on a Kaggle GPU) and writes
+  `clip_scores_<split>.csv`, `owlv2_raw_<split>.csv` and `run_info_<split>.json` (models, prompts, settings,
+  library versions). Prompts never use the word "blood".
+- R-B-5. Photos are shrunk to at most 2400 px on the long side for upload (`scripts/package_stage_b.py`);
+  boxes are scaled back using the original size in the manifest.
+- R-B-6. **Dev first.** Prompts and thresholds are tuned on dev only. **Test photos are packaged and scored
+  only after the git tag `protocol-v1` exists**; `package_stage_b.py --split test` refuses otherwise.
+- R-B-7. `scripts/import_stage_b.py` checks the returned CSVs against the data contracts and that every
+  photo of the split has CLIP scores.
+
+Acceptance tests (`tests/test_stage_b.py`): AT-B-1 tiles cover the photo and overlap; AT-B-2 boxes map back to
+original pixels; AT-B-3 boxes in the padding are dropped and others clamped; AT-B-4 top-k limit;
+AT-B-5 prompts avoid "blood" and cover the same categories for both models; AT-B-6 test packaging needs the
+freeze tag and shrinking keeps the original size.
 
 ## 6. Evaluation protocol  (filled in Phase 3, frozen by git tag `protocol-v1`)
 
@@ -390,6 +459,13 @@ agreement (precision, recall, Cohen's kappa); scores against silver and gold;
 slices by photo type and marker read; marker-masking experiment with a
 random-patch control; false-positive rate on marker-free scenes; error analysis
 of about 30 false positives and 30 false negatives per method.
+
+### 6.1 Freeze checklist
+
+Before the tag `protocol-v1` is created, these are written down and committed: final categories (D-020), prompts
+and queries, the tiling choice, per-category thresholds for CLIP and OWLv2, the box merge rule, the photo-level
+decision rule, the metric definitions, and the code commit. After the tag, nothing about them changes. The test
+split is scored once. Any later change is a new, clearly labelled experiment, not part of the main result.
 
 ## 7. Web app  (filled in Phase 4)
 
@@ -471,6 +547,10 @@ tried without any download.
 | D-019 | 2026-10-26 | Use all four parts of the FFS dataset on Zenodo (V 0.1, all CC BY-NC-SA 4.0, access open): part 1 record 17151982 `th_0001-0020.zip`, part 2 record 17164106 `th_0021-0040.zip` (42.3 GB), part 3 record 17164834 `th_0041-0060.zip` (40.1 GB), part 4 record 17165128 `th_0061_0080.zip` (47.5 GB). Only photos, English exhibit lists and description sheets are fetched, with `fetch_scenes.py --part N`. The dataset pages say newer versions exist; they were **not** used. Part 3 has no scenes 45, 47, 49, 51, 53; part 4's top folder is `th_0061_0080` | The merged data gives more scenes per category (D-003 inclusion rule needs 6 test scenes). Licences read from the Zenodo API on the same day; same share-alike terms as part 1, so the project keeps CC BY-NC-SA 4.0 for derived data |
 | D-020 | 2026-10-26 | **Final categories** (mechanical, rule of 3.2 on the silver test split, seed 42: 26 dev and 40 test scenes, 350 dev and 545 test photos): `ammunition`, `blade`, `bottle_glass`, `paper_document`, `red_brown_stain`. Merged into `other` for per-category metrics: `firearm`, `footwear`, `phone_electronics` | Test positives (photos / scenes): ammunition 43 / 7, blade 19 / 6, bottle_glass 59 / 13, paper_document 52 / 14, red_brown_stain 87 / 13 pass; firearm 20 / 4, footwear 10 / 4, phone_electronics 13 / 6 fail (15 photos and 6 scenes needed). Dev positives (photos / scenes): ammunition 45 / 5, blade 8 / 3, bottle_glass 46 / 7, firearm 25 / 3, footwear 5 / 2, paper_document 32 / 9, phone_electronics 13 / 5, red_brown_stain 40 / 7. Exhibit-level counts (exhibits / scenes, rule and confirmed rows, 531 exhibits in 75 scenes): blade 16 / 13, firearm 10 / 9, ammunition 38 / 17, bottle_glass 49 / 26, phone_electronics 15 / 14, paper_document 35 / 28, footwear 9 / 8, red_brown_stain 43 / 22, other 321 / 74. `blade` passes only just (6 scenes). Five categories pass, so the "fewer than 4" options of R-P-3 are not needed |
 | D-021 | 2026-10-26 | No third finder tuning round; the known gaps are accepted and measured instead | Known gaps: th_0005 markers have body V 22 to 50, below `v_min` 55; th_0008 has photos with a blue colour cast (marker body H about 130, S about 67); many dark photos give `unknown` photo type. Silver recall is therefore expected to be low in those scenes. Gold correction of every test photo (Phase 3) fixes the test side; dev is not corrected. No scene with photos is marker-free in parts 1 to 4 (the sheet rows with zero markers also have zero photographs: th_0039, th_0041, th_0045, th_0047, th_0049, th_0051, th_0053, th_0080), so the false-positive check uses photos in which no marker is visible, plus the marker-masking experiment |
+| D-022 | 2026-10-27 | Stage B outputs are one file per split (dev, test) | Test is scored only after the freeze |
+| D-023 | 2026-10-27 | Gold labelling is blind (silver hidden, exhibit list on request), one annotator, with a blind second pass on 55 photos | Avoids anchoring on silver; reliability measured with kappa |
+| D-024 | 2026-10-27 | CLIP baseline sees the whole photo padded to a square; OWLv2 sees the photo plus 2x2 tiles; tiling decided on dev from the saved tile column | Fair baseline; small objects need more pixels |
+| D-025 | 2026-10-27 | Models: CLIP ViT-L/14 and OWLv2 base ensemble; photos shrunk to 2400 px for upload | Fits a free Kaggle GPU; boxes mapped back to original pixels |
 
 ## 10. Change log
 
@@ -486,3 +566,4 @@ tried without any download.
 | 2026-10-26 | 4.6, 9 | Category rules multi-label with exclusive `other` rules (R-P-2, AT-P-6, D-018); llm suggestions confirmed except th_0002 #16 (manual, other) |
 | 2026-10-26 | 4.1, 9 | Parts 2-4 of the dataset added (config URLs, `fetch_scenes.py --part` after the command, D-019) |
 | 2026-10-26 | 3.1, 3.2, 4.5, 9 | Phase 2 finished: final categories chosen mechanically (D-020, `config.FINAL_CATEGORIES`), `silver.csv` limited to them (R-S-7), no third tuning round (D-021); stray heading from the merged text removed |
+| 2026-10-27 | 2, 4.7, 5, 6.1, 9 | Phase 3 spec merged: gold labels (R-G-1 to R-G-8, AT-G-1 to AT-G-9), Stage B (R-B-1 to R-B-7, AT-B-1 to AT-B-6), freeze checklist, per-split Stage B files, D-022 to D-025 |

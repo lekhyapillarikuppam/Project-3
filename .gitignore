@@ -33,3 +33,10 @@ results/phase2/photos_parts/
 results/phase2/*.log
 results/phase2/*.png
 results/phase2/silver_candidates.csv
+
+# Phase 3: generated labelling pages, exports and Stage B files (data_meta/gold.csv is committed once it exists)
+results/gold/gold_tool_*.html
+results/gold/*export*.csv
+results/stage_b/
+results/clip_scores_*.csv
+results/owlv2_raw_*.csv

@@ -16,7 +16,7 @@ Phases were merged on 2026-10-26 (SPEC D-016).
 - [x] Two tuning rounds (D-013, D-014); gate passed: H 0.87, A 0.65, precision 0.98 (optimistic: same photos used to tune and test)
 - [ ] Confirm license terms; decide how mannequin photos are shown
 
-## Phase 2: Data, categories, split, photo types, markers, silver
+## Phase 2: Data, categories, split, photo types, markers, silver (done)
 
 - [x] Merge Phase 2 spec into `SPEC.md` (4.5, 4.6, D-015 to D-017)
 - [x] Tests first: `tests/test_dataprep.py` (AT-P-1 to AT-P-5), `tests/test_silver.py` (AT-S-1 to AT-S-6)
@@ -29,20 +29,29 @@ Phases were merged on 2026-10-26 (SPEC D-016).
 - [x] Other parts of the dataset found, licences read (CC BY-NC-SA 4.0), downloaded (D-019)
 - **Gate (passed):** all tests pass; 5 categories pass the inclusion rule; D-020 and D-021 logged
 
-## Phase 3: Gold labels, models, freeze, test evaluation
+## Phase 3: Gold labels, models, freeze, test evaluation (see `docs/PHASE3_STEPS.md`)
 
-- [ ] Labelling screen or notebook; correct silver to gold for all test photos
-- [ ] Silver vs gold: precision, recall, kappa per category
-- [ ] CLIP baseline prompts and dev scores; OWLv2 prompts and tiling, run once on Kaggle (`owlv2_raw.csv`)
-- [ ] Always-present baseline; tune two thresholds per category on dev; box merge
-- [ ] Freeze prompts, thresholds, code; tag `protocol-v1`; fill `SPEC.md` sections 5-6
-- [ ] Run the frozen pipeline once on test and marker-free scenes
+Part 1 (code, spec, tools)
+- [x] Merge Phase 3 spec into `SPEC.md` (4.7, 5, 6.1, D-022 to D-025)
+- [ ] Gold tool, import, agreement: `make_gold_tool.py`, `import_gold.py` (AT-G-1 to AT-G-6)
+- [ ] Silver-vs-gold report code: `silver_gold.py`, `silver_vs_gold.py` (AT-G-7 to AT-G-9)
+- [ ] Stage B packaging, Kaggle script, import (AT-B-1 to AT-B-6)
+
+Part 2 (your labelling and runs)
+- [ ] Label all 545 test photos blind (gold pass 1); `data_meta/gold.csv` written
+- [ ] Second blind pass on 55 photos at least a day later; kappa per category (R-G-6)
+- [ ] Silver vs gold: precision, recall, F1, kappa with scene-cluster bootstrap intervals, slices (R-G-7)
+- [ ] Stage B on dev (Kaggle): CLIP and OWLv2 raw files; import
+- [ ] Tune prompts, tiling choice and two thresholds per category on dev; always-present baseline; box merge
+- [ ] Freeze checklist (6.1) committed; tag `protocol-v1`; fill `SPEC.md` section 6
+
+Part 3 (test evaluation, only after the tag)
+- [ ] Package and score test photos once (Kaggle); import
 - [ ] Precision, recall, F1, AP per category; macro average; scene-level bootstrap intervals; paired CLIP vs OWLv2
-- [ ] Scores against silver and gold; slices by photo type and marker read
-- [ ] Marker-masking experiment with random-patch control; false-positive rate on marker-free scenes
+- [ ] Scores against silver and against gold; slices by photo type and marker read
+- [ ] Marker-masking experiment with random-patch control; false-positive rate on photos with no marker visible
 - [ ] Error analysis (about 30 FP and 30 FN per method)
 - [ ] Export `results.json`, per-scene detections JSON, figures
-
 ## Phase 4: Web app and report
 
 - [ ] Static site scaffold; landing with notice, content note, attribution
