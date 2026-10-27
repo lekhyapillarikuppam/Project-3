@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viva Prep Conversation</title>
+<style>
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--card:#fff;--line:#e7e5e4;--accent:#1c7ed6;--code:#f5f5f4}
+@media (prefers-color-scheme:dark){:root{--bg:#161514;--fg:#e7e5e4;--muted:#a8a29e;--card:#1f1d1c;--line:#34312f;--accent:#74c0fc;--code:#292524}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.5rem;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 20px;font-size:.92rem}
+.bar{display:flex;gap:8px;margin-bottom:16px}
+.bar button{border:1px solid var(--line);background:var(--card);color:var(--fg);padding:6px 12px;border-radius:8px;cursor:pointer;font:inherit;font-size:.9rem}
+.bar button:hover{border-color:var(--accent)}
+.turn{border:1px solid var(--line);background:var(--card);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.q{padding:14px 16px;border-bottom:1px solid var(--line)}
+.q .tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.q p{margin:0;white-space:pre-wrap}
+details summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";color:var(--muted);font-size:1.2rem}
+details[open] summary::after{content:"\2212"}
+.a{padding:4px 16px 16px;overflow-x:auto}
+.a h1,.a h2,.a h3,.a h4{margin:1.1em 0 .4em;line-height:1.3}
+.a h1{font-size:1.25rem}.a h2{font-size:1.12rem}.a h3{font-size:1.02rem}.a h4{font-size:.95rem}
+.a p{margin:.5em 0}
+.a ul,.a ol{margin:.4em 0;padding-left:1.4em}
+.a code{background:var(--code);padding:1px 5px;border-radius:4px;font:.88em ui-monospace,Consolas,monospace}
+.a pre{background:var(--code);padding:10px 12px;border-radius:8px;overflow-x:auto}
+.a pre code{padding:0;background:none}
+.a table{border-collapse:collapse;margin:.6em 0;font-size:.9rem}
+.a th,.a td{border:1px solid var(--line);padding:5px 9px;text-align:left;vertical-align:top}
+.a th{background:var(--code)}
+.a hr{border:0;border-top:1px solid var(--line);margin:1em 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Viva Prep Conversation</h1>
+<p class="sub">Project: AI-Assisted Evidence Inventory (TraceLens). Click a turn's answer to expand it.</p>
+<div class="bar"><button id="open">Expand all</button><button id="close">Collapse all</button></div>
+<div id="turns"></div>
+</main>
+
+<script>
+// Each turn: the user's message and the assistant's reply (as light markdown).
+const TURNS = [
+{
+q: "/init: analyze this codebase and create a CLAUDE.md file for future Claude Code sessions.",
+a: `I rewrote the existing \`CLAUDE.md\` rather than starting a new one.
+
+- **Stale status removed:** it said "Phase 0 done, don't start Phase 1". The git log, the \`protocol-v1\` tag and \`TASKS.md\` show the project is well past that. The rule now says to work only on the phase you name and points to \`TASKS.md\` for status.
+- **Frozen protocol added:** the protocol is frozen under \`protocol-v1\`, and changes count as a labelled new experiment.
+- **Commands added:** environment setup, \`pytest\` (including how to run a single file or test), and a note that script docstrings show usage.
+- **Architecture section added:** Stage A builds the silver answer key, the gold labels check it, and Stage B (CLIP and OWLv2) never sees either. Evaluation then reads \`protocol/protocol_v1.json\`. \`kaggle/stage_b_run.py\` is the single source of prompts and models, and \`schemas.validate\` guards every CSV.
+- **Smaller notes:** \`app/\` is unused (the web app builds into \`docs/\`) and the data carries the CC BY-NC-SA 4.0 license.
+
+\`README.md\` is also out of date: its phase table still says Phases 2-6 are "not started". I left it alone since you didn't ask for that.`
+},
+{
+q: "I am preparing for viva. Tell me what is the purpose of this project and what is happening in it from start to end, based on the actual implementations.",
+a: `## 1. Purpose
+
+**Research question:** *How accurately can CLIP and OWLv2, with no training, tell which evidence categories appear in a photo of a staged crime scene? And how trustworthy is the marker-based answer key they are scored against?*
+
+Two questions in one project:
+1. **Detector question.** How good are off-the-shelf zero-shot models at finding evidence in crime-scene photos?
+2. **Ground-truth question.** The dataset has no per-photo labels, so I built them from the scene's own markers and exhibit lists. How reliable is that answer key?
+
+**Dataset.** FFS (Fictional Forensic Scenes, University of Lausanne, Zenodo, CC BY-NC-SA 4.0). 66 scenes with photos. Each scene has yellow numbered evidence markers and an exhibit list, such as "#7 knife, #8 vodka bottle".
+
+**Scope.** Presence only: "is a blade in this photo?". No counting, no training, and no claim that an object was used in a crime. Stains are called "red-brown stain", never "blood".
+
+## 2. The pipeline, start to end
+
+### Phase 1: feasibility gate
+- **Marker finder:** finds yellow placards by colour (HSV) and shape, with dark "ink" inside. No strict triangle test, because tent placards look like different shapes (D-007).
+- **OCR:** EasyOCR reads the number, constrained to numbers in that scene's exhibit list. One-digit reads are never "snapped" to a neighbour (D-010).
+- **Gate:** hand-labelled 31 photos. Pass marks were finder hit rate >= 0.70 and read accuracy >= 0.60. Result: H 0.87, A 0.65, precision 0.98. This is optimistic, because the same photos were used to tune and to test (D-015).
+
+### Phase 2: data, categories, split, silver labels
+- \`fetch_scenes.py\` streams single files out of remote Zenodo zips, so there is no 40+ GB download.
+- Exhibit spreadsheets become \`exhibits.csv\` (about 530 exhibits).
+- \`category_rules.csv\` is a regex table mapping descriptions to categories. It is multi-label (D-018). Unmatched descriptions got an LLM suggestion that I confirmed by hand.
+- **Scene-level dev/test split**, about 40/60, seed 42 (26 dev and 40 test scenes). The seed is never re-drawn (D-017).
+- **Silver labels:** marker #7 maps to the exhibit list, which maps to a category, so that category is present in the photo.
+- **Final categories chosen mechanically (D-020):** at least 15 test photos from at least 6 scenes. Five passed: ammunition, blade, bottle_glass, paper_document, red_brown_stain.
+
+### Phase 3a: gold labels
+Silver is automatic and incomplete, so gold labels were built for the 545 test photos x 5 categories.
+- An AI labels all photos (D-026).
+- A human then blindly re-decides every AI-vs-silver disagreement and audits 60 random fully-agreed photos (D-027, D-031).
+- Provenance is kept per row in \`gold_sources.csv\` (D-028).
+
+### Phase 3b: Stage B detectors
+**Detectors never see silver, gold or exhibit lists.**
+- **CLIP** (ViT-L/14, baseline): the whole photo padded to a square, scored against 3 prompts per category. Photo score is a softmax across the 5 categories of the mean prompt logit.
+- **OWLv2** (base ensemble, main): open-vocabulary detector returning boxes plus scores. Photo score is the best box score. Tiling gave no gain on dev, so the final choice is tile 0 only (D-029).
+- Heavy runs were packaged for Kaggle; a local CPU run also exists.
+- **Tuning on dev only:** one threshold per category per model, maximising F1 against dev silver, stored in \`protocol/protocol_v1.json\`.
+
+### Phase 3c: freeze, then test evaluation
+- The git tag \`protocol-v1\` locks categories, prompts, thresholds and metrics. Scripts refuse to run on test photos without it.
+- \`evaluate_test.py\` scores test once, with precision, recall, F1 and AP per category, a scene-level bootstrap (1000 resamples, 95% CIs), a paired OWLv2-minus-CLIP comparison, and error lists.
+
+### Phase 4: demo app
+\`build_app.py\` builds a static site in \`docs/\` ("TraceLens") with 30 sample photos.
+
+## 3. Actual results
+
+| System | Precision | Recall | F1 | AP |
+|---|---|---|---|---|
+| CLIP | 0.45 | 0.37 | **0.29** [0.22-0.35] | 0.42 |
+| OWLv2 | 0.67 | 0.53 | **0.56** [0.49-0.61] | 0.69 |
+
+- OWLv2 beats CLIP by +0.275 macro F1 (paired CI 0.19-0.35).
+- OWLv2 is best on bottle_glass (F1 0.72) and red_brown_stain (precision 0.89). CLIP's ammunition precision is 0.12. Blade is weak for both.
+- **Silver vs gold (macro):** precision 0.89, recall 0.48, F1 0.62, kappa 0.57. Markers are trustworthy when seen, but they miss about half of the true positives.
+- Scoring against silver gives lower numbers than against gold (OWLv2 macro F1 0.40 vs 0.56).
+
+## 4. Likely viva questions
+- **Why scene-level split and bootstrap?** Photos from one scene are near-duplicates; a photo-level split would leak and photo-level CIs would be too narrow.
+- **Why tune on dev only and freeze a tag?** To avoid test leakage and threshold-shopping.
+- **Why is silver recall low?** A photo only counts an object if its marker is visible and read correctly.
+- **Is the AI-labelled gold circular?** It is a weakness. The mitigation is blind human review of disagreements plus the 60-photo random audit, and provenance is kept per row.
+- **Why softmax for CLIP?** There is no "none" prompt, so a photo with no object shows no high share and falls under every threshold.
+- **Limitations:** a feasibility sample of only 31 photos, wide blade CIs, staged mannequin scenes, AI-assisted gold labels.
+
+## 5. One thing to be honest about
+My search of \`scripts/\` and \`src/\` found no marker-masking experiment code, although SPEC goal G3 lists it. Later I found D-032, which records that it was dropped for time. Also, I could not run Python in that shell (pandas was not installed), so the numbers come from \`results/eval/summary.md\`, \`SPEC.md\`, \`protocol_v1.json\` and CSV row counts.`
+},
+{
+q: "OK, tell me how the app built works, like what should the user expect from it.",
+a: `# How the app works and what a user should expect
+
+The app is called **TraceLens**. It is a static, read-only results viewer, not a live detector. The user cannot upload a photo and get predictions. Everything shown was computed beforehand by \`evaluate_test.py\`.
+
+## How it is built
+- \`scripts/build_app.py\` reads \`photo_predictions.csv\`, \`test_metrics.csv\` and \`silver_vs_gold.csv\`.
+- It picks **30 test photos**, deterministically (seed 42): 4 gold-positive photos per category, then random others up to 30.
+- It shrinks each photo to a 1000 px JPEG in \`docs/img/\`, writes the numbers to \`docs/data.js\`, and copies \`app_template.html\` to \`docs/index.html\`.
+- Plain HTML and JavaScript, no server or backend. Published with GitHub Pages.
+
+## What the user sees
+There are three tabs.
+
+### 1. Photos (the gallery)
+- A grid of the 30 sample photos. Each tile shows the scene ID and chips for the categories the **gold** labels say are present, or "none of the five".
+- A dropdown filters by "Gold has: blade" and so on.
+
+### 2. Photo detail (click a tile)
+- The photo with a table of one row per category: **Gold** yes/no, **Silver** yes/no, **CLIP** and **OWLv2** yes/no with the model score in brackets. Each model cell is **green if it agrees with gold and red if not**.
+- A model says "yes" when its score reaches the frozen per-category threshold.
+- **Checkboxes** draw OWLv2's best box for that category on the photo.
+- The photo type (overview, mid or close) is shown.
+
+### 3. Results
+- Two tables (OWLv2 main, CLIP baseline) with F1 and AP with 95% CIs, precision and recall per category, all against gold.
+- A "How far can the automatic answer key be trusted?" table: silver judged against gold (precision, recall, F1, kappa).
+
+### 4. About
+Method, limits, and the FFS attribution (CC BY-NC-SA 4.0, non-commercial).
+
+## What the user should take away
+1. OWLv2 beats CLIP: macro F1 about 0.56 against 0.29.
+2. The boxes are only OWLv2's best-scoring box for a category, not verified object locations.
+3. Silver is precise but misses many visible items (recall about 0.48).
+4. These are "candidate observations", not conclusions about a crime.
+5. This is a demo of 30 photos; the full metrics come from all 545 test photos in 40 scenes.
+
+## Things to be ready to explain
+- The app has no interactivity beyond filtering, tabs and box toggles. The "stretch" features in SPEC section 7 were not built.
+- A correction to my earlier briefing: **D-031** says human review covered only the AI-vs-silver disagreements; low-confidence-only labels kept the AI label. **D-032** confirms the marker-masking experiment, photo-type slices and tiling on test were deliberately dropped for time.
+
+I had not opened the app in a browser; this description comes from reading \`app_template.html\` and \`build_app.py\`.`
+},
+{
+q: "What are the categories into which the objects were divided, and on what basis?",
+a: `# The categories and how they were chosen
+
+There are two stages: eight candidate categories, then five final ones. They describe *types of evidence* and were taken from the exhibit lists rather than invented.
+
+## Step 1: eight candidate categories
+
+| Category | Typical exhibit wording |
+|---|---|
+| \`blade\` | knife, cutter, scissors, axe, saw, razor |
+| \`firearm\` | pistol, revolver, rifle, shotgun, gun |
+| \`ammunition\` | cartridge, casing, bullet |
+| \`bottle_glass\` | bottle, vodka, glass |
+| \`phone_electronics\` | phone, laptop, computer, tablet |
+| \`paper_document\` | A4 sheets, paper, passport, ID card |
+| \`footwear\` | shoes, boots, sandals, sneakers |
+| \`red_brown_stain\` | reddish trace/mark, stain, red-brown |
+| \`other\` | everything that fits none of the above |
+
+## Step 2: how each exhibit got its category
+An exhibit's description was mapped by \`data_meta/category_rules.csv\`, a versioned table of case-insensitive regex patterns. This was done by text, not by looking at photos.
+- **Multi-label (D-018):** every matching rule adds its category. A "knife with reddish trace" is both blade and red_brown_stain.
+- **Exclusive \`other\` rules:** "glass table" and body words go to \`other\` only, so a glass table stays out of bottle_glass and mannequin bodies are never a target.
+- **No matching rule:** an LLM suggested a category and I confirmed it by hand. Each row records its source (rule, llm or manual).
+
+Most exhibits went to \`other\` (about 320 of 537 rows, mostly confirmed LLM suggestions), which is why the final set is small.
+
+## Step 3: five final categories, chosen mechanically (D-003, D-020)
+The inclusion rule: a category is kept only if the **test** split has at least **15 positive photos from at least 6 scenes**. It was applied once to the silver table with seed 42, and the seed was never re-drawn (D-017).
+
+| Category | Test photos / scenes | Result |
+|---|---|---|
+| ammunition | 43 / 7 | kept |
+| blade | 19 / 6 | kept |
+| bottle_glass | 59 / 13 | kept |
+| paper_document | 52 / 14 | kept |
+| red_brown_stain | 87 / 13 | kept |
+| firearm | 20 / 4 | dropped (too few scenes) |
+| phone_electronics | 13 / 6 | dropped (too few photos) |
+| footwear | 10 / 4 | dropped |
+
+## Why this basis
+- The models are not trained, so the categories come from the data, which keeps labels traceable to investigators' own descriptions.
+- The statistical rule gives reliable numbers; a category with 10 positive photos would give meaningless CIs.
+- It was mechanical and fixed in advance, which blocks choosing categories after seeing model results.
+- Presence only (D-005), because FFS has no box annotations.
+
+## Caveats
+- The rule used **silver** counts, which are underestimates (silver recall about 0.48). Gold shows more positives, for example blade 51 against 19. Firearm, footwear and phone might have passed under gold, and I did not see a logged revisit of D-020.
+- Blade remains the weakest category, so its counts are the least stable.
+- \`red_brown_stain\` is a visual category I deliberately did not call "blood", and \`bottle_glass\` is a mixed, coarser class.`
+},
+{
+q: "Tell me major interview points I should know.",
+a: `# Major interview points
+
+## 1. The 30-second pitch
+"I evaluated two zero-shot models, CLIP and OWLv2, on staged crime-scene photos from the FFS dataset. The dataset has no per-photo labels, so I built an answer key from the scenes' own numbered markers and exhibit lists, then measured how trustworthy that key is. OWLv2 reached macro F1 0.56 against CLIP's 0.29. The marker-based key is precise (0.89) but misses about half the true positives (recall 0.48)."
+
+## 2. What is novel or distinctive
+- Two questions at once: detector quality and ground-truth quality.
+- Ground truth built from the data itself: marker, then exhibit list, then category.
+- Honest evaluation design: scene-level split, a frozen protocol (git tag), bootstrap CIs.
+- No training; everything is zero-shot.
+
+## 3. Methodology choices you must justify
+
+| Choice | Reason |
+|---|---|
+| Split by **scene**, not photo (about 40/60, seed 42) | Photos from one scene are near-duplicates, so a photo-level split would leak |
+| **Scene-level bootstrap** (1000 resamples) | Photos in a scene are not independent |
+| **Tune on dev only, freeze \`protocol-v1\`, score test once** | Prevents test leakage and threshold shopping |
+| Categories by a **mechanical rule** | Avoids choosing categories after seeing model results |
+| **Presence-level metrics only** | FFS has no box annotations |
+| **Paired** OWLv2-minus-CLIP comparison | Same scene resamples, so the difference is tested properly |
+| Threshold per category per model | Scores from different categories are not on the same scale |
+| CLIP photo score is a **softmax across categories** | There is no "none" prompt |
+
+## 4. Key numbers to memorise
+- 66 scenes, 26 dev and 40 test; 545 test photos; 5 categories.
+- Marker feasibility gate: hit rate 0.87, read accuracy 0.65, precision 0.98, on only 31 photos (optimistic).
+- OWLv2 macro vs gold: precision 0.67, recall 0.53, **F1 0.56** [0.49-0.61], AP 0.69.
+- CLIP macro: **F1 0.29** [0.22-0.35], AP 0.42.
+- Paired difference: +0.275 F1, CI [0.19, 0.35].
+- Silver vs gold: precision 0.89, recall 0.48, F1 0.62, kappa 0.57.
+
+## 5. Findings and what they mean
+1. OWLv2 beats CLIP: it localises small objects with a box score, while CLIP scores the whole image.
+2. CLIP over-fires: high recall but low precision on ammunition.
+3. The silver key is conservative: an object counts only if its marker is visible and read correctly.
+4. Scoring against silver understates the models (OWLv2 macro F1 0.40 against silver, 0.56 against gold).
+5. Blade and stain are the hardest.
+
+## 6. Limitations (say these before they are asked)
+- Gold is AI-labelled and human-checked, not fully human. The human reviewed only AI-vs-silver disagreements (D-031) plus a 60-photo audit. One annotator.
+- Feasibility sample is small (31 photos) and tuned on itself.
+- Categories were chosen using silver counts, which underestimate.
+- Dropped for time (D-032): marker-masking experiment, photo-type slices on test, tiling on test.
+- Staged data with mannequins; it will not transfer directly to real casework.
+- Wide CIs on blade.
+
+## 7. Questions they will likely ask
+- **Why is OWLv2 better?** Open-vocabulary detection with a box score suits small objects in clutter.
+- **Is the gold circular?** Partly AI-derived. Blind review, the random audit and provenance tracking are the safeguards; state it as a real limitation.
+- **Why not fine-tune?** Out of scope (N4). The question is how far off-the-shelf models go.
+- **How do you know there is no test leakage?** Detectors never read silver, gold or exhibit lists; thresholds come from \`protocol_v1.json\` chosen on dev only; the tag is checked in code.
+- **What next?** Fully human gold labels, few-shot prompts or fine-tuning, the marker-masking experiment, a "none" prompt for CLIP, larger OWLv2 models.
+- **Ethics?** Stains are "red-brown stain", not "blood"; mannequin bodies are not detected as people; outputs are "candidate observations"; the data is CC BY-NC-SA 4.0.
+
+## 8. Engineering points
+- Spec-driven development: \`SPEC.md\` is the source of truth, with a decisions log (D-001 to D-033), requirement IDs and acceptance tests mapped to pytest.
+- Reproducible: fixed seed, versioned rules, \`run_info\` files with library versions, resumable scripts.
+- \`kaggle/stage_b_run.py\` holds the prompts and models; the local run imports it.
+- \`schemas.validate\` guards every CSV contract.
+
+## 9. Things I could not verify
+- I did not run the code or tests in that session. Numbers come from \`results/eval/summary.md\`, \`SPEC.md\` and \`protocol_v1.json\`.
+- \`README.md\` and \`TASKS.md\` have stale or unchecked items.
+- I had not investigated why blade is weak; \`results/eval/errors.csv\` has examples to cite.`
+},
+{
+q: "Give me some mock questions.",
+a: `# Mock viva questions
+
+## A. Motivation and framing
+1. What problem does this project solve, and why is it hard without per-photo labels?
+2. What are your two research questions, and how are they linked?
+3. Why zero-shot? Why not fine-tune?
+4. What does "candidate observation" mean, and why do you insist on it?
+
+## B. Data and answer key
+5. Walk me through how a marker in a photo becomes a "blade is present" label.
+6. Why did you constrain OCR to numbers in the scene's exhibit list? What went wrong with snapping one-digit reads?
+7. Your feasibility gate used 31 photos tuned and tested on the same photos. Why is that a weakness?
+8. Why are most exhibits mapped to \`other\`? Is that a problem?
+9. A "knife with reddish trace" is in the data. How is it labelled and why?
+10. Why do you call stains "red-brown stain"?
+
+## C. Experimental design
+11. Why split by scene and not by photo?
+12. What does the \`protocol-v1\` tag do, and how does the code enforce it?
+13. How were the final five categories chosen? Could you have picked them differently?
+14. You applied the inclusion rule to silver counts, but silver recall is about 0.48. Does that bias the category choice?
+15. Why does CLIP use a softmax across categories?
+16. How were thresholds chosen, and why one per category?
+17. Why did you drop tiling for OWLv2?
+
+## D. Gold labels (expect pressure here)
+18. Your gold labels were produced by an AI. Isn't the evaluation circular?
+19. Exactly what did the human check, and what did they not check?
+20. You have one annotator. How do you know the human labels are reliable?
+21. Why was the review blind, and what bias does that avoid?
+22. How would the results change if gold were fully human-labelled?
+
+## E. Results
+23. State your headline result and its uncertainty.
+24. For which categories is the OWLv2-vs-CLIP difference not significant?
+25. CLIP's ammunition recall is 0.88 but precision is 0.12. What is happening?
+26. OWLv2 has stain precision 0.89 but recall 0.37. Why might that be?
+27. Silver has precision 0.89 but recall 0.48. What does that mean for someone using the marker key?
+28. Why do the models score lower against silver than against gold?
+29. What is the difference between F1 and AP, and why report both?
+30. What does the bootstrap actually resample, and why?
+
+## F. Critical thinking
+31. What is the biggest threat to validity in this study?
+32. Could the models be using the yellow markers as a shortcut?
+33. Would these results transfer to real crime scenes?
+34. The test photos came from the same dataset as the dev photos. What does that limit?
+35. Which of your claims are you least sure about?
+
+## G. Engineering and ethics
+36. What is the purpose of \`SPEC.md\` and the decisions log, and how does it connect to the tests?
+37. How did you make the pipeline reproducible?
+38. Why is \`kaggle/stage_b_run.py\` the only place prompts live?
+39. What ethical issues come up when running AI on crime-scene images?
+40. What would you do with another month?
+
+## H. Curveballs
+41. If a police unit asked to deploy this, what would you tell them?
+42. Explain CLIP and OWLv2 to a non-technical examiner in two sentences each.
+43. Your blade F1 interval spans nearly 0.0 to 0.6 against silver. What can you actually conclude about blade?
+44. Pick one decision in the decisions log you would now reverse.
+
+Questions 14, 19, 22 and 32 are the most likely to expose weak spots. Have honest answers ready.`
+},
+{
+q: "/export interview_prep.md: can you export them without those status lines (\"Brewed for 30s, done 6:31 PM\")? I do not want them.",
+a: `I saved the prep notes to \`C:\\dev\\Project3\\interview_prep.md\`. They are in a clean file with no status lines. Lines like "Brewed for 30s" come from the terminal interface and are not part of my replies. I can't switch them off from here.
+
+The file covers the pitch, the pipeline, the categories and why they were chosen, the methodology justifications, the numbers to memorise, the limitations, the app, the engineering points, and all 44 mock questions. I left out the model-answer hints so you can practise without them. I did not commit the file; it is untracked in git.`
+}
+];
+
+// Tiny markdown renderer: headings, lists, tables, code, bold/italic/inline code.
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function inline(s){
+  s = esc(s);
+  s = s.replace(/`([^`]+)`/g,"<code>$1</code>");
+  s = s.replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>");
+  s = s.replace(/\*([^*]+)\*/g,"<em>$1</em>");
+  return s;
+}
+function md(src){
+  const lines = src.split("\n"); let out = [], i = 0;
+  while(i < lines.length){
+    const l = lines[i];
+    if(/^```/.test(l)){ let b=[]; i++; while(i<lines.length && !/^```/.test(lines[i])) b.push(lines[i++]); i++;
+      out.push("<pre><code>"+esc(b.join("\n"))+"</code></pre>"); continue; }
+    const h = l.match(/^(#{1,4}) (.*)/);
+    if(h){ out.push(`<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`); i++; continue; }
+    if(/^\|/.test(l)){ let rows=[]; while(i<lines.length && /^\|/.test(lines[i])) rows.push(lines[i++]);
+      const cells = r => r.replace(/^\||\|$/g,"").split("|").map(c=>c.trim());
+      const head = cells(rows[0]), body = rows.slice(2).map(cells);
+      out.push("<table><tr>"+head.map(c=>`<th>${inline(c)}</th>`).join("")+"</tr>"+
+        body.map(r=>"<tr>"+r.map(c=>`<td>${inline(c)}</td>`).join("")+"</tr>").join("")+"</table>"); continue; }
+    if(/^\s*- /.test(l)){ let it=[]; while(i<lines.length && /^\s*- /.test(lines[i])) it.push(lines[i++].replace(/^\s*- /,""));
+      out.push("<ul>"+it.map(x=>`<li>${inline(x)}</li>`).join("")+"</ul>"); continue; }
+    if(/^\d+\. /.test(l)){ let it=[], start=parseInt(l,10); while(i<lines.length && /^\d+\. /.test(lines[i])) it.push(lines[i++].replace(/^\d+\. /,""));
+      out.push(`<ol start="${start}">`+it.map(x=>`<li>${inline(x)}</li>`).join("")+"</ol>"); continue; }
+    if(l.trim()===""){ i++; continue; }
+    let p=[]; while(i<lines.length && lines[i].trim()!=="" && !/^(#{1,4} |\||\s*- |\d+\. |```)/.test(lines[i])) p.push(lines[i++]);
+    out.push("<p>"+inline(p.join(" "))+"</p>");
+  }
+  return out.join("\n");
+}
+
+const root = document.getElementById("turns");
+TURNS.forEach((t, n) => {
+  const d = document.createElement("div");
+  d.className = "turn";
+  d.innerHTML = `<div class="q"><span class="tag">Turn ${n+1}</span><p></p></div>
+    <details><summary>Response</summary><div class="a">${md(t.a)}</div></details>`;
+  d.querySelector(".q p").textContent = t.q;
+  root.appendChild(d);
+});
+const all = open => document.querySelectorAll("details").forEach(x => x.open = open);
+document.getElementById("open").onclick = () => all(true);
+document.getElementById("close").onclick = () => all(false);
+</script>
+</body>
+</html>
