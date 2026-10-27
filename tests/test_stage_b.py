@@ -98,12 +98,14 @@ def test_at_b_7_decision_rule():
 
 def test_at_b_7_untuned_category_gets_median_threshold():
     n = 10
-    df = pd.DataFrame({"category": ["blade"] * n + ["ammunition"] * n + ["bottle_glass"] * n,
-                       "score": [0.9, 0.1] * (n // 2) * 3, "y": [1, 0] * (n // 2) * 3})
+    cats = ["blade", "ammunition", "bottle_glass", "paper_document", "red_brown_stain"]
+    df = pd.DataFrame({"category": [c for c in cats for _ in range(n)],
+                       "score": [0.9, 0.1] * (n // 2) * 5, "y": [1, 0] * (n // 2) * 5})
     df.loc[df.category == "bottle_glass", "y"] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]       # only 1 positive
     th, flagged = ev.choose_thresholds(df, [0.2, 0.5, 0.8])
     assert flagged == ["bottle_glass"]
-    assert th["bottle_glass"] == pytest.approx((th["blade"] + th["ammunition"]) / 2)
+    others = [th[c] for c in cats if c != "bottle_glass"]
+    assert th["bottle_glass"] == pytest.approx(float(np.median(others)))
 
 
 def test_at_b_8_nms_merge():
