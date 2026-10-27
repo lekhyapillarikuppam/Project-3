@@ -1,0 +1,103 @@
+{
+  "status": "chosen on dev only; not frozen until git tag protocol-v1",
+  "seed": 42,
+  "categories": [
+    "ammunition",
+    "blade",
+    "bottle_glass",
+    "paper_document",
+    "red_brown_stain"
+  ],
+  "clip": {
+    "model": "openai/clip-vit-large-patch14",
+    "photo_score": "softmax across the 5 categories of the mean of each category's 3 prompt logits",
+    "thresholds": {
+      "ammunition": 0.3,
+      "blade": 0.4,
+      "bottle_glass": 0.3,
+      "paper_document": 0.45,
+      "red_brown_stain": 0.2
+    },
+    "grid": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ],
+    "untuned_categories": []
+  },
+  "owlv2": {
+    "model": "google/owlv2-base-patch16-ensemble",
+    "tile_option": "tile 0 only",
+    "tiles_used": [
+      0
+    ],
+    "photo_score": "max box score of the category over the used tiles",
+    "thresholds": {
+      "ammunition": 0.15,
+      "blade": 0.525,
+      "bottle_glass": 0.275,
+      "paper_document": 0.3,
+      "red_brown_stain": 0.25
+    },
+    "grid": [
+      0.05,
+      0.075,
+      0.1,
+      0.125,
+      0.15,
+      0.175,
+      0.2,
+      0.225,
+      0.25,
+      0.275,
+      0.3,
+      0.325,
+      0.35,
+      0.375,
+      0.4,
+      0.425,
+      0.45,
+      0.475,
+      0.5,
+      0.525
+    ],
+    "untuned_categories": [],
+    "nms_iou": 0.5,
+    "box_merge": "NMS across prompts and tiles per photo and category"
+  },
+  "photo_rule": "present when photo score >= category threshold",
+  "threshold_selection": "grid search maximising photo-level F1 on dev; ties go to the lowest threshold",
+  "min_positives_to_tune": 5,
+  "bootstrap": {
+    "n": 1000,
+    "unit": "scene",
+    "seed": 42
+  },
+  "prompts_sha256": "17eb7d2e405596b1913b471cd4aefcef7dc2be68bfa1e0b24fb9474effdb729e",
+  "run_info": {
+    "clip_model": "openai/clip-vit-large-patch14",
+    "owl_model": "google/owlv2-base-patch16-ensemble",
+    "tile_grid": 2,
+    "tile_overlap": 0.25,
+    "raw_cutoff": 0.05,
+    "top_k": 20,
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1"
+  }
+}

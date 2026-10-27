@@ -457,8 +457,10 @@ Acceptance tests:
 Two zero-shot models score the photos. Neither ever sees silver, gold or exhibit lists (hard rule).
 
 - R-B-1. **CLIP baseline** (`openai/clip-vit-large-patch14`): the whole photo, padded to a square (nothing
-  is cropped away), against 3 text prompts per category. Score = image-text logit (cosine x 100). Photo-level
-  presence = max over the category's prompts above a per-category threshold (tuned on dev). Saved raw.
+  is cropped away), against 3 text prompts per category. Raw score = image-text logit (cosine x 100), saved raw.
+  Photo score per category = softmax, across the 5 categories, of the mean of the category's 3 prompt logits
+  (there is no "none" prompt; a photo with no object has no category with a high share and falls under every
+  threshold). Photo-level presence = photo score at least the per-category threshold (tuned on dev).
 - R-B-2. **OWLv2 main** (`google/owlv2-base-patch16-ensemble`): text queries per category (short noun phrases).
   Each photo is run as the full photo (tile 0) and as 2 x 2 overlapping tiles (tiles 1 to 4, 25% overlap),
   so small objects get more pixels. Boxes are mapped back to **original photo pixels**. All boxes with
@@ -476,10 +478,24 @@ Two zero-shot models score the photos. Neither ever sees silver, gold or exhibit
 - R-B-7. `scripts/import_stage_b.py` checks the returned CSVs against the data contracts and that every
   photo of the split has CLIP scores.
 
+- R-B-8. **Photo-level decision rule** (both models): a category is present in a photo when its photo score is
+  at least the category threshold. OWLv2 photo score = best box score of the category over the tiles in use.
+  Thresholds: one per category and model, chosen on dev by a grid search (CLIP 0.05 to 0.95 step 0.05; OWLv2
+  0.05 to 0.525 step 0.025) maximising photo-level F1 against dev silver; ties go to the lowest threshold. A
+  category with fewer than 5 dev positive photos is not tuned and gets the median of the other thresholds.
+  The tile option (tile 0 only, or tiles 0 to 4) is one choice for all categories, picked by dev macro F1,
+  then macro AP. Code: `src/ffs/stage_b_eval.py`, `scripts/tune_stage_b.py`; result: `protocol/protocol_v1.json`.
+- R-B-9. **Box merge rule**: boxes of one photo and category from all prompts and tiles in use are merged by
+  non-maximum suppression at IoU 0.5 (highest score first; a box overlapping a kept box with IoU above 0.5 is
+  dropped). The best box always survives, so merging never changes the photo score; it only cleans the box list
+  shown in the app.
+
 Acceptance tests (`tests/test_stage_b.py`): AT-B-1 tiles cover the photo and overlap; AT-B-2 boxes map back to
 original pixels; AT-B-3 boxes in the padding are dropped and others clamped; AT-B-4 top-k limit;
 AT-B-5 prompts avoid "blood" and cover the same categories for both models; AT-B-6 test packaging needs the
-freeze tag and shrinking keeps the original size.
+freeze tag and shrinking keeps the original size; AT-B-7 the photo-level decision rule (CLIP softmax score,
+OWLv2 best box over the chosen tiles, threshold with >=, untuned categories get the median);
+AT-B-8 the NMS merge rule (overlapping boxes merged at IoU 0.5, the best box kept, distant boxes kept).
 
 ## 6. Evaluation protocol  (filled in Phase 3, frozen by git tag `protocol-v1`)
 
@@ -586,6 +602,7 @@ tried without any download.
 | D-026 | 2026-10-27 | Gold labels are AI-labelled and human-checked (replaces the all-by-hand plan of D-023 for the main method) | The author cannot hand-label 545 photos in time; the check design keeps an honest, measured human role |
 | D-027 | 2026-10-27 | Human check = blind decisions on all AI-vs-silver disagreements and low-confidence labels, plus a blind full labelling of 60 random fully-agreed photos | Disagreements are where labels are least certain; the random audit measures the remaining error |
 | D-028 | 2026-10-27 | Label provenance is kept in `gold_sources.csv`, not in the `gold` contract | Keeps the contract unchanged; every row stays traceable |
+| D-029 | 2026-10-27 | Protocol v1 thresholds chosen on dev only (350 photos, 26 scenes) against dev silver: CLIP = softmax of mean prompt logit, OWLv2 = best box on tile 0 only (tiles 1-4 gave no gain: macro F1 0.460 vs 0.457, AP 0.374 vs 0.368), one threshold per category and model from a coarse grid, NMS IoU 0.5 | Simple rules the author can explain. Dev silver misses unmarked objects, so recall is understated and precision may be too; tile choice is within noise and "tile 0 only" is the simpler, cheaper option. Not frozen until tag `protocol-v1` |
 
 ## 10. Change log
 
@@ -603,3 +620,4 @@ tried without any download.
 | 2026-10-26 | 3.1, 3.2, 4.5, 9 | Phase 2 finished: final categories chosen mechanically (D-020, `config.FINAL_CATEGORIES`), `silver.csv` limited to them (R-S-7), no third tuning round (D-021); stray heading from the merged text removed |
 | 2026-10-27 | 2, 4.7, 5, 6.1, 9 | Phase 3 spec merged: gold labels (R-G-1 to R-G-8, AT-G-1 to AT-G-9), Stage B (R-B-1 to R-B-7, AT-B-1 to AT-B-6), freeze checklist, per-split Stage B files, D-022 to D-025 |
 | 2026-10-27 | 4.7, 9 | Phase 3b: gold labels are AI-labelled and human-checked; R-G-1 to R-G-6 replaced, R-G-9 to R-G-14 added, AT-G-10 to AT-G-17, D-026 to D-028 |
+| 2026-10-27 | 5, 9 | Stage B tuning on dev: R-B-1 photo score is now softmax of the mean prompt logit (was max over prompts), R-B-8 decision rule, R-B-9 NMS merge, AT-B-7 and AT-B-8, D-029; `protocol/protocol_v1.json` written (not frozen) |

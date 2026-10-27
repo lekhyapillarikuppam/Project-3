@@ -1,0 +1,67 @@
+{
+  "name": "dev",
+  "n_photos": 350,
+  "clip_model": "openai/clip-vit-large-patch14",
+  "owl_model": "google/owlv2-base-patch16-ensemble",
+  "clip_prompts": {
+    "ammunition": [
+      "a photo of a bullet cartridge case",
+      "a photo of spent shell casings on the floor",
+      "a photo of ammunition"
+    ],
+    "blade": [
+      "a photo of a knife",
+      "a photo of a kitchen knife on the floor",
+      "a photo of scissors or a blade"
+    ],
+    "bottle_glass": [
+      "a photo of a bottle",
+      "a photo of a drinking glass",
+      "a photo of broken glass"
+    ],
+    "paper_document": [
+      "a photo of sheets of paper",
+      "a photo of a notebook or a book",
+      "a photo of a letter or a document"
+    ],
+    "red_brown_stain": [
+      "a photo of a red-brown stain",
+      "a photo of a reddish stain on the floor",
+      "a photo of a reddish trace on a surface"
+    ]
+  },
+  "owl_queries": {
+    "ammunition": [
+      "a cartridge case",
+      "a bullet",
+      "a shotgun shell"
+    ],
+    "blade": [
+      "a knife",
+      "scissors",
+      "an axe"
+    ],
+    "bottle_glass": [
+      "a bottle",
+      "a drinking glass",
+      "broken glass"
+    ],
+    "paper_document": [
+      "a sheet of paper",
+      "a notebook",
+      "a book"
+    ],
+    "red_brown_stain": [
+      "a red-brown stain",
+      "a reddish stain"
+    ]
+  },
+  "tile_grid": 2,
+  "tile_overlap": 0.25,
+  "raw_cutoff": 0.05,
+  "top_k": 20,
+  "torch": "2.11.0+cu128",
+  "transformers": "5.16.1",
+  "device": "cuda",
+  "seconds": 1391
+}

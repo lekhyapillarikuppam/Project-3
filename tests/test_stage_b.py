@@ -67,3 +67,49 @@ def test_at_b_6_test_package_needs_the_freeze_tag_and_shrink_keeps_original_size
     w, h = pk.shrink(src, tmp_path / "out" / "a.jpg")
     assert (w, h) == (4000, 3000)
     assert max(Image.open(tmp_path / "out" / "a.jpg").size) == pk.MAX_SIDE
+
+
+# ---- AT-B-7 and AT-B-8: photo-level decision rule and box merge rule (src/ffs/stage_b_eval.py) --------
+import pandas as pd  # noqa: E402
+
+sys.path.insert(0, str(ROOT / "src"))
+from ffs import stage_b_eval as ev  # noqa: E402
+
+
+def test_at_b_7_decision_rule():
+    # CLIP: category with the highest mean logit gets the largest softmax share; shares sum to 1 per photo
+    rows = [("s", "p", c, f"q{i}", v) for c, vals in {"blade": [20, 22, 24], "ammunition": [10, 10, 10]}.items()
+            for i, v in enumerate(vals)]
+    out = ev.clip_photo_scores(pd.DataFrame(rows, columns=["scene_id", "photo_id", "category", "prompt", "score"]))
+    s = out.set_index("category").score
+    assert s.sum() == pytest.approx(1.0) and s["blade"] > 0.99
+    # threshold is inclusive
+    d = ev.decide(pd.DataFrame({"category": ["blade", "blade", "ammunition"], "score": [0.3, 0.29, 0.1]}),
+                  {"blade": 0.3, "ammunition": 0.2})
+    assert list(d.pred) == [1, 0, 0]
+    # OWLv2: best box over the tiles in use; no box at all means score 0
+    owl = pd.DataFrame({"scene_id": ["s"] * 2, "photo_id": ["p"] * 2, "category": ["blade"] * 2,
+                        "score": [0.2, 0.6], "tile": [0, 3]})
+    photos = pd.DataFrame({"scene_id": ["s"], "photo_id": ["p"]})
+    full = ev.owl_photo_scores(owl, photos, "full").set_index("category").score
+    both = ev.owl_photo_scores(owl, photos, "all").set_index("category").score
+    assert full["blade"] == 0.2 and both["blade"] == 0.6 and both["ammunition"] == 0.0
+
+
+def test_at_b_7_untuned_category_gets_median_threshold():
+    n = 10
+    df = pd.DataFrame({"category": ["blade"] * n + ["ammunition"] * n + ["bottle_glass"] * n,
+                       "score": [0.9, 0.1] * (n // 2) * 3, "y": [1, 0] * (n // 2) * 3})
+    df.loc[df.category == "bottle_glass", "y"] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]       # only 1 positive
+    th, flagged = ev.choose_thresholds(df, [0.2, 0.5, 0.8])
+    assert flagged == ["bottle_glass"]
+    assert th["bottle_glass"] == pytest.approx((th["blade"] + th["ammunition"]) / 2)
+
+
+def test_at_b_8_nms_merge():
+    boxes = pd.DataFrame({"x": [0, 5, 500], "y": [0, 5, 500], "w": [100, 100, 50], "h": [100, 100, 50],
+                          "score": [0.4, 0.7, 0.3]})
+    kept = ev.nms(boxes)
+    assert list(kept.score) == [0.7, 0.3]                 # the overlapping weaker box is dropped, the far box stays
+    assert ev.iou((0, 0, 10, 10), (0, 0, 10, 10)) == 1.0 and ev.iou((0, 0, 10, 10), (20, 20, 5, 5)) == 0.0
+    assert kept.score.max() == boxes.score.max()           # merging never changes the photo score
