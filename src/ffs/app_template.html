@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evidence Inventory Demo</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--ink:#1c1c1a;--mute:#6b6b66;--line:#dcdcd6;--ok:#1b7f4b;--okbg:#e3f4ea;--bad:#b3261e;--badbg:#fbe7e5;--acc:#2f5fd0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141413;--card:#1e1e1c;--ink:#ecece8;--mute:#9a9a94;--line:#34342f;--ok:#58c58a;--okbg:#17301f;--bad:#f2837c;--badbg:#3a1a18;--acc:#8aa8ff}}
+:root[data-theme="dark"]{--bg:#141413;--card:#1e1e1c;--ink:#ecece8;--mute:#9a9a94;--line:#34342f;--ok:#58c58a;--okbg:#17301f;--bad:#f2837c;--badbg:#3a1a18;--acc:#8aa8ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:28px 0 8px}
+p.sub{color:var(--mute);margin:0 0 16px}
+nav{display:flex;gap:8px;margin:12px 0 16px}
+nav button,select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer}
+nav button.on{border-color:var(--acc);color:var(--acc);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;cursor:pointer;padding:0;text-align:left}
+.tile:hover{border-color:var(--acc)}
+.tile img{width:100%;height:110px;object-fit:cover;display:block}
+.tile div{padding:6px 8px;font-size:12px;color:var(--mute)}
+.chip{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;border:1px solid var(--line);margin:1px 2px 0 0;color:var(--ink)}
+.stage{position:relative;display:inline-block;max-width:100%;line-height:0}
+.stage img{max-width:100%;max-height:70vh;display:block;border-radius:8px}
+.box{position:absolute;border:3px solid;border-radius:2px;pointer-events:none}
+.box span{position:absolute;left:-3px;top:-22px;font-size:11px;line-height:16px;padding:0 5px;color:#fff;border-radius:3px;white-space:nowrap}
+table{display:block;overflow-x:auto;max-width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:14px}
+th,td{padding:6px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+td.ok{background:var(--okbg);color:var(--ok)}td.bad{background:var(--badbg);color:var(--bad)}
+.num{font-variant-numeric:tabular-nums}
+.note{color:var(--mute);font-size:13px}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.back{margin-bottom:10px}
+footer{margin-top:36px;color:var(--mute);font-size:12px}
+</style>
+</head>
+<body>
+<main>
+<h1>AI-assisted evidence inventory</h1>
+<p class="sub">Zero-shot CLIP and OWLv2 looking for five kinds of evidence in staged crime-scene photos (FFS dataset, test scenes only). Saved results, no live model.</p>
+<nav><button id="t-gal" class="on">Photos</button><button id="t-res">Results</button><button id="t-about">About</button></nav>
+<section id="gal"></section>
+<section id="det" hidden></section>
+<section id="res" hidden></section>
+<section id="about" hidden></section>
+<footer id="foot"></footer>
+</main>
+<script src="data.js"></script>
+<script>
+const D = window.DATA, C = D.categories;
+const COL = ["#d9480f","#1c7ed6","#2f9e44","#862e9c","#c2255c"];
+const $ = id => document.getElementById(id);
+const pretty = c => c.replace(/_/g," ");
+function show(which){["gal","det","res","about"].forEach(k=>$(k).hidden=(k!==which));
+  $("t-gal").classList.toggle("on",which==="gal"||which==="det");$("t-res").classList.toggle("on",which==="res");$("t-about").classList.toggle("on",which==="about");}
+$("t-gal").onclick=()=>show("gal");$("t-res").onclick=()=>show("res");$("t-about").onclick=()=>show("about");
+
+// ---- gallery
+let filt = "all";
+function gallery(){
+  const opts = ['<option value="all">All photos</option>'].concat(C.map(c=>`<option value="${c}">Gold has: ${pretty(c)}</option>`));
+  let h = `<div class="row"><select id="f">${opts.join("")}</select><span class="note">${D.photos.length} sample photos from ${new Set(D.photos.map(p=>p.scene)).size} test scenes</span></div><div class="grid">`;
+  D.photos.forEach((p,i)=>{ if(filt!=="all" && !p.cats[filt].gold) return;
+    const g = C.filter(c=>p.cats[c].gold).map(c=>`<span class="chip">${pretty(c)}</span>`).join("")||'<span class="chip">none of the five</span>';
+    h += `<button class="tile" data-i="${i}"><img loading="lazy" src="${p.img}" alt=""><div>${p.scene}<br>${g}</div></button>`;});
+  $("gal").innerHTML = h + "</div>";
+  $("f").value = filt; $("f").onchange = e => {filt=e.target.value;gallery();};
+  document.querySelectorAll(".tile").forEach(b=>b.onclick=()=>detail(+b.dataset.i));
+}
+// ---- detail
+function detail(i){
+  const p = D.photos[i];
+  const cell = (pred, gold, txt) => `<td class="${pred===gold?'ok':'bad'}">${txt}</td>`;
+  let rows = C.map((c,k)=>{const r=p.cats[c];
+    return `<tr><td><label><input type="checkbox" data-c="${k}" ${r.owl_pred&&r.box?'checked':''} ${r.box?'':'disabled'}> <span style="color:${COL[k]}">&#9632;</span> ${pretty(c)}</label></td>
+    <td>${r.gold?"yes":"no"}</td><td>${r.silver?"yes":"no"}</td>
+    ${cell(r.clip_pred,r.gold,(r.clip_pred?"yes":"no")+` <span class="note num">(${r.clip_score.toFixed(2)})</span>`)}
+    ${cell(r.owl_pred,r.gold,(r.owl_pred?"yes":"no")+` <span class="note num">(${r.owl_score.toFixed(2)})</span>`)}</tr>`}).join("");
+  $("det").innerHTML = `<button class="back" id="bk">&larr; All photos</button>
+   <div class="stage" id="stage"><img src="${p.img}" alt="Test photo from scene ${p.scene}"></div>
+   <p class="note">${p.scene} &middot; ${p.photo} &middot; photo type: ${p.type}. Tick a category to draw OWLv2's best box (green = prediction agrees with gold, red = it does not).</p>
+   <table><tr><th>Category</th><th>Gold</th><th>Silver</th><th>CLIP</th><th>OWLv2</th></tr>${rows}</table>
+   <p class="note">Gold = AI-labelled, human-checked answer key. Silver = automatic answer key from numbered markers and exhibit lists. Numbers in brackets are the model scores; a model says "yes" when its score reaches the frozen per-category threshold.</p>`;
+  const draw=()=>{document.querySelectorAll(".box").forEach(b=>b.remove());
+    document.querySelectorAll("#det input[type=checkbox]").forEach(cb=>{ if(!cb.checked) return;
+      const k=+cb.dataset.c,c=C[k],r=p.cats[c],[x,y,w,h]=r.box;
+      const b=document.createElement("div");b.className="box";
+      b.style.cssText=`left:${x*100}%;top:${y*100}%;width:${w*100}%;height:${h*100}%;border-color:${COL[k]}`;
+      b.innerHTML=`<span style="background:${COL[k]}">${pretty(c)} ${r.owl_score.toFixed(2)}</span>`;
+      $("stage").appendChild(b);});};
+  document.querySelectorAll("#det input").forEach(cb=>cb.onchange=draw);draw();
+  $("bk").onclick=()=>show("gal"); show("det"); window.scrollTo(0,0);
+}
+// ---- results
+function results(){
+  const f=(r,a,lo,hi)=>`${(+r[a]).toFixed(2)} <span class="note">[${(+r[lo]).toFixed(2)}&ndash;${(+r[hi]).toFixed(2)}]</span>`;
+  const mrow=r=>`<tr><td>${pretty(r.category)}</td><td class="num">${r.n_pos}</td><td class="num">${f(r,"f1","f1_lo","f1_hi")}</td><td class="num">${f(r,"ap","ap_lo","ap_hi")}</td><td class="num">${(+r.precision).toFixed(2)}</td><td class="num">${(+r.recall).toFixed(2)}</td></tr>`;
+  let h = `<h2>How well do the models find each category? (against gold)</h2>`;
+  ["OWLv2","CLIP"].forEach(s=>{h+=`<p><b>${s}</b>${s==="OWLv2"?" (main model)":" (baseline)"}</p><table><tr><th>Category</th><th>Photos</th><th>F1 [95% CI]</th><th>AP [95% CI]</th><th>Precision</th><th>Recall</th></tr>${D.metrics.filter(r=>r.system===s).map(mrow).join("")}</table>`;});
+  h += `<p class="note">${D.n_scenes} test scenes, ${D.n_photos} photos. 95% intervals come from resampling whole scenes 1000 times, so photos from one scene are never treated as independent. Photo-level decisions use thresholds frozen on separate development scenes before the test photos were scored.</p>`;
+  h += `<h2>How far can the automatic answer key be trusted?</h2><table><tr><th>Category</th><th>Gold photos</th><th>Precision</th><th>Recall</th><th>F1 [95% CI]</th><th>Kappa</th></tr>${D.sg.map(r=>`<tr><td>${pretty(r.category)}</td><td class="num">${r.n_pos}</td><td class="num">${(+r.precision).toFixed(2)}</td><td class="num">${(+r.recall).toFixed(2)}</td><td class="num">${f(r,"f1","f1_lo","f1_hi")}</td><td class="num">${(+r.kappa).toFixed(2)}</td></tr>`).join("")}</table>
+  <p class="note">Silver (markers + exhibit lists) judged against gold. Precision is high: when a numbered marker says an item is there, it usually is. Recall is low: many visible items are never marked in that photo, so silver misses them.</p>`;
+  $("res").innerHTML = h;
+}
+// ---- about
+$("about").innerHTML = `<h2>What this is</h2><p>For each of five evidence categories (ammunition, blade, bottle or glass, paper or document, red-brown stain), the question is whether a photo contains it. CLIP scores the whole photo against text prompts. OWLv2 looks for objects and draws boxes. Both are used zero-shot, with no training.</p>
+<h2>How the answer keys were made</h2><p><b>Silver:</b> found automatically from the numbered yellow markers in each photo and the scene's exhibit list. <b>Gold:</b> an AI labelled every test photo from the picture alone, then a human re-decided every case where the AI disagreed with silver, plus a random audit of 60 photos. Photos where the AI was merely unsure were not all human-checked.</p>
+<h2>Limits</h2><p>One human checker. The AI labeller is kept separate from the answer key by instruction only. Dev-set numbers were optimistic because thresholds were tuned on them; only the test numbers on the Results tab count. Scenes are staged with mannequins; real casework would differ.</p>
+<h2>Data</h2><p>FFS (Fictional Forensic Scenes), University of Lausanne, CC BY-NC-SA 4.0. Images here are shrunk copies, for non-commercial use, with the same licence.</p>`;
+$("foot").textContent = D.footer;
+gallery(); results();
+</script>
+</body>
+</html>
