@@ -1,6 +1,7 @@
 """Build the labelling pages for gold labels (SPEC 4.7).
 
   python scripts/make_gold_tool.py --review        # you decide only the categories listed for each photo (blind)
+  python scripts/make_gold_tool.py --review --only-disagree   # shorter: only the AI-vs-silver disagreements (low-confidence-only pairs keep the AI label)
   python scripts/make_gold_tool.py --audit 60      # 60 random photos where everything agreed: you label all categories
   python scripts/make_gold_tool.py                 # (older mode) all test photos by hand
   python scripts/make_gold_tool.py --pass2 55      # (older mode) blind re-label of 55 random test photos
@@ -33,9 +34,16 @@ def write_page(data: dict, out: Path):
     print("Open it in Chrome. Photos are read from ../../data/raw/ relative to this file.")
 
 
+def only_disagree(review: pd.DataFrame) -> pd.DataFrame:
+    """Keep only the AI-vs-silver disagreements (drops the low-confidence-only pairs)."""
+    return review[review["reason"] == "disagree"].reset_index(drop=True)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--review", action="store_true")
+    ap.add_argument("--only-disagree", action="store_true",
+                    help="with --review: ask only about AI-vs-silver disagreements (shorter check, see SPEC D-031)")
     ap.add_argument("--audit", type=int, default=None, metavar="N")
     ap.add_argument("--pass2", type=int, default=None, metavar="N")
     ap.add_argument("--meta", default=str(config.META_DIR))
@@ -58,7 +66,13 @@ def main():
         if n_missing:
             sys.exit(f"The AI has not labelled {n_missing} test photos yet. Finish gold_ai.csv first.")
         review = gold.review_pairs(ai, silver)
-        review.to_csv(meta / "gold_review_pairs.csv", index=False)       # kept for provenance
+        if args.only_disagree and args.review:
+            review.to_csv(meta / "gold_review_pairs_full.csv", index=False)   # all pairs, kept for provenance
+            n_all = len(review)
+            review = only_disagree(review)
+            print(f"--only-disagree: {len(review)} of {n_all} pairs kept; the other {n_all - len(review)} "
+                  f"low-confidence-only pairs keep the AI label (not human-checked)")
+        review.to_csv(meta / "gold_review_pairs.csv", index=False)       # the pairs the human must decide
         if args.review:
             show = {}
             for r in review.itertuples():
