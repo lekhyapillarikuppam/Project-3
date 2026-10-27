@@ -489,6 +489,10 @@ Two zero-shot models score the photos. Neither ever sees silver, gold or exhibit
   non-maximum suppression at IoU 0.5 (highest score first; a box overlapping a kept box with IoU above 0.5 is
   dropped). The best box always survives, so merging never changes the photo score; it only cleans the box list
   shown in the app.
+- R-B-10. **Local CPU run** (`scripts/stage_b_local.py`): the same prompts, queries, models, cut-off and top-k,
+  imported from `kaggle/stage_b_run.py`, run on the laptop CPU over the ORIGINAL photos (no 2400 px shrink), OWLv2 on
+  tile 0 only (the protocol choice, D-029). Same output files and columns (tile = 0); results in
+  `results/stage_b/<split>_outputs/`. Resumable; refuses test photos without the tag `protocol-v1`.
 
 Acceptance tests (`tests/test_stage_b.py`): AT-B-1 tiles cover the photo and overlap; AT-B-2 boxes map back to
 original pixels; AT-B-3 boxes in the padding are dropped and others clamped; AT-B-4 top-k limit;
@@ -496,6 +500,8 @@ AT-B-5 prompts avoid "blood" and cover the same categories for both models; AT-B
 freeze tag and shrinking keeps the original size; AT-B-7 the photo-level decision rule (CLIP softmax score,
 OWLv2 best box over the chosen tiles, threshold with >=, untuned categories get the median);
 AT-B-8 the NMS merge rule (overlapping boxes merged at IoU 0.5, the best box kept, distant boxes kept).
+AT-B-9 (`tests/test_stage_b_local.py`) the local run writes the Kaggle columns with tile 0 only, a run_info
+file, and resumes without re-scoring finished photos.
 
 ## 6. Evaluation protocol  (filled in Phase 3, frozen by git tag `protocol-v1`)
 
@@ -621,3 +627,4 @@ tried without any download.
 | 2026-10-27 | 2, 4.7, 5, 6.1, 9 | Phase 3 spec merged: gold labels (R-G-1 to R-G-8, AT-G-1 to AT-G-9), Stage B (R-B-1 to R-B-7, AT-B-1 to AT-B-6), freeze checklist, per-split Stage B files, D-022 to D-025 |
 | 2026-10-27 | 4.7, 9 | Phase 3b: gold labels are AI-labelled and human-checked; R-G-1 to R-G-6 replaced, R-G-9 to R-G-14 added, AT-G-10 to AT-G-17, D-026 to D-028 |
 | 2026-10-27 | 5, 9 | Stage B tuning on dev: R-B-1 photo score is now softmax of the mean prompt logit (was max over prompts), R-B-8 decision rule, R-B-9 NMS merge, AT-B-7 and AT-B-8, D-029; `protocol/protocol_v1.json` written (not frozen) |
+| 2026-10-27 | 5 | R-B-10 local CPU Stage B run (original photos, tile 0 only) and AT-B-9 |
