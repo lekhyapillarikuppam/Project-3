@@ -2,11 +2,11 @@
 
   python scripts/ai_label_write.py --next 8                      # the next 8 unlabelled test photos
   python scripts/ai_label_write.py th_0002 IMG_x --labels ammunition=0,blade=1,bottle_glass=0,paper_document=0,red_brown_stain=1 \
-        --conf med --note "knife on the sofa; stain on the floor" --labeller "<your exact model id>"
+        --conf med --note "knife on the sofa; stain on the floor" --labeller "<your exact model id>" --code AB3K
   python scripts/ai_label_write.py --status
 
 Writes data_meta/gold_ai.csv. One call sets all categories of one photo (re-running a photo replaces it).
-Only test-split photos are accepted, and only after ai_label_view.py has produced images for them (view guard). Confidence: high = clearly sure, med = fairly sure, low = unsure or the
+Only test-split photos are accepted, and only with the code burned into the latest ai_label_view.py images of that photo (image-code guard). Confidence: high = clearly sure, med = fairly sure, low = unsure or the
 object would be tiny, dark or hidden. Low confidence sends the label to the human review set.
 """
 
@@ -32,6 +32,7 @@ def main():
     ap.add_argument("--conf", choices=gold.CONFIDENCES)
     ap.add_argument("--note", default="")
     ap.add_argument("--labeller", help="the exact model id of the AI doing the labelling")
+    ap.add_argument("--code", help="the 4-character code read from the corner of the latest view images")
     ap.add_argument("--next", type=int, metavar="N")
     ap.add_argument("--status", action="store_true")
     args = ap.parse_args()
@@ -57,9 +58,9 @@ def main():
     test = set(split.loc[split.split == "test", "scene_id"])
     if args.scene not in test or not ((photos.scene_id == args.scene) & (photos.photo_id == args.photo)).any():
         sys.exit("Not a test photo.")
-    if not gold.was_viewed(VIEW_LOG, args.scene, args.photo):
-        sys.exit("Refusing: no view was produced for this photo. Run ai_label_view.py first, look at the images, "
-                 "and if an image does not load, do not label the photo.")
+    if not gold.code_ok(VIEW_LOG, args.scene, args.photo, args.code):
+        sys.exit("Refusing: missing or wrong --code. Run ai_label_view.py, open the image and read the code in its "
+                 "corner. If an image does not load, do not label the photo.")
     labels = {k.strip(): int(v) for k, v in (kv.split("=") for kv in args.labels.split(","))}
     gold.upsert_ai_labels(PATH, args.scene, args.photo, labels, args.conf, args.note, args.labeller, cats)
     print("saved", args.scene, args.photo)

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import random
+import secrets
 
 import pandas as pd
 
@@ -272,21 +273,49 @@ def check_stats(sources: pd.DataFrame) -> dict:
 
 
 # ---- View guard: no AI label without a produced view (SPEC R-G-2) ----------------------------
-def log_view(path, scene: str, photo: str, now: str | None = None) -> None:
-    """Remember that images of this photo were produced for the AI labeller."""
+CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"      # no 0/O/1/I, easy to read off an image
+
+
+def new_code(n: int = 4) -> str:
+    """Random code burned into the images, so a label proves the images were actually seen."""
+    return "".join(secrets.choice(CODE_ALPHABET) for _ in range(n))
+
+
+def stamp_code(img, code: str):
+    """Burn the code into the top-left corner: white text on a black box, ~8% of the image height."""
+    from PIL import ImageDraw, ImageFont
+
+    img = img.copy()
+    size = max(16, round(img.height * 0.08))
+    try:
+        font = ImageFont.truetype("arial.ttf", size)
+    except OSError:
+        font = ImageFont.load_default(size)
+    draw = ImageDraw.Draw(img)
+    x0, y0, x1, y1 = draw.textbbox((0, 0), code, font=font)
+    pad = size // 4
+    draw.rectangle((0, 0, x1 - x0 + 2 * pad, y1 - y0 + 2 * pad), fill="black")
+    draw.text((pad - x0, pad - y0), code, fill="white", font=font)
+    return img
+
+
+def log_view(path, scene: str, photo: str, code: str, now: str | None = None) -> None:
+    """Remember the code written into the latest images of this photo."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     now = now or pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%dT%H:%M:%SZ")
     new = not path.exists()
     with open(path, "a", encoding="utf-8") as f:
         if new:
-            f.write("scene_id,photo_id,viewed_at\n")
-        f.write(f"{scene},{photo},{now}\n")
+            f.write("scene_id,photo_id,code,viewed_at\n")
+        f.write(f"{scene},{photo},{code},{now}\n")
 
 
-def was_viewed(path, scene: str, photo: str) -> bool:
+def code_ok(path, scene: str, photo: str, code: str | None) -> bool:
+    """True only if code equals the LATEST logged code for this photo (case-insensitive)."""
     path = Path(path)
-    if not path.exists():
+    if not code or not path.exists():
         return False
-    v = pd.read_csv(path)
-    return bool(((v["scene_id"] == scene) & (v["photo_id"] == photo)).any())
+    v = pd.read_csv(path, dtype=str)
+    v = v[(v["scene_id"] == scene) & (v["photo_id"] == photo)]
+    return bool(len(v)) and v["code"].iloc[-1].upper() == code.strip().upper()

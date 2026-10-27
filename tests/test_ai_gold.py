@@ -116,8 +116,95 @@ def test_at_g_16_check_stats_measure_ai_error_on_audit_and_who_was_right_in_revi
     assert 0 < st["human_share"] < 1
 
 
-def test_at_g_18_view_guard_remembers_viewed_photos(tmp_path):
+def test_at_g_18_code_guard_accepts_only_the_latest_code_for_that_photo(tmp_path):
     log = tmp_path / "view_log.csv"
-    assert not gold.was_viewed(log, "s1", "a")
-    gold.log_view(log, "s1", "a")
-    assert gold.was_viewed(log, "s1", "a") and not gold.was_viewed(log, "s1", "b")
+    assert not gold.code_ok(log, "s1", "a", "AB3K")
+    gold.log_view(log, "s1", "a", "AB3K")
+    assert gold.code_ok(log, "s1", "a", "ab3k")                  # case-insensitive
+    assert not gold.code_ok(log, "s1", "a", None) and not gold.code_ok(log, "s1", "a", "ZZZZ")
+    assert not gold.code_ok(log, "s1", "b", "AB3K")              # a code belongs to one photo
+    gold.log_view(log, "s1", "a", "QW7P")
+    assert gold.code_ok(log, "s1", "a", "QW7P") and not gold.code_ok(log, "s1", "a", "AB3K")
+
+
+def test_at_g_19_codes_avoid_confusable_characters():
+    codes = {gold.new_code() for _ in range(200)}
+    assert all(len(c) == 4 and not set(c) & set("0O1I") for c in codes) and len(codes) > 100
+
+
+# ---- the two scripts, run in-process against a tiny fake dataset ----------------------------------
+def _load(name):
+    import importlib.util
+    from pathlib import Path
+    path = Path(__file__).resolve().parents[1] / "scripts" / f"{name}.py"
+    spec = importlib.util.spec_from_file_location(name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+@pytest.fixture
+def fake_project(tmp_path, monkeypatch):
+    from PIL import Image
+    from ffs import config
+    meta, raw, res = tmp_path / "meta", tmp_path / "raw", tmp_path / "results"
+    meta.mkdir()
+    raw.mkdir()
+    Image.new("RGB", (400, 300), "gray").save(raw / "a.jpg")
+    pd.DataFrame({"scene_id": ["s1"], "photo_id": ["a"], "relpath": ["a.jpg"]}).to_csv(meta / "photos.csv", index=False)
+    pd.DataFrame({"scene_id": ["s1"], "split": ["test"]}).to_csv(meta / "scene_split.csv", index=False)
+    silver_table({("s1", "a"): (0, 0)}).to_csv(meta / "silver.csv", index=False)
+    for k, v in (("META_DIR", meta), ("RAW_DIR", raw), ("RESULTS_DIR", res)):
+        monkeypatch.setattr(config, k, v)
+    return meta, res / "gold" / "ai_views" / "view_log.csv"
+
+
+def _view(monkeypatch, capsys):
+    monkeypatch.setattr("sys.argv", ["ai_label_view.py", "s1", "a", "--tiles"])
+    _load("ai_label_view").main()
+    return capsys.readouterr().out
+
+
+def _write(monkeypatch, meta, log, code):
+    mod = _load("ai_label_write")
+    monkeypatch.setattr(mod, "PATH", meta / "gold_ai.csv")
+    monkeypatch.setattr(mod, "VIEW_LOG", log)
+    argv = ["ai_label_write.py", "s1", "a", "--labels", "blade=0,bottle_glass=1", "--conf", "high", "--labeller", "m"]
+    monkeypatch.setattr("sys.argv", argv + (["--code", code] if code else []))
+    mod.main()
+
+
+def test_at_g_20_write_refuses_without_or_with_wrong_code_and_saves_nothing(fake_project, monkeypatch, capsys):
+    meta, log = fake_project
+    _view(monkeypatch, capsys)
+    for bad in (None, "ZZZZ"):
+        with pytest.raises(SystemExit) as e:
+            _write(monkeypatch, meta, log, bad)
+        assert e.value.code not in (0, None)
+    assert not (meta / "gold_ai.csv").exists()
+
+
+def test_at_g_21_write_accepts_the_right_code_and_a_new_view_invalidates_the_old_one(fake_project, monkeypatch, capsys):
+    meta, log = fake_project
+    out1 = _view(monkeypatch, capsys)
+    code1 = pd.read_csv(log, dtype=str)["code"].iloc[-1]
+    assert code1 not in out1 and "code written into the image corner" in out1      # never printed
+    _write(monkeypatch, meta, log, code1.lower())
+    assert (meta / "gold_ai.csv").exists()
+    _view(monkeypatch, capsys)
+    code2 = pd.read_csv(log, dtype=str)["code"].iloc[-1]
+    assert code2 != code1
+    with pytest.raises(SystemExit):
+        _write(monkeypatch, meta, log, code1)                                      # old code now refused
+    _write(monkeypatch, meta, log, code2)
+
+
+def test_at_g_22_code_is_burned_into_every_image(fake_project, monkeypatch, capsys):
+    from PIL import Image
+    meta, log = fake_project
+    out = _view(monkeypatch, capsys)
+    paths = [line for line in out.splitlines() if line.endswith(".jpg")]
+    assert len(paths) == 5
+    for p in paths:
+        corner = Image.open(p).convert("L").crop((0, 0, 20, 20))
+        assert min(corner.getdata()) < 40                                          # black box in the corner

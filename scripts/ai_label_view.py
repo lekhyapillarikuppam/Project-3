@@ -3,7 +3,8 @@
   python scripts/ai_label_view.py th_0002 IMG_20240227_085541            # full photo, long side 1568 px
   python scripts/ai_label_view.py th_0002 IMG_20240227_085541 --tiles    # plus 4 zoomed quarter tiles
 
-Writes JPEGs under results/gold/ai_views/ and prints their paths. Only the photo is used: no silver,
+Writes JPEGs under results/gold/ai_views/ and prints their paths. A random 4-character code is burned into
+the corner of every image (and logged); ai_label_write.py needs it as --code, so it can only be read from the image. Only the photo is used: no silver,
 markers, exhibit lists or other labels. Only test-split photos are accepted.
 """
 
@@ -51,16 +52,18 @@ def main():
     out = config.RESULTS_DIR / "gold" / "ai_views"
     out.mkdir(parents=True, exist_ok=True)
     stem = f"{args.scene}__{args.photo}"
+    code = gold.new_code()                       # new code per call; only the latest one is accepted
     paths = [out / f"{stem}_full.jpg"]
-    fit(img).save(paths[0], "JPEG", quality=90)
+    gold.stamp_code(fit(img), code).save(paths[0], "JPEG", quality=90)
     if args.tiles:
         for i, box in enumerate(quarter_boxes(*img.size), 1):
             p = out / f"{stem}_t{i}.jpg"
-            fit(img.crop(box)).save(p, "JPEG", quality=90)
+            gold.stamp_code(fit(img.crop(box)), code).save(p, "JPEG", quality=90)
             paths.append(p)
-    gold.log_view(out / "view_log.csv", args.scene, args.photo)
+    gold.log_view(out / "view_log.csv", args.scene, args.photo, code)
     for p in paths:
         print(p)
+    print("code written into the image corner")      # never print the code itself
 
 
 if __name__ == "__main__":
